@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<rules>
+   <battleRules>
+    <rule>bfield.rules.srd.StandardAttack</rule>
+    <rule>bfield.rules.srd.FixedAttack</rule>
+    <rule>bfield.rules.srd.FixedSpecial</rule>
+    <rule>bfield.rules.srd.D20Attack</rule>
+    <rule>bfield.rules.srd.D20Special</rule>
+    <rule>bfield.rules.srd.RandomAttacks</rule>
+  </battleRules>
+  <unitRules>bfield.rules.srd.UnitSRD</unitRules>
+  <armyRules>bfield.rules.srd.ArmySRD</armyRules>
+
+  <classModifier>1</classModifier>
+  <effectiveness>0</effectiveness>
+  <highGroundBonus>1.0</highGroundBonus>
+  <stormMalus>-1</stormMalus>
+  <baseAttackMultiplier>0.05</baseAttackMultiplier>
+  <fortificationMod>-1</fortificationMod>
+  <baseAttackBonus>12</baseAttackBonus>
+  <shallowWaterMalus>-1</shallowWaterMalus>
+  <minimalDamage>1</minimalDamage>
+</rules>

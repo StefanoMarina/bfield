@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<conditions>
+  <terrain>
+    <condition name="Open"/>
+    <condition name="Forest" denyCharge="true" missileMod="-2"/>
+    <condition name="Jungle" denyCharge="true" denyMissile="true"/>
+    <condition name="Swamp" denyCharge="true" mountedUnitsMod="-1"/>
+    <condition name="Hills" highGroundRule="hills" allowHighGround="true"/>
+    <condition name="Mountains" highGroundRule="mountain" allowHighGround="true" artsOnly="true" denyCharge="true" />
+    <condition name="Shallow water" shallowWater="true" denyCharge="true"/>
+  </terrain>
+
+  <weather>
+    <condition name="Normal"/>
+    <condition name="Abnormal" />
+    <condition name="Inclement" missileMod="-2" /> 
+    <condition name="Storm" attackMod="-1" denyMissile="true" denyCharge="true"/>
+  </weather>
+
+  <visibility>
+    <condition name="Full"/>
+    <condition name="Limited" attackMod="-1"/>
+  </visibility>
+</conditions> 

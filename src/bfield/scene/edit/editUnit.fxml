@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
+<VBox fx:id="root" prefHeight="400.0" prefWidth="600.0" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="bfield.scene.edit.EditUnitController" 
+      spacing="5" fillWidth="true" >
+  <GridPane hgap="10" vgap="5" fx:id="grid">
+    <columnConstraints>
+      <ColumnConstraints fillWidth="true" /> 
+      <ColumnConstraints fillWidth="true" />
+      <ColumnConstraints fillWidth="true" />
+      <ColumnConstraints fillWidth="true" />
+      <ColumnConstraints fillWidth="true" />
+    </columnConstraints>
+    <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="Unit Type"/>
+    <ComboBox fx:id="cbType" GridPane.rowIndex="0" GridPane.columnIndex="1"
+      GridPane.columnSpan="3" maxWidth="900.0"  >
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="d20 SRD Unit"/>
+          <String fx:value="AD&amp;D 2nd edition unit"/>
+        </FXCollections>
+      </items>
+      <value>
+        <String fx:value="d20 SRD Unit"/>
+      </value>
+    </ComboBox>
+
+    <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="Unit Name"/>
+    <TextField fx:id="txtName" GridPane.columnSpan="3" 
+               GridPane.rowIndex="1" GridPane.columnIndex="1" text="New Unit"/>
+
+    <Label GridPane.rowIndex="2" GridPane.columnIndex="0" text="Icon"/>
+    <ComboBox fx:id="cbIcon" GridPane.rowIndex="2" GridPane.columnIndex="1" 
+            GridPane.columnSpan="3"/>
+
+    <Label GridPane.rowIndex="3" GridPane.columnIndex="0" text="Class"/>
+      <ComboBox fx:id="cbClass" maxWidth="900.0" GridPane.rowIndex="3" GridPane.columnIndex="1">
+        <items>
+          <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Infantry"/>
+            <String fx:value="Archers"/>
+            <String fx:value="Pikemen"/>
+            <String fx:value="Cavalry"/>
+            <String fx:value="Artillery"/>
+            <String fx:value="Irregulars"/>
+            <String fx:value="Ship"/>
+            <String fx:value="Special"/>
+          </FXCollections>
+        </items>
+        <value>
+          <String fx:value="Infantry"/>
+        </value>
+      </ComboBox>
+      <ComboBox fx:id="cbSpeed"  GridPane.rowIndex="3" GridPane.columnIndex="2">
+        <items>
+          <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Light"/>
+            <String fx:value="Medium"/>
+            <String fx:value="Heavy"/>
+          </FXCollections>
+        </items>
+        <value><String fx:value="Medium"/></value>
+      </ComboBox>
+      <ComboBox fx:id="cbLevel"  GridPane.rowIndex="3" GridPane.columnIndex="3">
+        <items>
+          <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Regular"/>
+            <String fx:value="Green"/>
+            <String fx:value="Veteran"/>
+          </FXCollections>
+        </items>
+        <value><String fx:value="Normal"/></value>
+      </ComboBox>
+    
+    <Label GridPane.rowIndex="4" GridPane.columnIndex="0" text="Defense"/>
+    <ComboBox GridPane.rowIndex="4" GridPane.columnIndex="1" fx:id="cbDefense"/>
+    
+    <Label GridPane.rowIndex="4" GridPane.columnIndex="2" text="Hits"/>
+    <ComboBox GridPane.rowIndex="4" GridPane.columnIndex="3" fx:id="cbHits">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <Integer fx:value="1"/>
+          <Integer fx:value="2"/>
+          <Integer fx:value="3"/>
+          <Integer fx:value="4"/>
+        </FXCollections>
+      </items>
+      <value><Integer fx:value="2"/></value>
+    </ComboBox>
+    <Label GridPane.rowIndex="5" GridPane.columnIndex="0" text="Status"/>
+    <HBox GridPane.rowIndex="5" GridPane.columnIndex="1"
+    GridPane.columnSpan="2" spacing="10" >
+      
+        <ToggleButton styleClass="tb" fx:id="tgVis" text=""
+                      GridPane.rowIndex="5" GridPane.columnIndex="4">
+          <graphic>
+            <Region styleClass="icon-front, icon-g, icon-eye"/>
+          </graphic>
+        </ToggleButton>
+        
+        <ToggleButton styleClass="tb" fx:id="tgWeather" text=""
+                      GridPane.rowIndex="5" GridPane.columnIndex="5">
+          <graphic>
+            <Region styleClass="icon-front, icon-g, icon-snow"/>
+          </graphic>
+        </ToggleButton>
+    
+    
+        <ToggleButton styleClass="tb" fx:id="tgMountain" text=""
+                      GridPane.rowIndex="5" GridPane.columnIndex="6">
+          <graphic>
+            <Region styleClass="icon-front, icon-g, icon-dwarf"/>
+          </graphic>
+          
+        </ToggleButton>
+        
+        <ToggleButton styleClass="tb" fx:id="tgFortification" text=""
+                      GridPane.rowIndex="5" GridPane.columnIndex="7" >
+          <graphic>
+            <Region styleClass="icon-front, icon-g, icon-tower"/>
+          </graphic>
+        </ToggleButton>
+        
+        <ToggleButton styleClass="tb" fx:id="tgTerrain" text=""
+                      GridPane.rowIndex="5" GridPane.columnIndex="8">
+          <graphic>
+            <Region styleClass="icon-front, icon-g, icon-mountain"/>
+          </graphic>
+          
+        </ToggleButton>
+    </HBox>  
+  </GridPane>
+  <Label styleClass="title" text="Edition specific"/>
+
+</VBox>

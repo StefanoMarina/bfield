@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane id="root" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1"
+hgap="20" vgap="20" fx:controller="bfield.scene.dialogs.NewRulesetDialogController" >
+    <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="Name:"/>
+    <TextField fx:id="txtName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="Folder:"/>
+    <TextField fx:id="txtFolder" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Label GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"
+      text="Please follow your system limits on folder names."/>
+    <CheckBox fx:id="shouldClone" GridPane.rowIndex="3" GridPane.columnIndex="0"
+      text="Clone:"/>
+    <ComboBox GridPane.fillWidth="true" fx:id="cbRuleset" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    <Label GridPane.rowIndex="4" GridPane.columnIndex="0" text="Description:"/>
+    <TextArea GridPane.rowIndex="5" GridPane.columnIndex="0" GridPane.columnSpan="2" 
+    fx:id="txtDesc"/>
+</GridPane>

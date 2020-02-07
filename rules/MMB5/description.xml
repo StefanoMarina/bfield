@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dataset>
+    <name>MarsupialMancer's Birthright 5E</name>
+<description>
+5th edition rules as described by MarsupialMancer (https://marsupialmancer.blogspot.com/2019/08/birthright-5e-revised.html).
+Units:
+Shield icon: unit BCR
+Sword icon: unit's individual modifier to 1d6 roll.
+Army:
+Shield icon: cumulative BCR
+Sword icon: global 1d6 modifier that will be applied to each unit's roll, added to the unit's individual roll.
+Note:
+Only the "ignore terrain" modifier works, enable it to set unit's bonus on terrain (ie elves on forest).
+Fortification army modifier is enabled, weather is not, no high ground rules.
+The "Unit was wounded before battle" malus is not applied, sorry. Everything else should be there.
+"Reserve" mode for units is appliable, effectiveness rule is not.
+</description>
+</dataset>

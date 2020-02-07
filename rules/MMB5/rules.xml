@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<rules>
+  <battleRules>
+    <rule>bfield.rules.mm.BattleMM</rule>
+  </battleRules>
+  <unitRules>bfield.rules.mm.UnitMM</unitRules>
+  <armyRules>bfield.rules.mm.ArmyMM</armyRules>
+  <classModifier>-1</classModifier>
+  <effectiveness>-2</effectiveness>
+  <highGroundBonus>-1.0</highGroundBonus>
+  <stormMalus>-2</stormMalus>
+  <baseAttackMultiplier>0.05</baseAttackMultiplier>
+  <fortificationMod>1</fortificationMod>
+  <baseAttackBonus>11</baseAttackBonus>
+  <shallowWaterMalus>-2</shallowWaterMalus>
+  <minimalDamage>1</minimalDamage>
+</rules>

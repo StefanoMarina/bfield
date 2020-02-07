@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
+
+<GridPane id="root" prefHeight="400.0" prefWidth="600.0"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="bfield.scene.edit.AdndUnitController">
+  <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="Morale"/>
+  <ComboBox GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="cbMorale">
+    <items>
+      <FXCollections fx:factory="observableArrayList">
+        <String fx:value="1 symbol"/>
+        <String fx:value="2 symbols"/>
+        <String fx:value="3 symbols"/>
+      </FXCollections>
+    </items>
+  </ComboBox>
+  
+  <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="Melee"/>
+  <ComboBox GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="cbMelee"/>
+  <Label GridPane.rowIndex="2" GridPane.columnIndex="0" text="Charge"/>
+  <ComboBox GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="cbCharge"/>
+  <Label GridPane.rowIndex="2" GridPane.columnIndex="0" text="Missile"/>
+  <ComboBox GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="cbMissile"/>
+</GridPane>

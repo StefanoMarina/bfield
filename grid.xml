@@ -1,0 +1,29 @@
+ <GridPane hgap="5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" 
+          minWidth="-Infinity" prefHeight="50.0" prefWidth="300">
+        
+        <Group GridPane.columnIndex="0">
+          <Region styleClass="icon-back, icon-black"/>
+          <Region styleClass="icon-front, icon-shield"/>
+        </Group>
+
+        <Spinner styleClass="spinner" fx:id="spDef" GridPane.columnIndex="1" min="-99" max="99"/>
+        
+        <Group GridPane.columnIndex="2">
+          <Region styleClass="icon-back, icon-black"/>
+          <Region styleClass="icon-front, icon-hilt"/>
+        </Group>
+        <Spinner styleClass="spinner" fx:id="spMelee" GridPane.columnIndex="3" min="-99" max="99"/>
+        
+        <Group GridPane.columnIndex="4">
+          <Region styleClass="icon-back, icon-black"/>
+          <Region styleClass="icon-front, icon-missile"/>
+        </Group>
+        <Spinner styleClass="spinner" fx:id="spMissile" GridPane.columnIndex="5" min="-99" max="99"/>
+        
+        <Group GridPane.columnIndex="6">
+          <Region styleClass="icon-back, icon-black"/>
+          <Region styleClass="icon-front, icon-charge"/>
+        </Group>
+        <Spinner styleClass="spinner" fx:id="spCharge" GridPane.columnIndex="7" min="-99" max="99"/>
+        
+      </GridPane>

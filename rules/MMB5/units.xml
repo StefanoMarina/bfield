@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<units xmlns:ns2="http://battlefield.uri/adnd_2e">
+  <unit name="Archers" hits="2" class="MdArch" def="1" melee="0"/>
+  <unit name="Artillerists" hits="2" class="Art" def="1" melee="0"/>
+  <unit name="Cavalry" hits="2" class="MdCav" def="3" melee="0"/>
+  <unit name="Infantry" hits="2" class="MdInf" def="1" melee="0"/>
+  <unit name="Infantry,Elite" hits="2" class="HvInf" def="2" melee="0"/>
+  <unit name="Irregulars" hits="2" class="MdIrr" def="0" melee="0"/>
+  <unit name="Levies" hits="2" class="LtIrr-" def="0" melee="0"/>
+  <unit name="Knights" hits="2" class="HvCav" def="4" melee="0"/>
+  <unit name="Mercenary, Cavalry" hits="2" class="MdCav" def="3" melee="0"/>
+  <unit name="Mercenary, Infantry" hits="2" class="MdInf" def="2" melee="0"/>
+  <unit name="Mercenary, Irregulars" hits="2" class="HvIrr" def="2" melee="0"/>
+  <unit name="Pikemen" hits="2" class="MdPike" def="2" melee="0"/>
+  <unit name="Scouts" hits="2" class="MdIrr" def="0" melee="0"/>
+  <unit name="Dwarf Guards" hits="2" class="HvInf" def="2" melee="0"/>
+  <unit name="Dwarf Crossbows" hits="2" icon="crossbow.svg" class="HvArch" def="2" melee="0"/>
+  <unit name="Dwarf Engineers" hits="2" class="Art"  icon="dwarf-helmet.svg"  def="1" melee="0"/>
+  <unit name="Elf Archers" hits="2" class="LtArch" def="3" melee="0"/>
+  <unit name="Elf Cavalry" hits="2" class="LtCav" def="5" melee="0"/>
+  <unit icon="goblin-head.svg" name="Goblin Archers" hits="2" class="MdArch" def="1" melee="0"/>
+  <unit icon="goblin-head.svg" name="Goblin Infantry" hits="2" class="MdInf" def="1" melee="0"/>
+  <unit icon="goblin-head.svg" name="Goblin Cavalry" hits="2" class="MdCav" def="3" melee="0"/>
+  <unit icon="wolf-head.svg" name="Gnoll Marauders" hits="2" class="HvIrr" def="3" melee="0"/>
+  <unit icon="wolf-head.svg" name="Gnoll Infantry" hits="2" class="HvInf" def="3" melee="0"/>
+  <unit name="Halfling scouts" hits="2" class="Irr" def="1" melee="0"/>
+  <unit icon="spiked-dragon-head.svg" name="Dragon" hits="2" class="HvSpecial" def="15" melee="0"/>
+  <unit icon="ogre.svg" name="Giants" hits="2" class="HvSpecial" def="10" melee="0"/>
+  <unit icon="crossed-axes.svg" name="Orog infantry" hits="2" class="HvInf" def="3" melee="0"/>
+  <unit icon="bone-gnawer.svg" name="Undead troops" hits="2" class="Special" def="2" melee="0"/>
+  <unit icon="spiked-dragon-head.svg" name="Varsk cavalry" hits="2" class="HvCav" def="3" melee="0"/>
+  <unit icon="spiked-dragon-head.svg" name="Varsk cavalry (cold)" hits="2" class="HvCav" def="5" melee="0"/>
+  <unit icon="pirate-flag.svg" name="Buccaneers" class="Irr" hits="2" melee="0" def="1"/>
+  <unit icon="pirate-flag.svg" name="Corsairs" class="Irr" hits="2" melee="0" def="3"/>
+  <unit icon="winged-sword.svg" name="Privateers" class="MdIrr" hits="2" melee="0" def="2"/>
+  <unit icon="bone-gnawer.svg" name="Undead sailors" class="Special" hits="2" melee="0" def="2"/>
+  <unit name="Caravel" hits="2" class="MdShip" melee="0" def="2"/>
+  <unit name="Carrack" hits="2" class="MdShip" melee="0" def="3"/>
+  <unit name="Dromond" hits="2" icon="trireme.svg" class="MdShip" melee="0" def="2"/>
+  <unit name="Galley" hits="2" icon="galleon.svg" class="HvShip" melee="0" def="3"/>
+  <unit name="Longship" hits="2" icon="galleon.svg" class="HvShip" melee="0" def="2"/>
+  <unit name="Galley" hits="2" icon="trireme.svg" class="MdShip" melee="0" def="1"/>
+</units>

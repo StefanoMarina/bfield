@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <entry key="LtIrr">curvy-knife.svg</entry>
+  <entry key="MdIrr">axe-sword.svg</entry>
+  <entry key="Irr">axe-sword.svg</entry>
+  <entry key="HvIrr">crossed-axes.svg</entry>
+  <entry key="LtInf">gladius.svg</entry>
+  <entry key="MdInf">two-handed-sword.svg</entry>
+  <entry key="Inf">two-handed-sword.svg</entry>
+  <entry key="HvInf">broadsword.svg</entry>
+  <entry key="LtArt">catapult.svg</entry>
+  <entry key="MdArt">catapult.svg</entry>
+  <entry key="Art">catapult.svg</entry>
+  <entry key="HvArt">catapult.svg</entry>
+  <entry key="LtAchr">pocket-bow.svg</entry>
+  <entry key="MdAchr">heavy-arrow.svg</entry>
+  <entry key="Achr">heavy-arrow.svg</entry>
+  <entry key="HvAchr">crossbow.svg</entry>
+  <entry key="LtPike">spears.svg</entry>
+  <entry key="MdPike">spears.svg</entry>
+  <entry key="Pike">spears.svg</entry>
+  <entry key="HvPike">spears.svg</entry>
+  <entry key="LtCav">horse-head.svg</entry>
+  <entry key="MdCav">cavalry.svg</entry>
+  <entry key="Cav">cavalry.svg</entry>
+  <entry key="HvCav">mounted-knight.svg</entry>
+  <entry key="LtShip">sailboat.svg</entry>
+  <entry key="MdShip">caravel.svg</entry>
+  <entry key="HvShip">galleon.svg</entry>
+</properties>
+

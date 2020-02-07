@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane id="root" prefHeight="400.0" prefWidth="600.0"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="bfield.scene.edit.D20UnitController"
+vgap="5" hgap="10" GridPane.hgrow="ALWAYS" >
+  <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="Morale"/>
+  <ComboBox GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="cbMorale">
+    <value><Integer fx:value="2"/></value>
+  </ComboBox>
+  
+  <Label GridPane.rowIndex="0" GridPane.columnIndex="2" text="Movement"/>
+  <ComboBox GridPane.rowIndex="0" GridPane.columnIndex="3" fx:id="cbMove"/>
+  
+  <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="Melee"/>
+  <ComboBox GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="cbMelee">
+    <value><Integer fx:value="2"/></value>
+  </ComboBox>
+  <CheckBox GridPane.rowIndex="1" GridPane.columnIndex="2"
+            fx:id="chkCharge" selected="false" text="Charge">
+    <selected>false</selected>
+  </CheckBox>
+  <ComboBox GridPane.rowIndex="1" GridPane.columnIndex="3" fx:id="cbCharge"
+  disable="true" >
+    <value><Integer fx:value="0"/></value>
+    <disable>true</disable>
+  </ComboBox>
+  <CheckBox  GridPane.rowIndex="1" GridPane.columnIndex="4" text="Missile"
+             selected="false" fx:id="chkMissile">
+    <selected>false</selected>
+  </CheckBox>
+  <ComboBox GridPane.rowIndex="1" GridPane.columnIndex="5" fx:id="cbMissile"
+  disable="true">
+    <value><Integer fx:value="0"/></value>
+    <disable>false</disable>
+  </ComboBox>
+</GridPane>

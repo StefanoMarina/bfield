@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+
+<units xmlns:adnd="http://battlefield.uri/adnd_2e">
+  <adnd:unit name="Anuirean artillerists" melee="1" adnd:missile="5,3" def="11" hits="2" class="Art" ignoreFortification="true" ignoreTerrain="true" move="1" mrl="4"/>
+  <adnd:unit name="Anuirean archers" melee="2" adnd:missile="4,2" def="12" hits="2" class="LtArch"  move="2" mrl="4"/>
+  <adnd:unit name="Anuirean med. cavalry" melee="3" missile="1" adnd:charge="2,1" def="13" hits="2" class="MdCav" move="3" mrl="4"/>
+  <adnd:unit name="Anuirean infantry" melee="3" def="13" hits="2" class="MdInf" icon="halberd.svg" move="1" mrl="4"/>
+  <adnd:unit name="Anuirean infantry elite" melee="4" def="14" hits="3" class="HvInf+" icon="winged-sword.svg" move="1" mrl="6"/>
+  <adnd:unit name="Anuirean irregulars" adnd:melee="3,1" missile="2" def="12" hits="2" class="LtIrr" move="2" mrl="4"/>
+  <adnd:unit name="Anuirean knights" melee="4" adnd:charge="2,1,1" def="14" hits="3" class="HvCav+" move="2" mrl="6"/>
+  <adnd:unit name="Anuirean levies" melee="2" def="11" hits="3" class ="Irr-" icon="sickle.svg" move="1" mrl="2"/>
+  <adnd:unit name="Mercenary cavalry" melee="3" charge="2" def="13" missile="1" hits="2" class="MdCav+" move="3" mrl="1"/>
+  <adnd:unit name="Mercenary infantry" melee="3" def="13" class="HvInf" icon="halberd.svg" move="1" mrl="1"/>
+  <adnd:unit name="Mercenary irregulars" adnd:melee="3,1" missile="2" def="12" class="LtIrr" move="2" mrl="1"/>
+  <adnd:unit name="Anuirean pikemen" melee="3" def="13" hits="2" class="MdPike" move="1" mrl="4"/>
+  <adnd:unit name="Anuirean scouts" melee="2"  missile="3" def="12" hits="1" class="Irr" move="3" mrl="4"/>
+
+  <adnd:unit name="Vos Cavalry" class="MdCav" def="13" hits="3" adnd:melee="3,2,0" adnd:missile="1,0,NA" adnd:charge="2,2,2"/>
+  <adnd:unit name="Vos irregulars" class="LtIrr" def="12" hits="2" melee="3" missile="1"/>
+
+  <adnd:unit name="Dwarf Guards" class="HvInf+" melee="3" def="15" hits="3" ignoreVisibility="true" ignoreMountain="true"
+          icon ="dwarf-helmet.svg" move="1" mrl="6"/>
+  <adnd:unit name="Dwarf Crossbowmen" class="MdArchr+" melee="2" adnd:missile="4,2" def="14" hits="2" 
+        ignoreVisibility="true" ignoreMountain="true" icon="crossbow.svg" move="1" mrl="6"/>
+
+  <adnd:unit name="Elven Archers" class="LtArch+" melee="2" adnd:missile="5,3" def="12" hits="2" ignoreVisibility="true" ignoreTerrain="true" move="2" mrl="6"/>
+  <adnd:unit name="Elven Cavalry" class="LtCav+" melee="3" adnd:missile="4,2" charge="2" def="12" hits="2" ignoreVisibility="true" move="2" mrl="6"/> 
+  <adnd:unit name="Goblin Archers" class="LtArch-" melee="1" adnd:missile="3,1" def="12" hits="2" icon="goblin-head.svg" ignoreVisibility="true" move="1" mrl="2"/>
+  <adnd:unit name="Goblin Infantry" class="LtInf-" melee="2" missile="1" def="12" hits="2"  icon="goblin-head.svg" ignoreVisibility="true" move="1" mrl="2"/>
+  <adnd:unit name="Goblin Guards" class="MdIrr" adnd:melee="4,2" missile="2" def="13" hits="3"  icon="goblin-head.svg" ignoreVisibility="true" move="1" mrl="2"/>
+  <adnd:unit name="Goblin skirmishers" class="LtIrr-" melee="2" missile="2" def="11" hits="2"  icon="goblin-head.svg"  ignoreVisibility="true" move="1" mrl="2"/>
+  <adnd:unit name="Goblin Wolfriders" class="LtCav" melee="3" adnd:charge="1,1" missile="1" def="12" hits="2" ignoreVisibility="true" move="3" mrl="4"
+  icon="wolf-head.svg"/>
+  <adnd:unit name="Common, Gnoll Marauders" class="LtIrr+" melee="3" missile="2" def="13" hits="3" move="2" mrl="2"/>
+  <adnd:unit name="Common, Gnoll Infantry" class="MdInf" def="14" hits="3" melee="4" missile="2" move="2" mrl="2"/>
+  <adnd:unit name="Orog infantry" def="13" melee="3" hits="3" class="MdInf+" move="1" mrl="4"/>
+  <adnd:unit name="Orog pikes" def="13" melee="3" hits="3" class="MdPike" move="1" mrl="4"/>
+  <adnd:unit name="Stonecrown Ogres" def="13" adnd:melee="7,5,4" hits="4" class="Special" icon="ogre.svg" move="7" mrl="4"/>
+  <adnd:unit name="Undead Legion" class="Special" adnd:melee="5,3,1" def="17" hits="3" icon="bone-gnawer.svg" ignoreVisibility="true" ignoreWeather="true" move="1" mrl="6"/>
+  <adnd:unit name="Warband of Markazor" class="MdIrr" adnd:melee="4,2,1" adnd:charge="1,1,1" icon="goblin-head.svg" hits="3" ignoreVisibility="true" move="2" mrl="6"/>
+  <adnd:unit name="Knights of Cuiraecen" class="HvCav+" adnd:melee="5,3,2" adnd:charge="2,2,1" def="15" hits="3" move="2" mrl="6"/>
+  <adnd:unit name="Knights of Haelyn" class="HvCav+" melee="5" adnd:charge="2,2,1" def="15" hits="3" move="2" mrl="6"/>
+  <adnd:unit name="Guardians of Mhoried" class="HvCav+" def="15" melee="4" missile="2" adnd:charge="2,2,1" hits="3" move="2" mrl="6"/>
+  <adnd:unit name="Brecht cavalry" class="MdCav+" melee="3" adnd:charge="1,1" missile="1" hits="2" def="12" move="3" mrl="6"/>
+
+  <adnd:unit name="Ship, Coaster" class="LtShip" melee="1" missile="0" def="11" hits="1" adnd:move="A" mrl="2"/>
+  <adnd:unit name="Ship, Dhow" class="LtShip" melee="1" missile="0" def="11" hits="1" adnd:move="A" mrl="2"/>
+  <adnd:unit name="Ship, Caravel" class="MdShip" adnd:melee="3,3" missile="3" def="13" hits="2" adnd:move="B" mrl="4"/>
+  <adnd:unit name="Ship, Cog" class="MdShip" adnd:melee="3,3,3" missile="2" def="13" hits="2" adnd:move="C" mrl="4"/>
+  <adnd:unit name="Ship, Dhoura" class="MdShip" adnd:melee="3,3,3" missile="1" def="12" hits="2" adnd:move="B" mrl="4"/>
+  <adnd:unit name="Ship, Longship" class="MdShip" melee="3" charge="2" def="12" hits="1" icon="trireme.svg" adnd:move="C" adnd:row="2" mrl="6"/>
+  <adnd:unit name="Ship, Drakkar" class="HvShip" adnd:melee="4,4,4" adnd:charge="2,2,2" def="13" hits="2" icon="trireme.svg" adnd:move="D" adnd:row="2" mrl="6"/>
+  <adnd:unit name="Ship, Galleon" class="HvShip" adnd:melee="5,5,5,5" adnd:missile="2,1,0,0" charge="2" def="14" hits="4" adnd:move="B" mrl="6"/>
+  <adnd:unit name="Ship, Knarr" class="HvShip" adnd:melee="2,2" missile="1" charge="2" def="13" hits="2" icon="trireme.svg" adnd:move="C" adnd:row="1"/>
+  <adnd:unit name="Ship, Roundship" class="HvShip" adnd:melee="4,4,4" adnd:missile="4,2,1" def="14" hits="3" adnd:move="B" mrl="6"/>
+  <adnd:unit name="Ship, Zebec" class="HvShip" adnd:melee="4,4,4" missile="3" def="14" hits="3" adnd:move="A" mrl="6"/>
+
+<!-- pirates -->
+  <adnd:unit name="Pirates, Mieres corsairs" adnd:melee="3,1" adnd:missile="0,NA,NA" def="13" hits="3" class="MdIrr" icon="pirate-flag.svg"/>
+  <adnd:unit name="Pirates, Albiele island pirates" melee="2" def="13" hits="2" class="LtIrr" icon="pirate-flag.svg"/>
+  <adnd:unit name="Pirates, Rzhlev irregulars" hits="2" def="12" class="LtIrr" melee="4" missile="1"/>
+  <adnd:unit name="Pirates, Rzhlev Artillerists" class="Art" ignoreFortification="true" ignoreTerrain="true" adnd:melee="2,0" missile="4" def="12" hits="2"/>
+  <adnd:unit name="Pirates, Rjurik mariners" class="LtIrr" def="13" hits="3" melee="3" adnd:missile="1,0,-2" icon="pirate-flag.svg"/>
+  <adnd:unit name="Pirates, Mercenary Reavers" class="MdIrr" def="13" hits="2" melee="3" icon="pirate-flag.svg"/>
+  <adnd:unit name="Pirates, Khinasi archers" class="LtArch" def="11" hits="2" melee="2" adnd:missile="4,2"/>
+  <adnd:unit name="Pirates, Khinasi skirmishers" class="LtIrr" def="11" hits="2" melee="2" missile="3"/>
+  <adnd:unit name="Pirates, island mariners" class="HvIrr+" def="14" hits="4" melee="4" icon="pirate-flag.svg"/>
+  <adnd:unit name="Pirates, Grabentod raiders" class="HvIrr+" def="14" hits="4"  melee="4" icon="pirate-flag.svg"/>
+</units>
+
+

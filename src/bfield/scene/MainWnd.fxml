@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bfield.scene.MainWndController">
+  <top>
+    <MenuBar>
+      <Menu text="File">
+        <MenuItem text="New Battle" onAction="#onMenuNew" accelerator="Shortcut+N"/>
+        <MenuItem text="Open..." onAction="#onMenuOpen" accelerator="Shortcut+O"/>
+        <MenuItem text="Save..." onAction="#onMenuSave" accelerator="Shortcut+S"/>
+        <SeparatorMenuItem/>
+        <MenuItem text="Exit" onAction="#onMenuQuit" accelerator="Shortcut+Q"/>
+      </Menu>
+      <Menu text="Ruleset">
+        <MenuItem text="Edit Unit" onAction="#onMenuEditUnit"/>
+        <MenuItem text="Delete Unit" onAction="#onUnitDelete"/>
+        <MenuItem text="New Ruleset" onAction="#onNewRuleset"/>
+      </Menu>
+      <Menu fx:id="mBattle" text="Battle"  disable="true" >
+        <CheckMenuItem fx:id="micOrdinals" text="Use ordinals" onAction="#onOrdinalsCheck"/>
+        <SeparatorMenuItem/>
+        <MenuItem text="Import army..." onAction="#onImportArmy"/>
+        <MenuItem text="Export army..." onAction="#onExportArmy"/>
+      </Menu>
+    </MenuBar>
+  </top>
+    <center>
+      <TabPane fx:id="tabMain" tabClosingPolicy="SELECTED_TAB" />
+    </center>
+</BorderPane>

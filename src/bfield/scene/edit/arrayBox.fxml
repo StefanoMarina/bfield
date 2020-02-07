@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox id="root" prefHeight="50.0" prefWidth="300.0" spacing="10.0" 
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="bfield.scene.ArrayBoxController">
+    <ComboBox fx:id="stat1"/>
+    <ComboBox fx:id="stat2"/>
+    <ComboBox fx:id="stat3"/>
+    <ComboBox fx:id="stat4"/>
+</HBox>

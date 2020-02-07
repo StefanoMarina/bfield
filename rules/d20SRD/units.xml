@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<units xmlns:ns2="http://battlefield.uri/adnd_2e">
+    <unit name="Anuirean archers" def="12" charge="-999" hits="2" class="MdArch" melee="2" missile="4" move="2" mrl="4"/>
+    <unit name="Anuirean med. cavalry" def="14" charge="2" hits="2" class="MdCav" melee="4" move="3" mrl="4"/>
+    <unit name="Anuirean engineers" def="10" hits="2" class="Art" melee="0" missile="6" ignoreFortification="true" move="1" mrl="4"/>
+    <unit name="Anuirean infantry" def="14" hits="2" class="MdInf" melee="4" icon="halberd.svg" move="1" mrl="4"/>
+    <unit name="Anuirean infantry elite" def="16" hits="3" class="HvInf+" melee="6" icon="winged-sword.svg" move="1" mrl="6"/>
+    <unit name="Anuirean irregulars" def="12" hits="2" class="LtIrr" melee="4" missile="2" move="2" mrl="2"/>
+    <unit name="Anuirean marines" def="12" hits="2" class="LtIrr" melee="4" missile="2" move="2" mrl="2"/>
+    <unit name="Anuirean knights" def="16" charge="4" hits="3" class="HvCav+" melee="6" move="3" mrl="6"/>
+    <unit name="Anuirean levies" def="10" hits="2" class="Irr-" melee="2" icon="sickle.svg" move="1" mrl="0"/>
+    <unit name="Anuirean pikemen" def="14" hits="2" class="MdPike" melee="4" move="1" mrl="4"/>
+    <unit name="Anuirean scouts" def="12" hits="1" class="Irr" melee="2" missile="4" move="3" mrl="4"/>
+    <unit name="Brecht archers" def="12" hits="2" class="LtArch" melee="2" missile="4" icon="crossbow.svg" move="2" mrl="4"/>
+    <unit name="Brecht artillerists" def="10" hits="2" class="Art" melee="0" missile="6" ignoreFortification="true" move="1" mrl="4"/>
+    <unit name="Brecht cavalry" def="12" charge="8" hits="2" class="LtCav" melee="4" missile="2" move="4" mrl="4"/>
+    <unit name="Brecht infantry" def="12" hits="2" class="LtInf" melee="4" move="2" mrl="4"/>
+    <unit name="Brecht infantry elite" def="14" hits="3" class="MdInf+" melee="6" icon="winged-sword.svg" move="2" mrl="6"/>
+    <unit name="Brecht irregulars" def="10" hits="2" class="Irr" melee="4" missile="2" move="2" mrl="4"/>
+    <unit name="Brecht levies" def="10" hits="2" class="Irr-" melee="2" move="1" mrl="0"/>
+    <unit name="Brecht marines" def="12" hits="3" class="LtInf+" melee="6" missile="2" move="3" mrl="6"/>
+    <unit name="Brecht scouts" def="12" hits="1" class="Irr" melee="2" missile="4" move="3" mrl="4"/>
+    <unit name="Khinasi archers" def="10" hits="2" class="Arch" melee="2" missile="4" move="2" mrl="4"/>
+    <unit name="Khinasi artillerists" def="10" hits="2" class="Art" melee="0" missile="6" ignoreFortification="true" move="1" mrl="4"/>
+    <unit name="Khinasi light cavalry" def="12" charge="2" hits="2" class="LtCav" melee="4" missile="2" move="4" mrl="4"/>
+    <unit name="Khinasi med. cavarly" def="14" charge="2" hits="2" class="MdCav" melee="4" move="3" mrl="4"/>
+    <unit name="Khinasi levies" def="10" hits="2" class="Irr-" melee="2" move="1" mrl="0"/>
+    <unit name="Khinasi marines" def="12" hits="3" class="LtInf+" melee="6" missile="2" move="3" mrl="6"/>
+    <unit name="Khinasi skirmishers" def="10" hits="2" class="Irr" melee="4" missile="2" move="2" mrl="2"/>
+    <unit name="Khinasi spearman" def="12" hits="2" class="LtInf" melee="4" move="2" mrl="4"/>
+    <unit name="Rjurik archers" def="12" hits="2" class="LtArch" melee="2" missile="4" move="2" mrl="4"/>
+    <unit name="Rjurik battleragers" def="12" hits="3" class="HvInf+" melee="8" move="2" mrl="8"/>
+    <unit name="Rjurik med. cavalry" def="14" charge="2" hits="2" class="MdCav" melee="4" move="4" mrl="4"/>
+    <unit name="Rjurik housecarls" def="14" hits="3" class="MdInf+" melee="6" move="2" mrl="6"/>
+    <unit name="Rjurik infantry" def="12" hits="2" class="LtInf" melee="4" move="2" mrl="4"/>
+    <unit name="Rjurik raiders" def="12" hits="2" class="LtIrr" melee="4" move="2" mrl="2"/>
+    <unit name="Rjurik levies" def="10" hits="2" class="Irr" melee="4" missile="2" move="2" mrl="2"/>
+    <unit name="Rjurik scouts" def="12" hits="1" class="LtIrr" melee="2" missile="4" move="3" mrl="2"/>
+    <unit name="Rjurik tribesman" def="12" hits="2" class="LtIrr" melee="4" missile="2" move="2" mrl="2"/>
+    <unit name="Vos Berserkers" def="12" hits="4" class="MdIrr+" melee="8" icon="sharp-axe.svg" move="2" mrl="6"/>
+    <unit name="Vos Footmen" def="14" hits="3" class="MdInf" melee="4" icon="stone-spear.svg" move="1" mrl="4"/>
+    <unit name="Vos Horsemen" def="14" charge="2" hits="3" class="MdCav" melee="4" move="3" mrl="4"/>
+    <unit name="Vos Raiders" def="14" hits="3" class="MdIrr" melee="4" move="1" mrl="2"/>
+    <unit name="Vos Scouts" def="12" hits="2" class="LtIrr" melee="2" missile="4" move="2" mrl="2"/>
+    <unit name="Vos Tribesmen" def="12" hits="3" class="LtIrr" melee="4" missile="2" move="2" mrl="2"/>
+    <unit name="Vos Varsk raiders" def="16" charge="4" hits="4" class="HvCav+" melee="6" icon="spiked-dragon-head.svg" move="3" mrl="6"/>
+    <unit name="Dwarven Crossbowmen" def="16" hits="3" class="MdArchr+" melee="4" missile="2" ignoreVisibility="true" ignoreMountain="true" icon="crossbow.svg" move="2" mrl="6"/>
+    <unit name="Dwarven Guards" def="18" hits="3" class="HvInf+" melee="6" ignoreVisibility="true" ignoreMountain="true" icon="dwarf-helmet.svg" move="1" mrl="6"/>
+    <unit name="Dwarven Homeguard" def="16" hits="2" class="MdIrr" melee="4" ignoreVisibility="true" ignoreMountain="true" icon="dwarf-helmet.svg" move="1" mrl="4"/>
+    <unit name="Elven Archers" def="12" hits="2" class="LtArch+" melee="2" missile="6" ignoreTerrain="true" ignoreVisibility="true" move="4" mrl="6"/>
+    <unit name="Elven Cavalry" def="14" charge="4" hits="2" class="LtCav+" melee="4" missile="6" ignoreVisibility="true" move="4" mrl="6"/>
+    <unit name="Elven Knights" def="16" charge="4" hits="3" class="MdCav+" melee="4" missile="4" ignoreVisibility="true" move="3" mrl="4"/>
+    <unit name="Elven Homeguard" def="12" hits="1" class="LtIrr" melee="2" missile="4" ignoreTerrain="true" ignoreVisibility="true" move="3" mrl="2"/>
+    <unit name="Goblin Archers" def="10" hits="2" class="LtArcher-" melee="0" missile="2" ignoreVisibility="true" icon="goblin-head.svg" move="1" mrl="0"/>
+    <unit name="Goblin Guards" def="14" hits="3" class="MdIrr" melee="4" ignoreVisibility="true" icon="goblin-head.svg" move="1" mrl="0"/>
+    <unit name="Goblin Infantry" def="12" hits="2" class="LtInf-" melee="2" ignoreVisibility="true" icon="goblin-head.svg" move="1" mrl="0"/>
+    <unit name="Goblin Skirmisher" def="12" hits="2" class="LtIrr-" melee="2" ignoreVisibility="true" icon="goblin-head.svg" move="1" mrl="0"/>
+    <unit name="Goblin Wolfriders" def="12" charge="2" hits="2" class="LtCav" melee="4" missile="2" ignoreVisibility="true" icon="wolf-head.svg" move="4" mrl="2"/>
+    <unit name="Common, Gnoll Marauders" def="12" hits="3" class="LtIrr+" melee="6" missile="4" move="3" mrl="2"/>
+    <unit name="Common, Orog Lizardriders" def="16" hits="4" class="HvCav+" melee="6" ignoreVisibility="true" icon="spiked-dragon-head.svg" move="3" mrl="6"/>
+    <unit name="Common, Ogre Legion" def="16" hits="4" class="Special" melee="12" ignoreVisibility="true" icon="ogre.svg" move="2" mrl="4"/>
+    <unit name="Troll Legion" def="16" hits="3" class="Special" melee="10" icon="goblin-head.svg" move="1" mrl="4"/>
+    <unit name="Undead Legion" def="22" hits="3" class="Special" melee="8" ignoreVisibility="true" ignoreWeather="true" icon="bone-gnawer.svg" move="1" mrl="6"/>
+    <unit name="Ship, Coaster" def="10" hits="1" class="LtShip" melee="0" missile="-2" move="1" mrl="2"/>
+    <unit name="Ship, Dhow" def="10" hits="1" class="LtShip" melee="0" missile="-2" move="1" mrl="2"/>
+    <unit name="Ship, Keelboat" def="8" hits="1" class="LtShip" melee="-2" move="1" mrl="0"/>
+    <unit name="Ship, Caravel" def="14" hits="2" class="MdShip" melee="4" missile="0" move="1" mrl="4"/>
+    <unit name="Ship, Cog" def="14" hits="2" class="MdShip" melee="4" missile="2" move="1" mrl="4"/>
+    <unit name="Ship, Dhoura" def="14" hits="2" class="MdShip" melee="4" missile="0" move="1" mrl="4"/>
+    <unit name="Ship, Longship" def="12" charge="2" hits="1" class="MdShip" melee="4" icon="trireme.svg" move="3" mrl="2"/>
+    <unit name="Ship, Drakkar" def="14" charge="2" hits="2" class="HvShip" melee="6" icon="trireme.svg" move="3" mrl="2"/>
+    <unit name="Ship, Galleon" def="16" charge="2" hits="4" class="HvShip" melee="8" missile="2" move="2" mrl="2"/>
+    <unit name="Ship, Knarr" def="14" charge="2" hits="2" class="HvShip" melee="4" missile="0" icon="trireme.svg" move="2" mrl="4"/>
+    <unit name="Ship, Roundship" def="16" hits="3" class="HvShip" melee="6" missile="6" move="0" mrl="6"/>
+    <unit name="Ship, Zebec" def="14" charge="2" hits="3" class="HvShip" melee="6" missile="4" move="2" mrl="4"/>
+</units>

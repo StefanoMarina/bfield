@@ -1,0 +1,148 @@
+/*
+Copyright (C) 2019 root
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : 29-ott-2019, 9.43.20
+    Author     : root
+*/
+.card {
+  -fx-background-color: linear-gradient(from 50% 0% to 50% 100%, gainsboro 50%, slategray 100%);
+  -fx-background-radius: 25px;
+  -fx-padding: 0.5em;
+  /*-fx-border-color: black;*/
+  -fx-border-radius: 20px;
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+}
+
+.army-tool-label {
+  -fx-max-width: 30;
+}
+
+.army-tool-spinner {
+  -fx-max-width: 60;
+  -fx-pref-width: 60;
+}
+
+.btnColor {
+  -fx-padding: 0;
+}
+
+.cardContent {
+  -fx-padding: 0.2em 0px 0px 0px;
+}
+
+.armyName, .cardClass, .cardSubtitle, .cardTitle {
+  -fx-font-family: sans-serif;
+  -fx-font-size: 1.2em;
+  -fx-font-weight: bold;
+}
+
+.ttip {
+  -fx-font-size: 0.1em;
+}
+
+.armyName, .armyName:selected {
+  -fx-font-size: 3em;
+  -fx-text-alignment: center;
+  -fx-background: transparent;
+  -fx-padding: 0;
+  -fx-border: none;
+  -fx-border-width: 0px;
+  -fx-focus-color: transparent;
+}
+
+.cardSubtitle {
+  -fx-font-size: 0.8em;
+  -fx-font-weight: normal;
+  -fx-font-style: italic;
+}
+
+.label-score-mod, .label-score-better, .label-score {
+  -fx-font-size: 1.5em;
+  -fx-font-weight: bold;
+  -fx-text-alignment: center;
+  -fx-alignment: center;
+  -fx-pref-width: 100.0;
+}
+
+.label-score-mod {
+  -fx-text-fill: darkred; 
+}
+.label-score-better {
+  -fx-text-fill: navy; 
+}
+
+.btn, .tb {
+  -fx-padding: 0;
+  -fx-border-width: 1px;
+  -fx-background-radius: 5px;
+  -fx-border-radius: 5px;
+  -fx-border-color:   darkgray  dimgray  dimgray darkgray;
+}
+
+.btn {-fx-background-color: transparent}
+.btn:hover, .btn:hover:selected {
+    -fx-background-color: white;
+}
+
+.tb {-fx-background-color: slategrey}
+
+.tb:hover, .tb:hover:selected  {
+  -fx-background-color: mediumblue;
+  -fx-border-color: transparent;
+}
+
+.tb:hover {
+  -fx-border-color: darkgray;
+}
+
+.tb:selected {
+  -fx-background-color: midnightblue;
+  -fx-border-color: black;
+}
+
+.tb:hover:selected .icon-crown {
+  -fx-background-color: goldenrod;
+}
+
+.tb:selected .icon-crown {
+  -fx-background-color: gold;
+}
+
+
+.tb:hover:selected .icon-g {
+  -fx-background-color: firebrick;
+}
+
+.tb:selected .icon-g {
+  -fx-background-color: tomato;
+}
+
+#btnHeal  > Region{
+    -fx-background-color: forestgreen;
+}
+#btnDamage > Region {
+    -fx-background-color: darkred;
+}
+
+/*
+edit unit
+*/
+
+.title {
+  -fx-font-size:20px;
+  -fx-font-weight: bold;
+}
