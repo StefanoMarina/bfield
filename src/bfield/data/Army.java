@@ -44,12 +44,24 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlSeeAlso({Unit.class, Unit2nd.class})
 public class Army {
 
+  /**
+   * Unique id to the army. 
+   * @see bfield.data.Battle#ID_HOME
+   * @see bfield.data.Battle#ID_AWAY
+   */
   @XmlAttribute
   protected String id;
 
+  /**
+   * Display name of the army.
+   */
   @XmlElement
   protected String name;
 
+  /**
+   * Unit list. use only getUnits().
+   * @see bfield.data.Army#getUnits() 
+   */
   @XmlElementWrapper(name = "units")
   @XmlElements(value={
     @XmlElement(name="unit", type=Unit.class),

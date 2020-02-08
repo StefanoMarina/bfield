@@ -41,16 +41,33 @@ import bfield.rules.BattleRules;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class BField {
   
+  /**
+   * the current battle element
+   */
   @XmlElement
   protected Battle battle;
   
+  /**
+   * The current factory. This will be a reference to Application
+   * @see bfield.Application#getFactories() 
+   */
   @XmlJavaTypeAdapter(XMLFactoryReferenceAdapter.class)
   @XmlElement(name="ruleset")
   protected XMLFactory factory;
   
+  /**
+   * Current selected battle rules mechanic from user menu. This will be saved
+   * as the BattleRules class.
+   * @see bfield.data.BField#getSelectedBattleMechanic() 
+   * @see bfield.rules.BattleRules
+   */
   @XmlElement(name="selectedBattleMechanic")
   protected String sBattleMechanic;
   
+  /**
+   * non-serialized instance of the BattleRules object. This should not be
+   * needed to be a constat property.
+   */
   @XmlTransient
   protected BattleRules bmSelected;
   
@@ -64,6 +81,9 @@ public class BField {
   @XmlElement(name="unitOrdinal")
   java.util.Map<String,Integer> ordinals;
   
+  /**
+   * user preference: should units show a roman number before the name?
+   */
   @XmlAttribute(name="useOrdinals")
   protected boolean bUseOrdinals;
   
@@ -151,33 +171,61 @@ public class BField {
     this.battle = battle;
   }
 
-  
+  /**
+   * sets the current XMLFactory.
+   * @param factory the new XmlFactory to use
+   */
   public void setFactory(XMLFactory factory) {
     this.factory = factory;
   }
 
+  /**
+   * Returns the current file path.
+   * @return the current file or null if no file set.
+   */
   public File getFile() {
     return file;
   }
 
+  /**
+   * Sets the file path.
+   * @param file the new file.
+   */
   public void setFile(File file) {
     this.file = file;
   }
 
+  /**
+   *
+   * @return
+   */
   public Map<String, Integer> getOrdinals() {
     if (ordinals == null)
       ordinals = new java.util.HashMap();
     return ordinals;
   }
 
+  /**
+   *
+   * @return
+   */
   public boolean isUseOrdinals() {
     return bUseOrdinals;
   }
 
+  /**
+   *
+   * @param bUseOrdinals
+   */
   public void setUseOrdinals(boolean bUseOrdinals) {
     this.bUseOrdinals = bUseOrdinals;
   }
   
+  /**
+   *
+   * @param unitName
+   * @return
+   */
   public Integer nextOrdinal(String unitName) {
     if (!getOrdinals().containsKey(unitName))
       getOrdinals().put(unitName, 0);
