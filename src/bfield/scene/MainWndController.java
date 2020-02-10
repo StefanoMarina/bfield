@@ -27,6 +27,8 @@ import bfield.event.BattleEvent;
 import java.awt.Event;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -401,5 +403,26 @@ public class MainWndController  {
       Application.showMessage("Error", "Exporting error.", "Something went"
               + " wrong while exporting the army.", ex);
     }
+  }
+
+  /**
+   * shows the 'acknowledgements' menu
+   * @param event 
+   */
+  @FXML
+  private void onMenuAcknowledgemens(ActionEvent event) {
+    try {
+      String data = new String(Files.readAllBytes(
+              new File(System.getProperty("user.dir")+File.separator+"text"
+                      +File.separator+"acknowledgements.html").toPath()
+      ));
+      
+      Application.getApp().actionshowHTMLContent("Acknowledgements",data);
+      
+    } catch (IOException ex) {
+      Application.showMessage("Error", "Could not show document.", "Cannot load"
+              + "acknowledgements.html", ex);
+    }
+          
   }
 }

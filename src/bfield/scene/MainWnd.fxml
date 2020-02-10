@@ -27,6 +27,9 @@
         <MenuItem text="Import army..." onAction="#onImportArmy"/>
         <MenuItem text="Export army..." onAction="#onExportArmy"/>
       </Menu>
+      <Menu text="Help">
+        <MenuItem text="Acknowledgements" onAction="#onMenuAcknowledgemens"/>
+      </Menu>
     </MenuBar>
   </top>
     <center>

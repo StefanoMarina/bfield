@@ -39,6 +39,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javax.xml.bind.JAXB;
 
@@ -427,5 +428,23 @@ public class Application extends javafx.application.Application {
     
     return (group.getSelectedToggle().equals(home))
             ? Battle.ID_HOME : Battle.ID_AWAY;
+  }
+  
+  /**
+   * Shows a window with html content on it, for customized long-size
+   * dialogs such as tutorials. It is not intended to be a full browser,
+   * only to show extended, formatted, text.
+   * @param htmlData valid html source from wich read HTML text.
+   */
+  public void actionshowHTMLContent(String title, String htmlData) {
+    WebView browser = new WebView();
+    browser.getEngine().loadContent(htmlData, "text/html");
+    
+    Alert alert = new Alert(Alert.AlertType.NONE);
+    alert.setTitle(title);
+    alert.getDialogPane().setContent(browser);
+    alert.getDialogPane().setPrefSize(800.0, 600.0);
+    alert.getButtonTypes().add(ButtonType.OK);
+    alert.showAndWait();
   }
 }
