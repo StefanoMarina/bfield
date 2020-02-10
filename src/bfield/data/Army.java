@@ -20,6 +20,8 @@ package bfield.data;
 import bfield.data.adapters.FxColorTypeAdapter;
 import bfield.rules.UnitRules;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 import javafx.scene.paint.Color;
 import javax.xml.bind.annotation.*;
@@ -90,6 +92,9 @@ public class Army {
   
   @XmlTransient
   Army enemy;
+  @XmlElementWrapper(name = "ordinals", required = false)
+  @XmlElement(name = "unitOrdinal")
+  Map<String, Integer> ordinals;
 
 /**
  * Returns the army's string identification.
@@ -312,5 +317,33 @@ public class Army {
    */
   public void setName(String name) {
     this.name = name;
+  }
+
+  /**
+   * Automatically increase the ordinal number on the internal store
+   * @param unitName unit name
+   * @return the new ordinal, updated
+   * @see #getOrdinals()
+   */
+  public Integer nextOrdinal(String unitName) {
+    if (!getOrdinals().containsKey(unitName)) {
+      getOrdinals().put(unitName, 0);
+    }
+    //Increase & return
+    getOrdinals().put(unitName, getOrdinals().get(unitName) + 1);
+    return getOrdinals().get(unitName);
+  }
+
+  /**
+   * Ordinal numbers tied to unit (IE 1st infantry, etc) are stored
+   * internally on a unitname/currentOrdinal map, which is serialized.
+   * @return the internal unit/number store map.
+   * @see #nextOrdinal(String)
+   */
+  public Map<String, Integer> getOrdinals() {
+    if (ordinals == null) {
+      ordinals = new HashMap();
+    }
+    return ordinals;
   }
 }
