@@ -18,6 +18,7 @@ package bfield.scene;
 
 import bfield.Application;
 import bfield.data.BField;
+import bfield.data.Battle;
 import bfield.data.Unit;
 import bfield.data.UnitBuilder;
 import bfield.data.UnitFactory;
@@ -360,27 +361,10 @@ public class MainWndController  {
 
   @FXML
   private void onOrdinalsCheck(ActionEvent event) {
-    BField bf = getSelectedBattle();
-    boolean previouslyUsedOrdinals = bf.getOrdinals().isEmpty(),
-            previousState =  bf.isUseOrdinals();
-    
     battles.get(tabMain.getSelectionModel().getSelectedItem())
             .setOrdinal(micOrdinals.isSelected());
     
-    //bf.setUseOrdinals(micOrdinals.isSelected());
-    
-    //check if previously used
-    if (bf.isUseOrdinals()) {
-      if (previouslyUsedOrdinals) {
-        //Reset numbers?
-      } else {
-        //assign everything
-      }
-      
-      //assigneverything
-    } else {
-      
-    }
+    getSelectedBattle().setUseOrdinals(micOrdinals.isSelected());
   }
 
   @FXML

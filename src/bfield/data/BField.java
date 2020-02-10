@@ -77,9 +77,6 @@ public class BField {
   @XmlTransient
   boolean upToDate = true;
 
-  @XmlElementWrapper(name="ordinals", required=false)
-  @XmlElement(name="unitOrdinal")
-  java.util.Map<String,Integer> ordinals;
   
   /**
    * user preference: should units show a roman number before the name?
@@ -195,15 +192,6 @@ public class BField {
     this.file = file;
   }
 
-  /**
-   *
-   * @return
-   */
-  public Map<String, Integer> getOrdinals() {
-    if (ordinals == null)
-      ordinals = new java.util.HashMap();
-    return ordinals;
-  }
 
   /**
    *
@@ -221,18 +209,5 @@ public class BField {
     this.bUseOrdinals = bUseOrdinals;
   }
   
-  /**
-   *
-   * @param unitName
-   * @return
-   */
-  public Integer nextOrdinal(String unitName) {
-    if (!getOrdinals().containsKey(unitName))
-      getOrdinals().put(unitName, 0);
-    
-    //Increase & return
-    getOrdinals().put(unitName, getOrdinals().get(unitName)+1);
-    return getOrdinals().get(unitName);
-  }
   
 }

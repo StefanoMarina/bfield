@@ -140,7 +140,7 @@ public class BattleController  {
        * Ordinals should be added regardless of usage, it's less confusing.
        */
       newUnit = battle.getFactory().getUnitFactory().createUnit(newUnitName,
-                battle.nextOrdinal(newUnitName));
+                event.getArmy().nextOrdinal(newUnitName));
       
       event.getArmy().addUnit(newUnit);
       ucRequest.addUnit(newUnit);
