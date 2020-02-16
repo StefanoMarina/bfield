@@ -115,7 +115,7 @@ public class BField {
    */
   public BattleRules getSelectedBattleMechanic() {
     if (bmSelected == null && sBattleMechanic != null) {
-      for (BattleRules bm : getFactory().getRulesFactory().getBattleMechanics()) {
+      for (BattleRules bm : getFactory().getRules().getBattleMechanics()) {
         if (bm.getClass().getSimpleName().equals(sBattleMechanic)) {
           bmSelected = bm;
           break;
@@ -125,7 +125,7 @@ public class BField {
     
     //lookup failed or empty string
     if (bmSelected == null) {
-      bmSelected = getFactory().getRulesFactory().getBattleMechanics().get(0);
+      bmSelected = getFactory().getRules().getBattleMechanics().get(0);
       sBattleMechanic = bmSelected.getClass().getSimpleName();
     }
       

@@ -38,13 +38,13 @@ public class RulesReferenceAdapter extends XmlAdapter<String,Rules>{
       return null;
     }
     
-    return data.getRulesFactory();
+    return data.getRules();
   }
 
   @Override
   public String marshal(Rules v) throws Exception {
     for (Entry<String,XMLFactory> e : Application.getApp().getFactories().entrySet()) {
-      if (e.getValue().getRulesFactory() == v) {
+      if (e.getValue().getRules() == v) {
         return e.getKey();
       }
     }
