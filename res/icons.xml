@@ -13,10 +13,10 @@
   <entry key="MdArt">catapult.svg</entry>
   <entry key="Art">catapult.svg</entry>
   <entry key="HvArt">catapult.svg</entry>
-  <entry key="LtAchr">pocket-bow.svg</entry>
-  <entry key="MdAchr">heavy-arrow.svg</entry>
-  <entry key="Achr">heavy-arrow.svg</entry>
-  <entry key="HvAchr">crossbow.svg</entry>
+  <entry key="LtArch">pocket-bow.svg</entry>
+  <entry key="MdArch">heavy-arrow.svg</entry>
+  <entry key="Arch">heavy-arrow.svg</entry>
+  <entry key="HvArch">crossbow.svg</entry>
   <entry key="LtPike">spears.svg</entry>
   <entry key="MdPike">spears.svg</entry>
   <entry key="Pike">spears.svg</entry>
