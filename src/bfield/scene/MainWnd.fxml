@@ -26,6 +26,8 @@
         <SeparatorMenuItem/>
         <MenuItem text="Import army..." onAction="#onImportArmy"/>
         <MenuItem text="Export army..." onAction="#onExportArmy"/>
+        <SeparatorMenuItem/>
+        <MenuItem text="Tutorial" accelerator="F1" onAction="#onTutorial"/>
       </Menu>
       <Menu text="Help">
         <MenuItem text="Acknowledgements" onAction="#onMenuAcknowledgemens"/>

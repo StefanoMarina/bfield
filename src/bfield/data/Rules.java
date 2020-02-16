@@ -146,6 +146,13 @@ public class Rules {
    */
   @XmlElement(name="armyRules")
   protected String armyRulesClass;
+  /**
+   * Name of the tutorial file that should be opened from help menu.
+   * All tutorial names are filename only, html format, and should be
+   * placed in the "text" subfolder.
+   */
+  @XmlElement
+  String tutorialFilename;
   
   /**
    * 
@@ -361,5 +368,15 @@ public class Rules {
     } catch (Exception e) {
         throw new RuntimeException(e);
     }
+  }
+  
+  
+  /**
+   * Returns the filename of the html tutorial.
+   * @return a string containing a filename without path
+   * @see #tutorialFilename
+   */
+  public String getTutorialFilename() {
+    return tutorialFilename;
   }
 }

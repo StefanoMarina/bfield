@@ -81,12 +81,16 @@ public class MainWndController  {
       bc.getBattlefield().setUpToDate(false);
     };
   }
-  
+  /**
+   * Returns current bfield. This does NOT check for open tabs -- if no battle
+   * tab is selected, a RuntimeException is thrown.
+   * @return the BField associated with the current opened tab.
+   */
   private BField getSelectedBattle() {
     Tab t = tabMain.getSelectionModel().getSelectedItem();
     BattleController bc = battles.get(t);
     if (bc == null) {
-      throw new RuntimeException("Could not retrieve battle controlloer.");
+      throw new RuntimeException("Could not retrieve battle controller.");
     }
     return bc.getBattlefield();
   }
@@ -417,12 +421,51 @@ public class MainWndController  {
                       +File.separator+"acknowledgements.html").toPath()
       ));
       
-      Application.getApp().actionshowHTMLContent("Acknowledgements",data);
+      Application.getApp().actionshowHTMLContent("Acknowledgements",data, true);
       
     } catch (IOException ex) {
       Application.showMessage("Error", "Could not show document.", "Cannot load"
               + "acknowledgements.html", ex);
     }
           
+  }
+
+  /**
+   * Takes the tutorial filename from the currently opened tab and
+   * shows the html file. Error is raised if no tutorial or battle is selected.
+   * @param event ignored
+   */
+  @FXML
+  private void onTutorial(ActionEvent event) {
+    BField bf = getSelectedBattle();
+    if (bf == null) {
+      Application.showMessage("No selection", "No battle selected.", 
+              "Please select a battle.", null);
+      return;
+    }
+    
+    final String FNAME = bf.getFactory()
+            .getRules().getTutorialFilename();
+    
+    if (FNAME == null || FNAME.isEmpty()) {
+      Application.showMessage("No tutorial", "No tutorial found.", 
+              "This ruleset has no tutorial attached.", null);
+      return;
+    }
+      
+    File tutorialFile = new File(String.format("%s%stext%s%s",
+            System.getProperty("user.dir"), File.separator,
+            File.separator, FNAME
+    ));
+    try {
+      String data = new String(Files.readAllBytes(tutorialFile.toPath()));
+      if (data == null || data.isEmpty())
+        throw new IOException("Could not read file or empty file.");
+      
+      Application.getApp().actionshowHTMLContent("Tutorial", data, false);
+    }catch(IOException ioe) {
+      Application.showMessage("Error","An error occourred", 
+              "please chek exception info.", ioe);
+    }
   }
 }

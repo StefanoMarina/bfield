@@ -184,7 +184,7 @@ public class BattleController  {
     cbVisibility.setItems(FXCollections.observableArrayList(cf.getVisibility()));
    // cbFormula.setItems(FXCollections.observableArrayList(Rules.AttackMethod.values()));
     cbFormula.setItems(FXCollections.observableArrayList(
-              battle.getFactory().getRulesFactory().getBattleMechanics()));
+              battle.getFactory().getRules().getBattleMechanics()));
     
     refreshBattle();
     refreshArmies();
@@ -274,7 +274,7 @@ public class BattleController  {
    }
    
    Map<String,String> result;
-   result = battle.getSelectedBattleMechanic().doBattle(battle.getFactory().getRulesFactory(),
+   result = battle.getSelectedBattleMechanic().doBattle(battle.getFactory().getRules(),
            battle.getBattle());
    
    int round = battle.getBattle().nextRound();

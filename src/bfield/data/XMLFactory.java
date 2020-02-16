@@ -33,7 +33,7 @@ public class XMLFactory {
   @XmlTransient
   protected ConditionFactory conditionFactory;
   @XmlTransient
-  protected Rules rulesFactory;
+  protected Rules rules;
   @XmlTransient
   protected UnitFactory unitFactory;
     
@@ -113,7 +113,7 @@ public class XMLFactory {
     b.terrain = conditionFactory.getTerrain().get(0);
     b.weather = conditionFactory.getWeather().get(0);
     b.visibility = conditionFactory.getVisibility().get(0);
-    b.setRules(rulesFactory);
+    b.setRules(rules);
     
     return b;
   }
@@ -122,8 +122,8 @@ public class XMLFactory {
     return conditionFactory;
   }
 
-  public Rules getRulesFactory() {
-    return rulesFactory;
+  public Rules getRules() {
+    return rules;
   }
 
   public UnitFactory getUnitFactory() {
@@ -158,7 +158,7 @@ public class XMLFactory {
     factory.setPath(fDir);
     
     try {
-      factory.rulesFactory = JAXB.unmarshal(fRules, Rules.class);
+      factory.rules = JAXB.unmarshal(fRules, Rules.class);
     } catch (Exception e) {
       throw new IOException("Rules file failed to load. Cause: " + e.getLocalizedMessage());
     }
@@ -189,7 +189,7 @@ public class XMLFactory {
     File fDescription = new File(fDir.getAbsolutePath()+File.separator+"description.xml");
     
     try {
-       JAXB.marshal(rulesFactory, fRules);
+       JAXB.marshal(rules, fRules);
     } catch (Exception ioe) {
       throw new IOException("Rules save failed.", ioe);
     } 

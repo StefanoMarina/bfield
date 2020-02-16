@@ -1,0 +1,36 @@
+<html>
+  <body>
+    <h1>BRCS Tactical battle tutorial</h1>
+    <h2>Should you fight?</h2>
+    <p>Roll the d100 icon near the weather. if it turns out to be a major storm, you can rule out that no battle can take place.</p>
+    <h2>Okay, let's get going</h2>
+    <p>
+      <ol>
+        <li>Select <i>terrain</i>, weather (if not rolled) and <i>visibility)</i> (limited if night or heavy fog</li>
+        <li>Do you want the effectiveness rule in action? select the appropriate button if you want it so.</li>
+        <li>Now onto the armies. Does any army benefits of fortification? select the rook button if so.</li>
+        <li>Is this battle on the hills? if so, the defending army may have the <i>high ground advantage</i></li>
+        <ul>
+            <li>On a hill, the army first into the province have the advantage. It expires after the first round.</li>
+            <li>On a mountain, the first unit you will add to the army list will have the advantage.</li>
+        </ul>
+        <li>Repeat for the other army.</li>
+        <li>Now start adding units, if you want them to be identified easily select the "battle->use ordinals" menu.</li>
+        <li>Done? Ok, is this unit on a foreign terrain during harsh climate? like arab soldiers on russia during winter? if so, press the snowflake button on the army menu and enable suffering for all. You can then disable weather suffering manually.</li>
+      </ol>
+Done! you may start your battle.
+    </p>
+    <h2>Auto formulas</h2>
+    <p>BRCS use a fixed formula to assume how much damage the armies do to each other. Use them to spread damage when you don't want to handle mass combat.</p>
+    <p>the formula is 11+(your attack-enemy defense)*0.05 vs the same for the enemy.</p>
+    <p>The first attack is <i>special</i> meaning that your units' best value between charge, melee and ranged will be used. All the other attacks will consider melee score only.</p>
+    <p><ul>
+      <li><b>Special attack, then standard</b>: standard rule, first round uses special then melee attack.</li>
+      <li><b>Standard attack, fixed formula</b>: melee attack only.</li>
+      <li><b>Special attack, fixed formula</b>: special attack only.</li>
+      <li><b>Standard attack, 1d20 </b>: melee attack only, however 1d20 is rolled instead of 11.</li>
+      <li><b>Special attack, 1d20 </b>: special attack only, however 1d20 is rolled instead of 11.</li>
+      <li><b>Random 1 vs 1, using their best </b>: each unit from the army will try to attack, with its best score, one unit randomly chosen from the enemy list.</li>
+    </ul></p>
+  </body>
+</html>

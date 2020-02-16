@@ -19,4 +19,5 @@
   <baseAttackBonus>11</baseAttackBonus>
   <shallowWaterMalus>-2</shallowWaterMalus>
   <minimalDamage>1</minimalDamage>
+  <tutorialFilename>tutorial.d20srd.html</tutorialFilename>
 </rules>
