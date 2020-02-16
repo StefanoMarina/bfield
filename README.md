@@ -17,11 +17,11 @@ Already included:
 - [MarsupialMancer's Birthright 5E](https://marsupialmancer.blogspot.com/2019/08/birthright-5e-revised.html) rules for mass battles
 
 ## Requirements
-Java 8 is required. Battlefield! uses 2 libraries expunged from OpenJDK: JAXB and JavaFX. Ant files for support will be added in the future.
+Java 8 is required, or any java with JAXB and JavaFX support.
 
 ## Running the app
 1. Ensure you have JAVA8 and know how to use it
-2. Download zip file from dist folder
+2. Download zip file from *repo* folder
 3. Extract everyhthing 
 4. Launch the jar file
 
@@ -41,8 +41,7 @@ Subpackages such as srd shows implementation of such classes. If you want to add
 
 ## TO DO
 - DOCUMENTATION, DOCUMENTATION, DOCUMENTATION
-- Help guides
-- Thankyou on the app to the icon artists from [game-icons](www.game-icons.net)
+- Full ruleset edit
 
 ## ThankYou
 - The Birthright.net community
