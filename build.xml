@@ -11,6 +11,7 @@
         <zipfileset dir="template" prefix="Battlefield/template"/>
         <zipfileset dir="svg" excludes="sys/*" prefix="Battlefield/svg"/>
         <zipfileset dir="res" prefix="Battlefield/res"/>
+        <zipfileset dir="text" prefix="Battlefield/text"/>
         <zipfileset dir="dist" includes="${release.root}.jar" prefix="Battlefield"/>
       </zip>
     </target>
