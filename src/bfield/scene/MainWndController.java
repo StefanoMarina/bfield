@@ -399,7 +399,8 @@ public class MainWndController  {
     
     if (result == null)
       return;
-    
+    if (!result.getAbsolutePath().endsWith(".xarmy"))
+        result = new File (result.getAbsolutePath()+".xarmy");
     try {
       Application.getApp().actionExportArmy(getSelectedBattle(), result);
     } catch (IOException ex) {
