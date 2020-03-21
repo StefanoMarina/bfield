@@ -18,20 +18,15 @@ package bfield.scene;
 
 import bfield.Application;
 import bfield.data.BField;
-import bfield.data.Battle;
 import bfield.data.Unit;
 import bfield.data.UnitBuilder;
 import bfield.data.UnitFactory;
 import bfield.data.XMLFactory;
 import bfield.event.BattleEvent;
-import java.awt.Event;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -189,6 +184,10 @@ public class MainWndController  {
     
       if (result == null)
           return;
+      
+      if (!result.getAbsolutePath().endsWith(".bfield"))
+        result = new File (result.getAbsolutePath()+".bfield");
+      
       bf.setFile(result);
       t.setTooltip(new Tooltip(result.toString()));
     }
