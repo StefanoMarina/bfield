@@ -19,7 +19,6 @@ package bfield.scene;
 import bfield.Application;
 import bfield.RulesUtilities;
 import bfield.Utilities;
-import bfield.data.Battle;
 import bfield.event.UnitChangeEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -27,7 +26,6 @@ import javafx.scene.control.Label;
 import bfield.data.Unit;
 import bfield.data.Unit2nd;
 import bfield.rules.UnitRules;
-import java.lang.ref.WeakReference;
 import java.util.Optional;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Tooltip;
@@ -260,6 +258,7 @@ public void setUnit(String team, Unit u, UnitRules um) {
    setShowOrdinal(showOrdinal);
    
   
+  //load and set unit symbol
   String svgFile = (u.getIcon() != null ? u.getIcon()
       : Application.getApp().getAppropriateIcon(u.getClassName()));
   try {
@@ -270,11 +269,13 @@ public void setUnit(String team, Unit u, UnitRules um) {
   }
   
   rPictureIcon.getStyleClass().clear();
-  rPictureIcon.getStyleClass().add("picture-front");
-  //rPictureIcon.getStyleClass().add("pic-"+unitName);
-   
+  rPictureIcon.getStyleClass().add("picture-front");   
   rPictureBackground.setStyle("-fx-background-color: red");
-   
+  
+  /**
+   * 2nd edition units have the "rowing" capability
+   * TODO: add show_rowing to rules instead of ugly class ref check
+   */ 
     if (unit instanceof Unit2nd) {
       lblPaddles.setVisible(true);
       grPaddles.setVisible(true);
@@ -289,12 +290,14 @@ public void setUnit(String team, Unit u, UnitRules um) {
       grPaddles.setVisible(false);
    }
    
+    //movement can be number or string (movement class for ships in 2e)
     if (unit.getMovement() != null)
       lblMove.setText(unit.getMovement().toString());
     else
       lblMove.setText("--");
    
-   refreshUnit();
+    //Ship mode: we need to show cargo
+    refreshUnit();
  }
  
  public void refreshUnit() {
@@ -308,7 +311,7 @@ public void setUnit(String team, Unit u, UnitRules um) {
    
    lblDef.setText(String.valueOf(mod.getDef()));
    lblMelee.setText(String.format("%d", mod.getMelee()));
- 
+   lblMorale.setText(String.valueOf(mod.getMorale()));
    
    lblMissile.setStyle("");
    if (mod.getMissile() != Unit.NA){
