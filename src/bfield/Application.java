@@ -29,6 +29,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Properties;
+import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -50,16 +51,50 @@ import javax.xml.bind.JAXB;
  */
 public class Application extends javafx.application.Application {
 
+  /**
+   * Preferences static values
+   */
+  public static final String P_LASTFOLDER = "lastFolder";
+  
   private java.util.Properties unitIconDatabase;
   private java.util.Map<String, XMLFactory> rulesCache;
   private MainWndController rootController;
   private Stage stage;
   private static Application app;
   
+  private Properties preferences;
+  
   public static Application getApp() {
     return app;
   }
 
+  public void quit() {
+    rootController.closeAllTabs();
+    try {
+      getPreferences().storeToXML(new FileOutputStream(new File
+      (System.getProperty("user.dir")+File.separator+"preferences.xml")),
+              "Battlefield preferences");
+    } catch (IOException ioe) {
+      System.err.println("Could not save preferences.");
+    }
+  }
+  
+  public Properties getPreferences() {
+    if (preferences == null) {
+      File filePref = new File (System.getProperty("user.dir")
+              + File.separator+"preferences.xml");
+      preferences = new Properties();
+      
+      try {
+        preferences.loadFromXML(new FileInputStream(filePref));
+      } catch(IOException fnfe) {
+        //no big deal, just keep new preference file
+        System.out.println("Warning: no preferences found.");
+      }
+    }
+    return preferences;
+  }
+  
   public static void main(String[] args) throws Exception {
     launch(args);
   }
@@ -73,6 +108,10 @@ public class Application extends javafx.application.Application {
     Application.app = this;
     stage = primaryStage;
 
+    primaryStage.setOnCloseRequest( (we) -> {
+      quit();
+    });
+    
     System.out.println("Loading rules...");
     rulesCache = new java.util.HashMap();
 

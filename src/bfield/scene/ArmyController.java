@@ -275,6 +275,8 @@ public class ArmyController  {
     
     a.getUnits().forEach((u) -> {addUnit(u);});
     refreshArmy();
+    
+    
   }
   
   public void refreshArmy() {

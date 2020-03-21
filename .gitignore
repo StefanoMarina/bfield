@@ -1,1 +1,4 @@
 /rules/CnC/
+build/
+preferences.xml
+dist/
