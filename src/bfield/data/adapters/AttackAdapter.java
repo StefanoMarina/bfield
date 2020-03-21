@@ -16,16 +16,20 @@
  */
 package bfield.data.adapters;
 
-/**
- *
- * @author ste
- */
+
 import bfield.data.Unit;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Objects;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
+/**
+ * Attackadapter is used to parse adnd:X properties
+ * so att="2,2,1" will become an int [2,2,1] array.
+ * you have to put NA multiple times to correctly parse
+ * the stat, so [2,NA,NA] for 3 hits.
+ * @author ste
+ */
 public class AttackAdapter extends XmlAdapter<String,Integer[]>{
 
   @Override
@@ -61,16 +65,22 @@ public class AttackAdapter extends XmlAdapter<String,Integer[]>{
     StringBuilder str = new StringBuilder();
     java.util.List<Integer> li = Arrays.<Integer>asList(v);
     Collections.reverse(li);
-    
-    for (Integer i : li) {
+/**
+ * 1.0.2
+ * you have to add NA multiple times to force disabling unit skill
+ * before hits reach 0
+ */    
+    java.util.Iterator<Integer> it = li.iterator();
+    while (it.hasNext()) {
+      Integer i = it.next();
+    //for (Integer i : li) {
       if (i == null || i.equals(Unit.NA)) {
         str.append("NA");
-        //break;
       } else {
         str.append(i);
-        if (!Objects.equals(i, v[v.length-1])){
+      }
+      if (it.hasNext()){
           str.append(",");
-        }
       }
     }
     return str.toString();

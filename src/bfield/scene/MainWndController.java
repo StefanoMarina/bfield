@@ -18,20 +18,15 @@ package bfield.scene;
 
 import bfield.Application;
 import bfield.data.BField;
-import bfield.data.Battle;
 import bfield.data.Unit;
 import bfield.data.UnitBuilder;
 import bfield.data.UnitFactory;
 import bfield.data.XMLFactory;
 import bfield.event.BattleEvent;
-import java.awt.Event;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -47,6 +42,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /**
@@ -182,15 +178,20 @@ public class MainWndController  {
     Tab t = tabMain.getSelectionModel().getSelectedItem();
       
     if (bf.getFile() == null) {
-    FileChooser fc = new FileChooser(); 
-    fc.setTitle("Save battle");
-    fc.getExtensionFilters().add(new ExtensionFilter("Battlefield files", "*.bfield"));
-    File result = fc.showSaveDialog(Application.getApp().getStage());
+      FileChooser fc = createFileChooser("Save battle", "bfield");
+    
+      File result = fc.showSaveDialog(Application.getApp().getStage());
     
       if (result == null)
           return;
+      
+      if (!result.getAbsolutePath().endsWith(".bfield"))
+        result = new File (result.getAbsolutePath()+".bfield");
+      
       bf.setFile(result);
       t.setTooltip(new Tooltip(result.toString()));
+      Application.getApp().getPreferences().put(Application.P_LASTFOLDER, 
+            result.getParent());
     }
     
     javax.xml.bind.JAXB.marshal(bf, bf.getFile());
@@ -201,14 +202,13 @@ public class MainWndController  {
 
   @FXML
   private void onMenuOpen(ActionEvent event) {
-    FileChooser fc = new FileChooser(); 
-    fc.setTitle("Save battle");
-    fc.getExtensionFilters().add(new ExtensionFilter("Battlefield files", "*.bfield"));
+    FileChooser fc = createFileChooser("Save battle", "bfield");
     File result = fc.showOpenDialog(Application.getApp().getStage());
     
     if (result == null)
       return;
-    
+    Application.getApp().getPreferences().put(Application.P_LASTFOLDER, 
+            result.getParent());
     BField b = Application.getApp().actionLoadBattle(result);
     
     if (b == null) {
@@ -220,14 +220,18 @@ public class MainWndController  {
     b.setFile(result);
     b.setUpToDate(false);
     addNewBattleTab(b);
+    
   }
 
-  @FXML
-  private void onMenuQuit(ActionEvent event) {
+  public void closeAllTabs() {
     for (Tab t : tabMain.getTabs()) {
       BField bf = battles.get(t).getBattlefield(); 
     }
-    
+  }
+  
+  @FXML
+  public void onMenuQuit(ActionEvent event) {
+    Application.getApp().getStage().close();
     //kill me
   }
 
@@ -375,16 +379,18 @@ public class MainWndController  {
 
   @FXML
   private void onImportArmy(ActionEvent event) {
-    FileChooser fc = new FileChooser(); 
-    fc.setTitle("Import army");
-    fc.getExtensionFilters().add(new ExtensionFilter("Battlefield army XML files", "*.xarmy"));
+    FileChooser fc = createFileChooser("Import army", "xarmy");          
     File result = fc.showOpenDialog(Application.getApp().getStage());
     
     if (result == null)
       return;
     
+    //store last path
     if (!Application.getApp().actionImportArmy(result, getSelectedBattle()))
       return;
+    
+    Application.getApp().getPreferences().put(Application.P_LASTFOLDER, 
+            result.getParent());
     
     BattleController bc = battles.get(tabMain.getSelectionModel().getSelectedItem());
     //force army restoration and set
@@ -393,19 +399,21 @@ public class MainWndController  {
 
   @FXML
   private void onExportArmy(ActionEvent event) {
-    FileChooser fc = new FileChooser(); 
-    fc.setTitle("Export army");
-    fc.getExtensionFilters().add(new ExtensionFilter("Battlefield army XML files", "*.xarmy"));
+    FileChooser fc = createFileChooser("Export army", "xarmy");
     File result = fc.showSaveDialog(Application.getApp().getStage());
     
     if (result == null)
       return;
-    
+    if (!result.getAbsolutePath().endsWith(".xarmy"))
+        result = new File (result.getAbsolutePath()+".xarmy");
     try {
       Application.getApp().actionExportArmy(getSelectedBattle(), result);
     } catch (IOException ex) {
       Application.showMessage("Error", "Exporting error.", "Something went"
               + " wrong while exporting the army.", ex);
+    } finally {
+      Application.getApp().getPreferences().setProperty(Application.P_LASTFOLDER,
+              result.getParentFile().getAbsolutePath());
     }
   }
 
@@ -467,5 +475,32 @@ public class MainWndController  {
       Application.showMessage("Error","An error occourred", 
               "please chek exception info.", ioe);
     }
+  }
+  
+  /**
+   * Creates a filechooser by putting default values, including start folder
+   * based on P_LASTFOLDER preference
+   * @param title Title to be shown
+   * @param extension string with the starting extension (bfield, xarmy, ecc)
+   * @return a newly created file chooser
+   */
+  private FileChooser createFileChooser(String title, String extension) {
+    FileChooser chooser = new FileChooser();
+    chooser.setTitle(title);
+    String lastFolder = 
+      Application.getApp().getPreferences().getProperty(Application.P_LASTFOLDER);
+    if (lastFolder != null) {
+      chooser.setInitialDirectory(new File(lastFolder));
+    }
+    ExtensionFilter filter;
+    switch (extension) {
+      case "bfield" : filter = new ExtensionFilter("Battlefield! xml files",
+              "*.bfield"); break;
+      case "xarmy" : filter = new ExtensionFilter("Battlefield! xml army",
+              "*.xarmy"); break;
+      default: throw new UnsupportedOperationException("Unknown file extension");
+    }
+    chooser.getExtensionFilters().add(filter);
+    return chooser;
   }
 }
