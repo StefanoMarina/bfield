@@ -51,7 +51,7 @@
   <adnd:unit name="Ship, Longship" class="MdShip" melee="3" charge="2" def="12" hits="1" icon="trireme.svg" adnd:move="C" adnd:row="2" mrl="6"/>
   <adnd:unit name="Ship, Drakkar" class="HvShip" adnd:melee="4,4,4" adnd:charge="2,2,2" def="13" hits="2" icon="trireme.svg" adnd:move="D" adnd:row="2" mrl="6"/>
   <adnd:unit name="Ship, Galleon" class="HvShip" adnd:melee="5,5,5,5" adnd:missile="2,1,0,0" charge="2" def="14" hits="4" adnd:move="B" mrl="6"/>
-  <adnd:unit name="Ship, Knarr" class="HvShip" adnd:melee="2,2" missile="1" charge="2" def="13" hits="2" icon="trireme.svg" adnd:move="C" adnd:row="1"/>
+  <adnd:unit name="Ship, Knarr" class="HvShip" adnd:melee="2,2" missile="1" charge="2" def="13" hits="2" icon="trireme.svg" adnd:move="C" adnd:row="1" mrl="4"/>
   <adnd:unit name="Ship, Roundship" class="HvShip" adnd:melee="4,4,4" adnd:missile="4,2,1" def="14" hits="3" adnd:move="B" mrl="6"/>
   <adnd:unit name="Ship, Zebec" class="HvShip" adnd:melee="4,4,4" missile="3" def="14" hits="3" adnd:move="A" mrl="6"/>
 

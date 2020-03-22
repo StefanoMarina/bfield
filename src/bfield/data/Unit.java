@@ -16,7 +16,6 @@
  */
 package bfield.data;
 
-import bfield.RulesUtilities;
 import javax.xml.bind.annotation.*;
 
 
@@ -78,6 +77,23 @@ public class Unit implements Cloneable {
   
   public static final int NA = -999;
   
+  @XmlAttribute(name="cap", required=false)
+  protected Integer cap;
+  
+  @XmlElementWrapper(name="cargo")
+  @XmlElements(value={
+    @XmlElement(name="unit", type=Unit.class),
+    @XmlElement(namespace=URI.ADND_URI, name="unit", type=Unit2nd.class)
+  })
+  protected java.util.List<Unit> cargo;
+  
+  public java.util.List<Unit> getCargo() {
+    if (cargo == null) {
+      cargo = new java.util.ArrayList();
+    }
+    return cargo;
+  }
+  
   public String getName() {
     return name;
   }
@@ -116,10 +132,13 @@ public class Unit implements Cloneable {
   }
   
   public int getMelee() {
-  
     return melee;
   }
 
+  public int getCap() {
+    return (cap != null) ? cap : NA;
+  }
+  
   public int getMissile() {
     return (missile != null) ? missile : NA;
   }

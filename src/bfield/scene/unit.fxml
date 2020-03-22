@@ -188,12 +188,13 @@
     </VBox>
   </center>
   <right>
+    <!-- Vertical action bar -->
     <VBox spacing="5">
       <BorderPane.margin>
         <Insets top="5"/>
       </BorderPane.margin>
       <HBox spacing="2">
-      <Button  styleClass="btn" fx:id="btnHeal" text="" onAction="#onHealUnit">
+        <Button  styleClass="btn" fx:id="btnHeal" text="" onAction="#onHealUnit">
           <graphic>
             <Region styleClass="icon-front, icon-heart-plus"/>
           </graphic>
@@ -209,23 +210,30 @@
             <Tooltip text="Click to remove 1 hit to unit."/>
           </tooltip>
         </Button>
-        </HBox>
-        <ToggleButton styleClass="tb"  fx:id="tbCamp" alignment="BASELINE_RIGHT"><tooltip>
-            <Tooltip text="Send unit to camp."/>
-          </tooltip>
-          <graphic>
-            <Region styleClass="icon-front, icon-pavillon"/>
-          </graphic>
-        </ToggleButton>
-        <Button styleClass="btn" text=""  onAction="#onUnitRemove">
-          <graphic>
-            <Region styleClass="icon-front,icon-cancel" style="-fx-background-color:black" />
-          </graphic>
-          <tooltip>
-            <Tooltip text="Click to remove unit."/>
-          </tooltip>
-        </Button>
-    </VBox>
-    
+      </HBox>
+      <ToggleButton styleClass="tb"  fx:id="tbCamp" alignment="BASELINE_RIGHT"><tooltip>
+          <Tooltip text="Send unit to camp."/>
+        </tooltip>
+        <graphic>
+          <Region styleClass="icon-front, icon-pavillon"/>
+        </graphic>
+      </ToggleButton>
+      <Button styleClass="btn" text=""  onAction="#onUnitRemove">
+        <graphic>
+          <Region styleClass="icon-front,icon-cancel" style="-fx-background-color:black" />
+        </graphic>
+        <tooltip>
+          <Tooltip text="Click to remove unit."/>
+        </tooltip>
+      </Button>
+      <Button fx:id="btnShowCargo" styleClass="btn" text="" onAction="#onCargoRequest" visible="false">
+        <graphic>
+          <Region styleClass="icon-front, icon-galea"/>
+        </graphic>
+        <tooltip>
+          <Tooltip text="Click to add unit to the ship."/>
+        </tooltip>
+      </Button>
+    </VBox>    
   </right>
 </BorderPane>

@@ -162,6 +162,7 @@ public class Application extends javafx.application.Application {
     //Css & Launch
     scene.getStylesheets().add(getClass().getResource("scene/content.css").toExternalForm());
     scene.getStylesheets().add(getClass().getResource("scene/icons.css").toExternalForm());
+    scene.getStylesheets().add(getClass().getResource("scene/smallcell.css").toExternalForm());
     primaryStage.setScene(scene);
     primaryStage.setTitle("Battlefield!");
     primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));

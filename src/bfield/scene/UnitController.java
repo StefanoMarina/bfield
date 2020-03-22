@@ -120,6 +120,8 @@ public class UnitController {
   private Group grPaddles;
   
   private boolean showOrdinal;
+  @FXML
+  private Button btnShowCargo;
   /**
    * TODO:
    * Army request is used for color change only at this time.
@@ -297,6 +299,12 @@ public void setUnit(String team, Unit u, UnitRules um) {
       lblMove.setText("--");
    
     //Ship mode: we need to show cargo
+    if(unit.getClassName().contains("Ship")){
+      btnShowCargo.setVisible(true);
+    } else {
+      btnShowCargo.setVisible(false);
+    }
+    
     refreshUnit();
  }
  
@@ -456,5 +464,9 @@ public void setUnit(String team, Unit u, UnitRules um) {
   @FXML
   public void onUnitRemove() {
     root.fireEvent(new UnitChangeEvent(unit, root, UnitChangeEvent.UNIT_REMOVE));
+  }
+
+  @FXML
+  private void onCargoRequest(ActionEvent event) {
   }
 }
