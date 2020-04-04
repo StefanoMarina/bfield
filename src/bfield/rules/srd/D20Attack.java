@@ -57,8 +57,11 @@ public class D20Attack extends BattleSRD {
     rolls = SRDUtils.doubleRoll(battle.getArmy(Battle.ID_HOME).getName(),
               battle.getArmy(Battle.ID_AWAY).getName());
     
+    if (rolls == null)
+      return null;
+    
     java.util.Map<String,String> result = super.doBattle(rules, battle);
-    rolls.clear();
+    rolls = null;
     return result;
   }
   
