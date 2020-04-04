@@ -8,6 +8,7 @@
         <condition highGroundRule="hills" name="Hills"/>
         <condition denyCharge="true" artsOnly="true" highGroundRule="mountain" name="Mountains"/>
         <condition denyCharge="true" shallowWater="true" name="Shallow water"/>
+        <condition denyCharge="true" name="Open water"/>
     </terrain>
     <weather>
         <condition name="Normal"/>

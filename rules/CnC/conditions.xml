@@ -9,6 +9,7 @@
     <condition name="Hills" highGroundRule="hills" allowHighGround="true"/>
     <condition name="Mountains" highGroundRule="mountain" allowHighGround="true" artsOnly="true" denyCharge="true" />
     <condition name="Shallow water" shallowWater="true" denyCharge="true"/>
+    <condition name="Open water" denyCharge="true"/>
   </terrain>
 
   <weather>

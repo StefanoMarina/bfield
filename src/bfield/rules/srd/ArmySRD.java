@@ -41,12 +41,22 @@ public class ArmySRD extends bfield.rules.ArmyRules {
     
     Unit[] aliveUnits = army.getActiveUnits();
     
+    int shipsValue = 0, shipsCount = 0;
+    
     for (Unit u : aliveUnits) {
       Unit modUnit = modEnvironment.mod(u, army.getID());
-      value += modUnit.getMelee();
+      if (modUnit.getClassName().contains("Ship")) {
+       shipsValue+= modUnit.getMelee();
+       shipsCount++;
+      }
+      else
+        value += modUnit.getMelee();
     }
     
     value = (value / aliveUnits.length);
+    if (shipsCount > 0 && shipsValue > 0)
+      value += (shipsValue / shipsCount);
+    
     /**
      * Hill high ground - 1st attack only, but whole army
     */
@@ -88,18 +98,28 @@ public class ArmySRD extends bfield.rules.ArmyRules {
    */
   @Override
   public double getSpecial() {
-        double value = 0.0;
+    double value = 0.0;
     
+    int shipsValue = 0, shipsCount= 0;
+        
     Unit[] aliveUnits = army.getActiveUnits();
     
     for (Unit u : aliveUnits) {
       Unit modUnit = modEnvironment.mod(u, army.getID());
+      
+      if (modUnit.getClassName().contains("Ship")) {
+          shipsValue+= modUnit.getMissile();
+          shipsCount++;
+      }
+    
       value += Math.max(
               modUnit.getMelee(), Math.max(
               modUnit.getMissile(), modUnit.getCharge()));
     }
     
     value = (value / aliveUnits.length);
+    if (shipsValue > 0 && shipsCount > 0)
+      value += (shipsValue / shipsCount);
     
     /**
      * Hill high ground - 1st attack only, but whole army
