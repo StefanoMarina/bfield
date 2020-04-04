@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Region?>
 
 <BorderPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1"   fx:controller="bfield.scene.ArmyController">
@@ -94,11 +95,12 @@
     <center>
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
             <content>
-                <VBox fx:id="boxList" spacing="20">
+                <FlowPane fx:id="boxList">
                     <padding>
                     <Insets top="20.0" bottom="20.0" left="20.0" right="20.0"/>
                     </padding>
-                </VBox>
+                </FlowPane>
+                
             </content>
         </ScrollPane>
     </center>

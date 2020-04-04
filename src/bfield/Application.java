@@ -19,6 +19,7 @@ package bfield;
 import bfield.data.*;
 
 import bfield.scene.MainWndController;
+import bfield.scene.UnitCellController;
 import bfield.scene.dialogs.NewBattleDialogController;
 import bfield.scene.dialogs.UnitSelectorController;
 import bfield.scene.edit.EditUnitController;
@@ -40,6 +41,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -62,7 +64,19 @@ public class Application extends javafx.application.Application {
   private Stage stage;
   private static Application app;
   
+  private Font FONT_STATUS;
+  
   private Properties preferences;
+
+  public Font getStatusFont() {
+    
+    if (FONT_STATUS == null) {
+      FONT_STATUS = 
+            Font.loadFont(Application.class.getResource("bfield.ttf")
+                    .toExternalForm(),10.0);
+    }
+    return FONT_STATUS;
+  }
   
   public static Application getApp() {
     return app;
@@ -154,10 +168,20 @@ public class Application extends javafx.application.Application {
    
     //Main scene
     FXMLLoader loader = new FXMLLoader(getClass().getResource("scene/MainWnd.fxml"));
-    //FXMLLoader loader = new FXMLLoader(getClass().getResource("scene/dialogs/NewRulesetDialog.fxml"));
+    //FXMLLoader loader = new FXMLLoader(getClass().getResource("scene/unitcell.fxml"));
     javafx.scene.Parent obj = loader.load();
     this.rootController = loader.<MainWndController>getController();
     javafx.scene.Scene scene = new javafx.scene.Scene(obj);
+    
+    //test start
+      /*UnitCellController ucc = loader.<UnitCellController>getController();
+      ucc.setArmyColor(javafx.scene.paint.Color.DARKRED);
+      Unit u = rulesCache.get("D20 SRD").getUnitFactory().createUnit("Anuirean infantry");
+      u.setIgnoreVisibility(true);
+      u.setIgnoreTerrain(true);
+      u.setIgnoreMountain(true);
+      ucc.setUnit(u);*/
+    //test end
     
     //Css & Launch
     scene.getStylesheets().add(getClass().getResource("scene/content.css").toExternalForm());

@@ -135,10 +135,7 @@ public class BattleController  {
               .equals(Battle.ID_HOME)) ? acHome : acAway;
       
       Unit newUnit;
-      /**
-       * NOTE:
-       * Ordinals should be added regardless of usage, it's less confusing.
-       */
+
       newUnit = battle.getFactory().getUnitFactory().createUnit(newUnitName,
                 event.getArmy().nextOrdinal(newUnitName));
       

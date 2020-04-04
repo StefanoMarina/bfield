@@ -17,16 +17,12 @@
 package bfield.scene.dialogs;
 
 import bfield.data.Unit;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
@@ -80,7 +76,7 @@ public class CargoCellController extends ListCell<Unit>{
       loader.setController(this);
       try {
         loader.load();
-      } catch (Exception e) {
+      } catch (IOException e) {
         throw new RuntimeException("Failure in loading cargocell fxml.");
       }
     }

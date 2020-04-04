@@ -18,6 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Created on : 29-ott-2019, 9.43.20
     Author     : root
 */
+
+/* Colori di default */
+.b-def { -fx-background-color: navy; }
+.b-melee { -fx-background-color: red; }
+.b-missile { -fx-background-color: darkseagreen; }
+.b-special { -fx-background-color: darkred;}
+.b-disabled { -fx-background-color:darkgrey; }
+
 .card {
   -fx-background-color: linear-gradient(from 50% 0% to 50% 100%, gainsboro 50%, slategray 100%);
   -fx-background-radius: 25px;

@@ -19,11 +19,76 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Author     : ste
 */
 
-
-.smallCellUnitBackground {
-  -fx-border-radius: 2px;
+.card-cell {
+  -fx-background-color: linear-gradient(from 50% 0% to 50% 100%, gainsboro 50%, slategray 100%);
+  -fx-background-radius: 12px;
+  -fx-padding: 0.2em;
+  -fx-border-radius: 10px;
+  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
 }
 
-.smallCellUnitFront {
-  
+/*progress bar*/
+.ucHealthbar {
+  -fx-accent: lime;/*linear-gradient(from 100% 50% to 0% 50%, lime 50%, darkolivegreen 100%);*/ 
+}
+.ucHealthbar > .track {
+  -fx-control-inner-background: darkred;
+  /*-fx-background-radius: 4px;*/
+  -fx-border-radius: 4px;
+  -fx-border-style: solid;
+  -fx-border-width:1px;
+  -fx-text-box-border:black;
+}
+
+.ucHealthbar > .bar {
+  -fx-background-insets: 1 1 2 1;
+  -fx-padding: 0.20em;
+}
+.ucName {
+  -fx-font-size: 0.6em;
+  -fx-font-weight: bold;
+  -fx-text-alignment: center;
+  -fx-alignment: center;
+}
+
+.ucStat {
+  -fx-font-size: 0.8em;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-text-alignment: center;
+  -fx-alignment: center;
+  -fx-padding: 0.15em;
+  -fx-background-radius: 4px;
+}
+
+@font-face {
+  font-family: bfield;
+  src: url("bfield.ttf");
+}
+
+.status-label {
+  -fx-padding: 1px 3px 1px 3px;
+  -fx-background-radius: 4px;
+  /*-fx-indent: 4px;*/
+  -fx-opacity: 1;
+  -fx-font-size: 0.8em;
+  -fx-font-family: 'bfield';
+  /*-fx-border-width: 1px;
+  -fx-border-radius: 4px;-*/
+}
+
+
+.bonus {
+  -fx-background-color: navy; 
+  -fx-text-fill: gold;
+}
+
+.malus {
+  -fx-background-color: black; 
+  -fx-text-fill: red;  
+}
+
+#gStatuses {
+  -fx-background-color: transparent;
+  -fx-border-style: none;
 }

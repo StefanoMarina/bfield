@@ -38,11 +38,13 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -70,9 +72,9 @@ public class ArmyController  {
   @FXML
   private Button btnAdd;
   @FXML
-  private VBox boxList;
+  private FlowPane boxList;
   
-  private java.util.WeakHashMap<Pane, UnitController> mUnits;
+  private java.util.WeakHashMap<Pane, UnitCellController> mUnits;
   
   //Check out what units are doing
   private final EventHandler<UnitChangeEvent> uehUnitChange;
@@ -111,23 +113,23 @@ public class ArmyController  {
   
   public void updateOrdinals(boolean value) {
     bShowOrdinal = value;
-    for (UnitController uc : mUnits.values()) {
-      uc.setShowOrdinal(value);
+    for (UnitCellController uc : mUnits.values()) {
+      //uc.setShowOrdinal(value);
     }
   }
   
   public void setWeatherDisabled(boolean value) {
     btnWeather.setDisable(value);
-    getUnits().values().forEach( (x) -> {x.setWeatherDisabled(value); x.refreshUnit();});
+    getUnits().values().forEach( (x) -> {x.setStatusEnabled("weather", !value); x.refreshUnit();});
   }
   
   public void setGroundDisabled(boolean value) {
     tbHighGround.setDisable(value);
-    getUnits().values().forEach( (x) -> {x.setMountainDisabled(value); x.refreshUnit();});
+    getUnits().values().forEach( (x) -> {x.setStatusEnabled("mountain", !value); x.refreshUnit();});
   }
   
    public void setVisibilityDisabled(boolean value) {
-    getUnits().values().forEach( (x) -> {x.setVisibilityDisabled(value); x.refreshUnit();});
+    getUnits().values().forEach( (x) -> {x.setStatusEnabled("visibility", !value); x.refreshUnit();});
   }
    
   public ArmyController() {
@@ -221,7 +223,7 @@ public class ArmyController  {
   
   public void onSetColor() {
     army.setColor(btnColorChange.getValue());
-    for (UnitController uc : mUnits.values() )
+    for (UnitCellController uc : mUnits.values() )
       uc.setArmyColor(btnColorChange.getValue());
     
     refreshUnits();
@@ -317,11 +319,11 @@ public class ArmyController  {
   
   public void addUnit(Unit u) {
     try {
-      FXMLLoader unitLoader = new FXMLLoader(getClass().getResource("unit.fxml"));
+      FXMLLoader unitLoader = new FXMLLoader(getClass().getResource("unitcell.fxml"));
       Pane newPane = unitLoader.load();
-      UnitController uc = unitLoader.getController();
+      UnitCellController uc = unitLoader.getController();
       uc.setArmyColor(army.getColor());
-      uc.setShowOrdinal(bShowOrdinal);
+      //uc.setShowOrdinal(bShowOrdinal);
       getUnits().put(newPane, uc);
       
       uc.setUnit(army.getID(), u, unitMechanic);
@@ -329,7 +331,8 @@ public class ArmyController  {
       newPane.addEventHandler(UnitChangeEvent.UNIT_REMOVE, uehUnitRemove);
       newPane.addEventFilter(UnitChangeEvent.UNIT_CHANGE_TERRAIN, uehUnitTerrain);
       
-      uc.setWeatherDisabled(btnWeather.isDisable());
+      uc.setStatusEnabled("weather", btnWeather.isDisable());
+      //uc.setWeatherDisabled(btnWeather.isDisable());
       
       boxList.getChildren().add(newPane);
     } catch (IOException ex) {
@@ -338,7 +341,7 @@ public class ArmyController  {
   }
 
   
-  private java.util.Map<Pane,UnitController> getUnits() {
+  private java.util.Map<Pane,UnitCellController> getUnits() {
     if (mUnits == null)
       mUnits = new java.util.WeakHashMap();
     return mUnits;

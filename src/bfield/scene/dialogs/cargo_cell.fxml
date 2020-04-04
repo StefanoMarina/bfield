@@ -13,5 +13,4 @@
       <Region styleClass="smallCellUnitFront" fx:id="rPictureFront"/>
     </Group>
     <Label fx:id="lblUnitData"/>
-
 </HBox>
