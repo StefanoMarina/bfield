@@ -59,6 +59,7 @@ public abstract class BattleSRD implements BattleRules {
            
     int resultHome = (int)Math.max(Math.floor(multiplier), MIN);
     
+    
     //away attack
     multiplier = VALUE + getAttackValue(away, battle) - rHome.getDefense();
     multiplier *= MOD * home.getActiveUnitsSize();
