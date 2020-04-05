@@ -16,19 +16,25 @@
  */
 package bfield.rules.srd;
 
+import bfield.data.Army;
+import bfield.data.Battle;
 import bfield.data.Rules;
 
 /**
  *
  * @author ste
  */
-public class D20Special extends FixedSpecial {
-
-  @Override
-  protected Integer getFixedNumber(Rules r) {
-    return bfield.RulesUtilities.roll(20, 0);
+public class D20Special extends D20Attack {
+@Override
+  protected double getAttackValue(Army army, Battle b) {
+    if (rolls == null || rolls.isEmpty()){
+      System.out.println("called d20/getAttackValue with empty result.");
+      return bfield.RulesUtilities.roll(20, 
+              (int)b.getArmyRules(army.getID()).getSpecial());
+    } else
+      return rolls.get(army.getName())+b.getArmyRules(army.getID()).getSpecial();
   }
-
+  
   @Override
   public String toString() {
     return "1d20 + special attack";

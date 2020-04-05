@@ -34,6 +34,7 @@ import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DialogPane;
@@ -468,6 +469,7 @@ public class Application extends javafx.application.Application {
     return true;
   }
   
+  
   public static String actionArmySelection(String selectionText, BField battle) {
     
     RadioButton home = new RadioButton(battle.getBattle().getArmy(Battle.ID_HOME)
@@ -519,4 +521,5 @@ public class Application extends javafx.application.Application {
     
     alert.show();
   }
+  
 }

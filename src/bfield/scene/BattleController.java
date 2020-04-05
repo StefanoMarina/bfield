@@ -274,6 +274,11 @@ public class BattleController  {
    result = battle.getSelectedBattleMechanic().doBattle(battle.getFactory().getRules(),
            battle.getBattle());
    
+   if (result == null) {
+     //attack aborted.
+     return;
+   }
+   
    int round = battle.getBattle().nextRound();
    
     StringBuilder sb = new StringBuilder();
