@@ -2,6 +2,22 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/rules/srd/D20Special.java</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/scene/MainWndController.java</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/scene/dialogs/srdRoll.fxml</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/event/ArmyEvent.java</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/rules/srd/ArmySRD.java</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/rules/srd/FixedAttack.java</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/Application.java</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/scene/BattleController.java</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/rules/srd/FixedSpecial.java</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/scene/army.fxml</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/rules/srd/BattleSRD.java</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/rules/srd/D20Attack.java</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/scene/dialogs/SrdRollController.java</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/rules/srd/SRDUtils.java</file>
+            <file>file:/mnt/d/Programmazione/Progetti/bfield/src/bfield/version.xml</file>
+        </group>
     </open-files>
 </project-private>
