@@ -27,7 +27,7 @@ import org.w3c.dom.Document;
  *
  * @author Stefano
  */
-public class Utilities {
+public interface Utilities {
   public static String loadSVGFile(String filename) throws Exception {
     File f = new File("svg"+File.separator+filename);
     
