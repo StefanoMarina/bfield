@@ -16,6 +16,7 @@
  */
 package bfield.scene;
 
+import bfield.Application;
 import bfield.event.UnitChangeEvent;
 import bfield.data.Army;
 import bfield.data.Battle;
@@ -25,12 +26,16 @@ import bfield.rules.ArmyRules;
 import bfield.rules.UnitRules;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Optional;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -38,15 +43,14 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -103,6 +107,11 @@ public class ArmyController  {
   
   private boolean bShowOrdinal;
   
+  private EventHandler<javafx.scene.input.MouseEvent> ehOnUnitClick;
+  
+  private UnitController ucSelection;
+  private Pane pSelection;
+  
   /*
   TODO:
   Find a way to update army stats without adding Battle to all controllers
@@ -110,26 +119,37 @@ public class ArmyController  {
   private Battle battle;
   
   private UnitRules unitMechanic;
+  @FXML
+  private Button btnEmbark;
   
   public void updateOrdinals(boolean value) {
     bShowOrdinal = value;
-    for (UnitCellController uc : mUnits.values()) {
+    for (UnitCellController uc : getUnits().values()) {
       //uc.setShowOrdinal(value);
     }
   }
   
-  public void setWeatherDisabled(boolean value) {
+  public void setWeatherDisabled(boolean value, boolean update) {
     btnWeather.setDisable(value);
-    getUnits().values().forEach( (x) -> {x.setStatusEnabled("weather", !value); x.refreshUnit();});
+    getUnits().values().forEach( (x) -> {
+      x.setStatusEnabled("weather", !value); 
+      if (update)x.refreshUnit();
+    });
   }
   
-  public void setGroundDisabled(boolean value) {
+  public void setGroundDisabled(boolean value, boolean update) {
     tbHighGround.setDisable(value);
-    getUnits().values().forEach( (x) -> {x.setStatusEnabled("mountain", !value); x.refreshUnit();});
+    getUnits().values().forEach( (x) -> {
+        x.setStatusEnabled("mountain", !value); 
+        if (update)x.refreshUnit();
+      });
   }
   
-   public void setVisibilityDisabled(boolean value) {
-    getUnits().values().forEach( (x) -> {x.setStatusEnabled("visibility", !value); x.refreshUnit();});
+   public void setVisibilityDisabled(boolean value, boolean update) {
+    getUnits().values().forEach( (x) -> {
+      x.setStatusEnabled("visibility", !value); 
+        if (update)x.refreshUnit();
+      });
   }
    
   public ArmyController() {
@@ -185,6 +205,20 @@ public class ArmyController  {
       else
         newUnitName = (String) t1;
     });
+  
+    try {
+      FXMLLoader unitLoader = new FXMLLoader(getClass().getResource("unit.fxml"));
+      pSelection = (Pane) unitLoader.load();
+      ucSelection = unitLoader.getController();
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+    
+    BorderPane.setAlignment(pSelection, Pos.BOTTOM_CENTER);
+    BorderPane.setMargin(pSelection, new Insets(20,0,10,0));
+    root.setBottom(pSelection);
+    
+    pSelection.setVisible(false);
     
     sDefMod.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-99,99,0));
     sAttMod.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-99,99,0));
@@ -202,8 +236,36 @@ public class ArmyController  {
       onSetColor();
     });
     
-  
+    //Unit selection
+    this.ehOnUnitClick = (MouseEvent e) -> {
+      if (!(e.getSource() instanceof Pane)) {
+        System.err.println(e.getSource().getClass().getSimpleName());
+        return;
+      }
+      
+      Pane pane = (Pane) e.getSource();
+      if (!getUnits().containsKey(pane)) {
+        return;
+      }
+      
+      onUnitSelection(pane);  
+    };
   }
+  
+  public void onUnitSelection(Pane clickedNode) {
+    
+    UnitCellController selectedController = mUnits.get(clickedNode);
+    if (selectedController.isSelected())
+      return;
+    
+    getUnits().values().forEach( controller -> { controller.setSelected(
+            mUnits.get(clickedNode) == controller); });
+    
+    ucSelection.setArmyColor(army.getColor());
+    ucSelection.setUnit(army.getID(), selectedController.getUnit(), unitMechanic);
+    pSelection.setVisible(true);
+  }
+  
   
   @FXML
   public void onFortified() {
@@ -277,8 +339,6 @@ public class ArmyController  {
     
     a.getUnits().forEach((u) -> {addUnit(u);});
     refreshArmy();
-    
-    
   }
   
   public void refreshArmy() {
@@ -312,15 +372,20 @@ public class ArmyController  {
     refreshUnits();
   }
   
+  
+  
   public void refreshUnits() {
-    getUnits().values().forEach((uc) -> {uc.refreshUnit();});
+    getUnits().values().forEach((uc) -> {
+      uc.refreshUnit();
+    });
   }
-  
-  
+
   public void addUnit(Unit u) {
+    Pane newPane;
+    
     try {
       FXMLLoader unitLoader = new FXMLLoader(getClass().getResource("unitcell.fxml"));
-      Pane newPane = unitLoader.load();
+      newPane = unitLoader.load();
       UnitCellController uc = unitLoader.getController();
       uc.setArmyColor(army.getColor());
       //uc.setShowOrdinal(bShowOrdinal);
@@ -331,13 +396,27 @@ public class ArmyController  {
       newPane.addEventHandler(UnitChangeEvent.UNIT_REMOVE, uehUnitRemove);
       newPane.addEventFilter(UnitChangeEvent.UNIT_CHANGE_TERRAIN, uehUnitTerrain);
       
+      if (u.getClassName().contains("Ship")) {
+        //disembark action is added
+        newPane.addEventHandler(ArmyEvent.ARMY_DISEMBARK_UNIT, (eh) ->{
+          root.fireEvent(new ArmyEvent(army, ArmyEvent.ARMY_DISEMBARK_UNIT, null, 
+                  eh.getTargetUnit()));
+          eh.consume();
+        });
+      }
+      
       uc.setStatusEnabled("weather", btnWeather.isDisable());
       //uc.setWeatherDisabled(btnWeather.isDisable());
       
+      newPane.addEventHandler(MouseEvent.MOUSE_CLICKED, ehOnUnitClick);
+      
       boxList.getChildren().add(newPane);
     } catch (IOException ex) {
-      System.err.println("Could not load unit pane " + u.getName());
+      System.err.println("Could not load unit pane " + u.getName()
+              + ": " + ex.getMessage());
+      return;
     }
+    
   }
 
   
@@ -346,7 +425,6 @@ public class ArmyController  {
       mUnits = new java.util.WeakHashMap();
     return mUnits;
   }
-  
   @FXML
   public void onAddNewUnit() {
     if (newUnitName == null)
@@ -354,5 +432,24 @@ public class ArmyController  {
     
     //sends request to battlecontroller
     root.fireEvent(new ArmyEvent(army, ArmyEvent.ARMY_ADD_UNIT, newUnitName));
+  }
+
+  @FXML
+  private void onEmbarkUnit(ActionEvent event) {
+    if (newUnitName == null)
+      return;
+    
+    Unit ship = ucSelection.getUnit();
+    if (ship == null || !ship.getClassName().contains("Ship"))
+      onAddNewUnit();
+    else if (ship.getCargo().size() == ship.getBunks()) {
+      Application.showMessage("Cap reached", "Cannot add new crew",
+              ship.getName() + " has already reached full crew", null);
+      return;
+    }
+    else
+    //sends request to battlecontroller
+    root.fireEvent(new ArmyEvent(army, ArmyEvent.ARMY_EMBARK_UNIT, newUnitName,
+            ship));
   }
 }

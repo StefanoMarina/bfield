@@ -129,6 +129,15 @@ public class BattleController  {
       refreshArmies();
     };
     
+    final EventHandler<ArmyEvent> armyDisembarkUnit = (event) -> {
+      Unit unit = event.getTargetUnit();
+      ArmyController acRequest = (event.getArmy().getID()
+          .equals(Battle.ID_HOME)) ? acHome : acAway;
+      event.getArmy().addUnit(event.getTargetUnit());
+      acRequest.addUnit(event.getTargetUnit());
+      refreshArmies();
+    };
+            
     final EventHandler<ArmyEvent> armyAddNewUnit = (event) -> {
       String newUnitName = event.getData();
       ArmyController ucRequest = (event.getArmy().getID()
@@ -139,17 +148,24 @@ public class BattleController  {
       newUnit = battle.getFactory().getUnitFactory().createUnit(newUnitName,
                 event.getArmy().nextOrdinal(newUnitName));
       
-      event.getArmy().addUnit(newUnit);
-      ucRequest.addUnit(newUnit);
+      
+      if (event.getEventType() == ArmyEvent.ARMY_EMBARK_UNIT) {
+        event.getTargetUnit().getCargo().add(newUnit);
+      } else {
+        event.getArmy().addUnit(newUnit);
+        ucRequest.addUnit(newUnit);
+      }
+      
       refreshArmies();
     };
-    
-    pnlHome.addEventHandler(ArmyEvent.ARMY_HIGHGROUND_CHANGED, armyHGChanged);
-    pnlAway.addEventHandler(ArmyEvent.ARMY_HIGHGROUND_CHANGED, armyHGChanged);
-    pnlHome.addEventHandler(ArmyEvent.ARMY_CHANGED, armyRefreshRequest);
-    pnlAway.addEventHandler(ArmyEvent.ARMY_CHANGED, armyRefreshRequest);
-    pnlHome.addEventHandler(ArmyEvent.ARMY_ADD_UNIT, armyAddNewUnit);
-    pnlAway.addEventHandler(ArmyEvent.ARMY_ADD_UNIT, armyAddNewUnit);
+    final Pane[] loop = new Pane[] {pnlHome, pnlAway};
+    for (Pane p : loop ){
+      p.addEventHandler(ArmyEvent.ARMY_HIGHGROUND_CHANGED, armyHGChanged);
+      p.addEventHandler(ArmyEvent.ARMY_CHANGED, armyRefreshRequest);
+      p.addEventHandler(ArmyEvent.ARMY_ADD_UNIT, armyAddNewUnit);
+      p.addEventHandler(ArmyEvent.ARMY_EMBARK_UNIT, armyAddNewUnit);
+      p.addEventHandler(ArmyEvent.ARMY_DISEMBARK_UNIT, armyDisembarkUnit);
+    }
   }
 
   @FXML
@@ -192,10 +208,10 @@ public class BattleController  {
     List<ArmyController> la = Arrays.<ArmyController>asList(acHome, acAway);
     
     la.forEach( (ac) -> {
-      ac.refreshArmy();
-      ac.setGroundDisabled(!cbTerrain.getValue().isHighGroundAllowed());
-      ac.setWeatherDisabled("Normal".equals(cbWeather.getValue().getName()));
-      ac.setVisibilityDisabled("Full".equals(cbVisibility.getValue().getName()));
+      ac.setGroundDisabled(!cbTerrain.getValue().isHighGroundAllowed(), false);
+      ac.setWeatherDisabled("Normal".equals(cbWeather.getValue().getName()), false);
+      ac.setVisibilityDisabled("Full".equals(cbVisibility.getValue().getName()),false);
+      ac.refreshArmyAndUnits();
     });
     
     root.fireEvent(new BattleEvent(BattleEvent.BATTLE_GENERAL_CHANGE));
