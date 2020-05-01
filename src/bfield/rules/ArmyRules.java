@@ -46,6 +46,4 @@ public abstract class ArmyRules {
   public UnitRules getModEnvironment() {
     return modEnvironment;
   }
-  
-  public abstract boolean embedHero(Unit unitToEmbed);
 }
