@@ -7,11 +7,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml/1" id="root" prefHeight="50.0" prefWidth="100"
-            fx:controller="bfield.scene.UnitCellController" gridLinesVisible="false"  hgap="5" vgap="3">
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" styleClass="card-cell" 
+          gridLinesVisible="false"  hgap="0" vgap="3"
+          prefHeight="50.0" prefWidth="100"
+          fx:controller="bfield.scene.UnitCellController">
   <columnConstraints>
-    <ColumnConstraints fillWidth="true" percentWidth="75"/>
-    <ColumnConstraints fillWidth="true" percentWidth="25" />  
+    <ColumnConstraints halignment="LEFT"  fillWidth="true" percentWidth="75"/>
+    <ColumnConstraints halignment="CENTER" fillWidth="true" percentWidth="25" />  
   </columnConstraints>
   
   <Label fx:id="lblName" GridPane.rowIndex="0" GridPane.columnIndex="0"
@@ -22,7 +24,7 @@
           minHeight="5" GridPane.columnSpan="2"  /> 
   
   <StackPane GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.rowSpan="4">
-    <Group>
+    <Group fx:id="gPicture" >
       <Region styleClass="picture-lg-back" fx:id="rPictureBackground"/>
       <Region styleClass="picture-lg-front" fx:id="rPictureIcon"/>
     </Group>
@@ -33,7 +35,8 @@
     </GridPane>
   </StackPane>
   
-  
+  <Label fx:id="lBunks" GridPane.rowIndex="1" GridPane.columnIndex="1" 
+      prefWidth="25" styleClass="ucStat, b-cargo" visible="false"/>
   <Label fx:id="lDef" GridPane.rowIndex="2" GridPane.columnIndex="1" 
       prefWidth="25" styleClass="ucStat, b-def"/>
   <Label fx:id="lMel" GridPane.rowIndex="3" GridPane.columnIndex="1" 
@@ -42,5 +45,4 @@
       prefWidth="25" styleClass="ucStat, b-missile"/>
   <Label fx:id="lSpc" GridPane.rowIndex="5" GridPane.columnIndex="1" 
       prefWidth="25" styleClass="ucStat, b-special"/>
-  
 </GridPane>
