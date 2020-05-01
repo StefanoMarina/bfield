@@ -20,6 +20,7 @@
             <ToolBar>
                 <ComboBox fx:id="cbUnits"/>
                 <Button fx:id="btnAdd" text="Add unit" onAction="#onAddNewUnit"/>
+                <Button fx:id="btnEmbark" text="Embark" onAction="#onEmbarkUnit"/>
                 <ColorPicker fx:id="btnColorChange" styleClass="btnColor"/>
             </ToolBar>
             <HBox spacing="5" fillHeight="true" alignment="CENTER">
@@ -95,7 +96,7 @@
     <center>
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
             <content>
-                <FlowPane fx:id="boxList">
+                <FlowPane fx:id="boxList" hgap="10" vgap="10" prefHeight="200" >
                     <padding>
                     <Insets top="20.0" bottom="20.0" left="20.0" right="20.0"/>
                     </padding>
@@ -105,8 +106,6 @@
         </ScrollPane>
     </center>
     <bottom>
-        <GridPane hgap="10" prefWidth="140">
-            
-        </GridPane>
+        
     </bottom>
 </BorderPane>
