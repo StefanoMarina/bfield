@@ -165,6 +165,8 @@ public class UnitController {
     armyID = name;
   }
   
+  public Unit getUnit() {return unit;}
+  
   public void initialize() {
     
     tgVis.setOnAction( (ActionEvent e) -> {

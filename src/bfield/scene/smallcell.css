@@ -20,11 +20,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 .card-cell {
-  -fx-background-color: linear-gradient(from 50% 0% to 50% 100%, gainsboro 50%, slategray 100%);
-  -fx-background-radius: 12px;
-  -fx-padding: 0.2em;
-  -fx-border-radius: 10px;
-  -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+  -fx-padding: 0.5em;
+}
+
+.cell-selected {
+  -fx-background-color: linear-gradient(from 50% 0% to 50% 100%, skyblue 100%, steelblue 100%);
+  -fx-border-color: slateblue;
 }
 
 /*progress bar*/

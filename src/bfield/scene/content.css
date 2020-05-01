@@ -21,10 +21,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Colori di default */
 .b-def { -fx-background-color: navy; }
-.b-melee { -fx-background-color: red; }
+.b-melee { -fx-background-color: darkred; }
 .b-missile { -fx-background-color: darkseagreen; }
-.b-special { -fx-background-color: darkred;}
+.b-special { -fx-background-color: darkmagenta;}
 .b-disabled { -fx-background-color:darkgrey; }
+.b-cargo { -fx-background-color: rosybrown; }
+
+.t-better {-fx-text-fill: yellow !important;}
+.t-worse {-fx-text-fill: tomato !important; }
 
 .card {
   -fx-background-color: linear-gradient(from 50% 0% to 50% 100%, gainsboro 50%, slategray 100%);
@@ -153,4 +157,20 @@ edit unit
 .title {
   -fx-font-size:20px;
   -fx-font-weight: bold;
+}
+
+/* cargo container */
+.cargo-pane {
+  -fx-border-width: 2px;
+}
+
+.cargo-pane-internal {
+  
+}
+
+.cargo-title {
+  -fx-font-family:"arial";
+  -fx-font-size: 0.8em;
+  -fx-padding: 0.3em;
+  -fx-text-fill: white;
 }
