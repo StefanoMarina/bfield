@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author Chepe Lucho
  */
-public class RomanNumerals {
+public abstract class RomanNumerals {
 
   private static LinkedHashMap<String, Integer> roman_numerals;
 
