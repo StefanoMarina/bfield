@@ -78,8 +78,8 @@ public class Unit implements Cloneable {
   
   public static final int NA = -999;
   
-  @XmlAttribute(name="bulk", required=false)
-  protected Integer bulk;
+  @XmlAttribute(name="bunks", required=false)
+  protected Integer bunks;
   
   @XmlElementWrapper(name="cargo")
   @XmlElements(value={
@@ -134,8 +134,8 @@ public class Unit implements Cloneable {
     return melee;
   }
 
-  public int getBulk() {
-    return Optional.ofNullable(bulk).orElse(NA);
+  public int getBunks() {
+    return Optional.ofNullable(bunks).orElse(NA);
   }
   
   public int getMissile() {

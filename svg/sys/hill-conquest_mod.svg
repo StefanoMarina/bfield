@@ -11,7 +11,7 @@
    viewBox="0 0 512 512"
    version="1.1"
    id="svg1608"
-   sodipodi:docname="hill-conquest.svg"
+   sodipodi:docname="hill-conquest_mod.svg"
    inkscape:version="0.92.5 (0.92.5+68)">
   <metadata
      id="metadata1614">
@@ -21,6 +21,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>

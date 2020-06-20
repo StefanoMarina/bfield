@@ -64,13 +64,13 @@
     <unit name="Ship, Coaster" def="10" hits="1" class="LtShip" melee="0" missile="-2" move="1" mrl="2"/>
     <unit name="Ship, Dhow" def="10" hits="1" class="LtShip" melee="0" missile="-2" move="1" mrl="2"/>
     <unit name="Ship, Keelboat" def="8" hits="1" class="LtShip" melee="-2" move="1" mrl="0"/>
-    <unit name="Ship, Caravel" def="14" hits="2" class="MdShip" melee="4" missile="0" move="1" mrl="4"/>
-    <unit name="Ship, Cog" def="14" hits="2" class="MdShip" melee="4" missile="2" move="1" mrl="4"/>
-    <unit name="Ship, Dhoura" def="14" hits="2" class="MdShip" melee="4" missile="0" move="1" mrl="4"/>
-    <unit name="Ship, Longship" def="12" charge="2" hits="1" class="MdShip" melee="4" icon="trireme.svg" move="3" mrl="2"/>
-    <unit name="Ship, Drakkar" def="14" charge="2" hits="2" class="HvShip" melee="6" icon="trireme.svg" move="3" mrl="2"/>
-    <unit name="Ship, Galleon" def="16" charge="2" hits="4" class="HvShip" melee="8" missile="2" move="2" mrl="2"/>
-    <unit name="Ship, Knarr" def="14" charge="2" hits="2" class="HvShip" melee="4" missile="0" icon="trireme.svg" move="2" mrl="4"/>
-    <unit name="Ship, Roundship" def="16" hits="3" class="HvShip" melee="6" missile="6" move="0" mrl="6"/>
-    <unit name="Ship, Zebec" def="14" charge="2" hits="3" class="HvShip" melee="6" missile="4" move="2" mrl="4"/>
+    <unit name="Ship, Caravel" bunks="1" def="14" hits="2" class="MdShip" melee="4" missile="0" move="1" mrl="4"/>
+    <unit name="Ship, Cog" bunks="1" def="14" hits="2" class="MdShip" melee="4" missile="2" move="1" mrl="4"/>
+    <unit name="Ship, Dhoura"  bunks="1" def="14" hits="2" class="MdShip" melee="4" missile="0" move="1" mrl="4"/>
+    <unit name="Ship, Longship" bunks="1" def="12" charge="2" hits="1" class="MdShip" melee="4" icon="trireme.svg" move="3" mrl="2"/>
+    <unit name="Ship, Drakkar" bunks="1" def="14" charge="2" hits="2" class="HvShip" melee="6" icon="trireme.svg" move="3" mrl="2"/>
+    <unit name="Ship, Galleon" bunks="3" def="16" charge="2" hits="4" class="HvShip" melee="8" missile="2" move="2" mrl="2"/>
+    <unit name="Ship, Knarr" bunks="1" def="14" charge="2" hits="2" class="HvShip" melee="4" missile="0" icon="trireme.svg" move="2" mrl="4"/>
+    <unit name="Ship, Roundship" bunks="2" def="16" hits="3" class="HvShip" melee="6" missile="6" move="0" mrl="6"/>
+    <unit name="Ship, Zebec" bunks="2" def="14" charge="2" hits="3" class="HvShip" melee="6" missile="4" move="2" mrl="4"/>
 </units>

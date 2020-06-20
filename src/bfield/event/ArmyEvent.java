@@ -16,11 +16,10 @@
  */
 package bfield.event;
 
-import bfield.data.Unit;
 import bfield.data.Army;
+import bfield.data.Unit;
 import javafx.event.Event;
 import javafx.event.EventType;
-import javafx.scene.Node;
 /**
  *
  * @author ste
@@ -33,9 +32,13 @@ public class ArmyEvent extends Event {
       new EventType<>(Event.ANY, "ARMY_CHANGED");
   public static final EventType<ArmyEvent> ARMY_ADD_UNIT =
       new EventType<>(Event.ANY, "ARMY_ADD_UNIT");
-  
+  public static final EventType<ArmyEvent> ARMY_EMBARK_UNIT =
+      new EventType<>(Event.ANY, "ARMY_EMBARK");
+  public static final EventType<ArmyEvent> ARMY_DISEMBARK_UNIT =
+      new EventType<>(Event.ANY, "ARMY_DISEMBARK");
   
   private final Army army;
+  private final Unit unit;
   private String data;
   
   public final Army getArmy() {return army;}
@@ -43,15 +46,28 @@ public class ArmyEvent extends Event {
   public ArmyEvent(Army a, EventType<ArmyEvent> type) {
     super(type);
     army = a;
+    unit = null;
   }
   
   public ArmyEvent(Army a, EventType<ArmyEvent> type, String data) {
     super(type);
     army = a;
     this.data = data;
+    unit = null;
   }
 
+  public ArmyEvent(Army a, EventType<ArmyEvent> type, String data, Unit unit) {
+    super(type);
+    army = a;
+    this.data = data;
+    this.unit = unit;
+  }
+    
   public String getData() {
     return data;
+  }
+  
+   public Unit getTargetUnit() {
+    return unit;
   }
 }

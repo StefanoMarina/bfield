@@ -59,8 +59,6 @@ public class MainWndController  {
 
   private final EventHandler<BattleEvent> ehBattleChange;
   @FXML
-  private CheckMenuItem micOrdinals;
-  @FXML
   private Menu mBattle;
   
   public MainWndController() {
@@ -294,7 +292,6 @@ public class MainWndController  {
     //check if it is a battle tab
     if (battles.containsKey(newTab)) {
       mBattle.setDisable(false);
-      micOrdinals.setSelected(battles.get(newTab).getBattlefield().isUseOrdinals());
     } else {
       mBattle.setDisable(true);
     }
@@ -367,14 +364,6 @@ public class MainWndController  {
               "An error occourred while copying", ioe);
     }
     
-  }
-
-  @FXML
-  private void onOrdinalsCheck(ActionEvent event) {
-    battles.get(tabMain.getSelectionModel().getSelectedItem())
-            .setOrdinal(micOrdinals.isSelected());
-    
-    getSelectedBattle().setUseOrdinals(micOrdinals.isSelected());
   }
 
   @FXML

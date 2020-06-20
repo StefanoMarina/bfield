@@ -22,8 +22,6 @@
         <MenuItem text="New Ruleset" onAction="#onNewRuleset"/>
       </Menu>
       <Menu fx:id="mBattle" text="Battle"  disable="true" >
-        <CheckMenuItem fx:id="micOrdinals" text="Use ordinals" onAction="#onOrdinalsCheck"/>
-        <SeparatorMenuItem/>
         <MenuItem text="Import army..." onAction="#onImportArmy"/>
         <MenuItem text="Export army..." onAction="#onExportArmy"/>
         <SeparatorMenuItem/>

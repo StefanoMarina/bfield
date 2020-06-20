@@ -131,6 +131,7 @@ public class Unit2nd extends Unit {
     
     if (charge == null && charge2 != null)
       charge = safeIndex(charge2);
+    
     return super.getChargeBonus();
   }
   

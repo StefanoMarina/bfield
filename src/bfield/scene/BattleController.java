@@ -44,6 +44,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import bfield.rules.BattleRules;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 
 /**
  * FXML Controller class
@@ -70,6 +72,8 @@ public class BattleController  {
   private GridPane pnlContent;
   @FXML
   private ComboBox<BattleRules> cbFormula;
+  @FXML
+  private StackPane stack;
   
   
   public BField getBattlefield() {return battle;}
@@ -87,7 +91,9 @@ public class BattleController  {
       pnlAway = loader.load();
       acAway = loader.<ArmyController>getController();
       
-     
+      GridPane.setVgrow(pnlHome, Priority.ALWAYS);
+      GridPane.setVgrow(pnlAway, Priority.ALWAYS);
+      
       pnlContent.add(pnlHome, 0, 0);
       pnlContent.add(pnlAway, 1, 0);
       
@@ -215,16 +221,6 @@ public class BattleController  {
     });
     
     root.fireEvent(new BattleEvent(BattleEvent.BATTLE_GENERAL_CHANGE));
-  }
-  
-  public void setOrdinal(boolean bOrdinal) {
-    boolean bCurrentStatus = battle.isUseOrdinals();
-    if (bCurrentStatus == bOrdinal)
-      return;
-    
-    battle.setUseOrdinals(bOrdinal);
-    acHome.updateOrdinals(bOrdinal);
-    acAway.updateOrdinals(bOrdinal);
   }
   
   public void refreshBattleAndArmies() {

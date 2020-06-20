@@ -6,6 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
+<?import bfield.scene.Icon?>
 
 <GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" styleClass="card-cell" 
           gridLinesVisible="false"  hgap="0" vgap="3"
@@ -16,14 +17,21 @@
     <ColumnConstraints halignment="CENTER" fillWidth="true" percentWidth="25" />  
   </columnConstraints>
   
-  <Label fx:id="lblName" GridPane.rowIndex="0" GridPane.columnIndex="0"
-          GridPane.columnSpan="2" styleClass="ucName" />
-  
   <ProgressBar fx:id="pBar"  styleClass="ucHealthbar" 
-               GridPane.rowIndex="1" GridPane.columnIndex="0"
+               GridPane.rowIndex="0" GridPane.columnIndex="0"
           minHeight="5" GridPane.columnSpan="2"  /> 
   
-  <StackPane GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.rowSpan="4">
+  <HBox GridPane.rowIndex="1" GridPane.columnIndex="0"
+          GridPane.columnSpan="2">
+    <Label fx:id="lblName" styleClass="ucName" />
+    <Icon fx:id="iHeroes" visible="false" sizeClass="xs" iconClass="icon-smallcrown, smallcrown"/>
+  </HBox>
+  
+  <Label fx:id="lblRetired"  styleClass="ucName" 
+               GridPane.rowIndex="1" GridPane.columnIndex="0"
+          GridPane.columnSpan="2" visible="false" text="Retired"/>
+  
+<StackPane GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.rowSpan="4">
     <Group fx:id="gPicture" >
       <Region styleClass="picture-lg-back" fx:id="rPictureBackground"/>
       <Region styleClass="picture-lg-front" fx:id="rPictureIcon"/>

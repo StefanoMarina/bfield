@@ -33,6 +33,10 @@ public class UnitChangeEvent extends javafx.event.Event {
       new EventType<>(Event.ANY, "UNIT_REMOVE");
   public static final EventType<UnitChangeEvent> UNIT_CHANGE_TERRAIN =
       new EventType<>(Event.ANY, "UNIT_CHANGE_TERRAIN");
+  public static final EventType<UnitChangeEvent> UNIT_EMBED_HERO =
+      new EventType<>(Event.ANY, "UNIT_EMBED_HERO");
+  public static final EventType<UnitChangeEvent> UNIT_DISEMBARK =
+      new EventType<>(Event.ANY, "UNIT_DISEMBARK");
   
   private final Unit unit;
   
@@ -49,4 +53,6 @@ public class UnitChangeEvent extends javafx.event.Event {
   public Unit getUnit() {
     return unit;
   }
+  
+  
 }

@@ -32,6 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .ucHealthbar {
   -fx-accent: lime;/*linear-gradient(from 100% 50% to 0% 50%, lime 50%, darkolivegreen 100%);*/ 
 }
+
 .ucHealthbar > .track {
   -fx-control-inner-background: darkred;
   /*-fx-background-radius: 4px;*/
@@ -45,6 +46,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -fx-background-insets: 1 1 2 1;
   -fx-padding: 0.20em;
 }
+
 .ucName {
   -fx-font-size: 0.6em;
   -fx-font-weight: bold;
@@ -62,11 +64,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -fx-background-radius: 4px;
 }
 
-@font-face {
-  font-family: bfield;
-  src: url("bfield.ttf");
-}
-
 .status-label {
   -fx-padding: 1px 3px 1px 3px;
   -fx-background-radius: 4px;
@@ -78,15 +75,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -fx-border-radius: 4px;-*/
 }
 
+/* bonus and malus front color used in small status icons*/
+.f-bonus {-fx-background-color: yellow !important;}
+.f-malus {-fx-background-color: tomato !important;}
 
-.bonus {
-  -fx-background-color: navy; 
-  -fx-text-fill: gold;
-}
-
-.malus {
-  -fx-background-color: black; 
-  -fx-text-fill: red;  
+.smallcrown {
+  -fx-background-color: yellow;
 }
 
 #gStatuses {

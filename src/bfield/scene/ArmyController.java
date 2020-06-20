@@ -51,6 +51,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 /**
  * FXML Controller class
@@ -121,13 +122,9 @@ public class ArmyController  {
   private UnitRules unitMechanic;
   @FXML
   private Button btnEmbark;
+  @FXML
+  private StackPane stack;
   
-  public void updateOrdinals(boolean value) {
-    bShowOrdinal = value;
-    for (UnitCellController uc : getUnits().values()) {
-      //uc.setShowOrdinal(value);
-    }
-  }
   
   public void setWeatherDisabled(boolean value, boolean update) {
     btnWeather.setDisable(value);
@@ -151,10 +148,37 @@ public class ArmyController  {
         if (update)x.refreshUnit();
       });
   }
+  
+   /**
+    * Utility to get the currently selected controller.
+    * @param u a unit (may be null)
+    * @return a UnitCellController with isSelected() == true
+    * or null if no element is selected
+    */
+  private java.util.Map.Entry<Pane, UnitCellController> getSelectedCell(Unit u) {
+     if (u == null)
+      return mUnits.entrySet().stream().filter(en -> (en.getValue().isSelected()))
+             .findFirst().orElse(null);
+     else
+       return mUnits.entrySet().stream().filter(en -> (en.getValue().isSelected() &&
+               en.getValue().getUnit() == u)).findFirst().orElse(null);
+   }
    
+  
   public ArmyController() {
+    //Unit controller has been used.
     this.uehUnitChange = (event) -> {    
       refreshArmy();
+      
+      //if the change occourred on selected unit, update both controllers
+      if (ucSelection.getUnit() == event.getUnit()) {
+        if (ucSelection == event.getSource())
+          ucSelection.refreshUnit();
+        else
+          mUnits.values().stream().filter( uc -> (uc.isSelected() &&
+                  event.getUnit() == uc.getUnit()))
+                  .forEach( uc -> {uc.refreshUnit();});
+      }
     };
     
     this.uehUnitTerrain = (event) -> {
@@ -169,9 +193,20 @@ public class ArmyController  {
         throw new RuntimeException("Requested unit is not part of the army!");
       }
       
+      Pane selectedPane = source;
+      
+      if (ucSelection.getUnit() == unit) {
+        if (pSelection == event.getSource()) {
+          ucSelection.setUnit("",null,null);
+          //pSelection.setVisible(false);
+          stack.getChildren().remove(pSelection);
+          selectedPane = this.getSelectedCell(unit).getKey();
+        }
+      }
+      
       army.getUnits().remove(unit);
-      boxList.getChildren().remove(source);
-      getUnits().remove(source);
+      boxList.getChildren().remove(selectedPane);
+      getUnits().remove(selectedPane);
       refreshArmy();
       root.fireEvent(new ArmyEvent(army,ArmyEvent.ARMY_CHANGED));
     };
@@ -213,13 +248,17 @@ public class ArmyController  {
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
+     pSelection.addEventHandler(UnitChangeEvent.UNIT_CHANGE, uehUnitChange);
+     pSelection.addEventHandler(UnitChangeEvent.UNIT_REMOVE, uehUnitRemove);
+     pSelection.addEventFilter(UnitChangeEvent.UNIT_CHANGE_TERRAIN, uehUnitTerrain);
+     
+    //BorderPane.setAlignment(pSelection, Pos.BOTTOM_CENTER);
+    //BorderPane.setMargin(pSelection, new Insets(20,0,10,0));
     
-    BorderPane.setAlignment(pSelection, Pos.BOTTOM_CENTER);
-    BorderPane.setMargin(pSelection, new Insets(20,0,10,0));
-    root.setBottom(pSelection);
-    
-    pSelection.setVisible(false);
-    
+    /*
+      root.setBottom(pSelection);
+      pSelection.setVisible(false);
+    */
     sDefMod.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-99,99,0));
     sAttMod.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-99,99,0));
     
@@ -238,6 +277,7 @@ public class ArmyController  {
     
     //Unit selection
     this.ehOnUnitClick = (MouseEvent e) -> {
+      e.consume();
       if (!(e.getSource() instanceof Pane)) {
         System.err.println(e.getSource().getClass().getSimpleName());
         return;
@@ -250,6 +290,20 @@ public class ArmyController  {
       
       onUnitSelection(pane);  
     };
+    
+    root.setOnMouseClicked( (MouseEvent e) ->{
+      e.consume();
+      if (stack.getChildren().contains(pSelection)) {
+        
+        UnitCellController uc = getUnits().values().stream().filter(
+          controller -> (controller.isSelected())).findFirst().orElse(null);
+        
+        if (uc != null)
+          uc.setSelected(false);
+        
+        stack.getChildren().remove(pSelection);
+      }
+    });
   }
   
   public void onUnitSelection(Pane clickedNode) {
@@ -263,7 +317,13 @@ public class ArmyController  {
     
     ucSelection.setArmyColor(army.getColor());
     ucSelection.setUnit(army.getID(), selectedController.getUnit(), unitMechanic);
-    pSelection.setVisible(true);
+
+    if (!stack.getChildren().contains(pSelection)) {
+      StackPane.setAlignment(pSelection, Pos.BOTTOM_CENTER);
+      StackPane.setMargin(pSelection,new Insets(20));
+      pSelection.setVisible(true);
+      stack.getChildren().add(pSelection);
+    }
   }
   
   
@@ -339,6 +399,7 @@ public class ArmyController  {
     
     a.getUnits().forEach((u) -> {addUnit(u);});
     refreshArmy();
+ 
   }
   
   public void refreshArmy() {
@@ -356,6 +417,10 @@ public class ArmyController  {
     sAttMod.getValueFactory().setValue(army.getAttackMod());
     sDefMod.getValueFactory().setValue(army.getDefenseMod());
     
+    UnitController.styleData(attack, attack, lblMelee);
+    UnitController.styleData(defense, defense, lblDef);
+    UnitController.styleData(special, special, lblCharge);
+    /*
     lblMelee.setText( (attack != Unit.NA) ? String.valueOf(attack) : "--");
     lblDef.setText( (defense != Unit.NA) ? String.valueOf(defense) : "--");
     lblCharge.setText( (special != Unit.NA) ? String.valueOf(special) : "--");
@@ -363,6 +428,7 @@ public class ArmyController  {
     lblMelee.setStyle((attack < -9) ? "-fx-font-size: 1.0em" : "");
     lblDef.setStyle((defense < -9) ? "-fx-font-size: 1.0em" : "");
     lblCharge.setStyle((special < -9) ? "-fx-font-size: 1.0em" : "");
+    */
     
     bSilent = false;
   }
@@ -372,12 +438,12 @@ public class ArmyController  {
     refreshUnits();
   }
   
-  
-  
   public void refreshUnits() {
     getUnits().values().forEach((uc) -> {
       uc.refreshUnit();
     });
+    if (stack.getChildren().contains(pSelection))
+      ucSelection.refreshUnit();
   }
 
   public void addUnit(Unit u) {
@@ -425,6 +491,7 @@ public class ArmyController  {
       mUnits = new java.util.WeakHashMap();
     return mUnits;
   }
+  
   @FXML
   public void onAddNewUnit() {
     if (newUnitName == null)

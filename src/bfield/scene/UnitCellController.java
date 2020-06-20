@@ -17,7 +17,6 @@
 package bfield.scene;
 
 import bfield.Application;
-import bfield.IconFont;
 import bfield.Utilities;
 import bfield.data.Unit;
 import bfield.event.ArmyEvent;
@@ -25,13 +24,12 @@ import bfield.event.UnitChangeEvent;
 import bfield.rules.UnitRules;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.Collections;
 import java.util.List;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
@@ -40,6 +38,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -119,6 +118,10 @@ public class UnitCellController {
   
   @FXML
   private Group gPicture;
+  @FXML
+  private Icon iHeroes;
+  @FXML
+  private Label lblRetired;
   
   protected List<UnitCellController> getBunks() {
     if (bunks == null)
@@ -209,7 +212,7 @@ public class UnitCellController {
     
     if (u.getClassName().contains("Ship")) {
       root.getChildren().remove(pBar);
-      root.add(pBar, 0, 1, 1, 1);
+      root.add(pBar, 0, 0, 1, 1);
       lBunks.setVisible(true);
     }
     
@@ -456,38 +459,41 @@ public class UnitCellController {
     //health bar
     if (!unit.isDead()) {
       pBar.setVisible(true);
+      lblRetired.setVisible(false);
       pBar.setProgress((double)unit.getCurrentHits()/(double)unit.getHits());
     } else {
       pBar.setVisible(false);
     }
-    
+    if (unit.isRetired() && !unit.isDead())
+      lblRetired.setVisible(true);
+      
     if (showStatus == null)
       showStatus = new java.util.HashMap();
     
     //statuses
     gpStatuses.getChildren().clear();
     if (showStatus.getOrDefault("visibility", true) && unit.getIgnoreVisibility())
-      enqueueStatusDisplay(createStatusLabel(IconFont.I_VISIBILITY,"bonus"));
+      enqueueStatusDisplay(createStatus("bonus", "icon-eye"));
     if (showStatus.getOrDefault("terrain", true) && unit.getIgnoreTerrain())
-      enqueueStatusDisplay(createStatusLabel(IconFont.I_TERRAIN,"bonus"));
+      enqueueStatusDisplay(createStatus("bonus", "icon-mountain"));
     if (showStatus.getOrDefault("mountain", true) && unit.getIgnoreMountain())
-      enqueueStatusDisplay(createStatusLabel(IconFont.I_MOUNTAIN,"bonus"));
+      enqueueStatusDisplay(createStatus("bonus", "icon-dwarf"));
     if (showStatus.getOrDefault("weather", false) && unit.getIgnoreWeather())
-      enqueueStatusDisplay(createStatusLabel(IconFont.I_WEATHER,"bonus"));
+      enqueueStatusDisplay(createStatus("bonus", "icon-snow"));
     
     
     if (showStatus.getOrDefault("visibility", true) && !unit.getIgnoreVisibility() &&
             modEnvironment.getContext().getVisibility().isBad())
-      enqueueStatusDisplay(createStatusLabel(IconFont.I_VISIBILITY,"malus"));
+      enqueueStatusDisplay(createStatus("malus", "icon-eye"));
     if ( showStatus.getOrDefault("weather", true) && !unit.getIgnoreWeather() &&
             modEnvironment.getContext().getWeather().isBad())
-      enqueueStatusDisplay(createStatusLabel(IconFont.I_WEATHER,"malus"));
+      enqueueStatusDisplay(createStatus("malus", "icon-snow"));
     if (showStatus.getOrDefault("terrain", true) && !unit.getIgnoreTerrain() &&
             modEnvironment.getContext().getTerrain().isBad())
-      enqueueStatusDisplay(createStatusLabel(IconFont.I_TERRAIN,"malus"));
+      enqueueStatusDisplay(createStatus("malus", "icon-terrain"));
     if (showStatus.getOrDefault("mountain", true) && !unit.getIgnoreMountain()&&
             modEnvironment.getContext().getTerrain().isBad())
-      enqueueStatusDisplay(createStatusLabel(IconFont.I_MOUNTAIN,"malus"));
+      enqueueStatusDisplay(createStatus("malus", "icon-dwarf"));
     
     //Ships, cargo count
     if(sourceUnit.getClassName().contains("Ship")) {
@@ -497,16 +503,6 @@ public class UnitCellController {
         lBunks.setText(String.format("%d/%d", unit.getCargo().stream()
         .filter(cun -> {return !cun.isDead();} ).count(), unit.getBunks()));
       
-      //Check if cargo synchs
-      /*
-      if (getBunks().size() < sourceUnit.getCargo().size()) {
-        for (int i = (sourceUnit.getCargo().size() - getBunks().size())-1; i
-                < sourceUnit.getCargo().size(); i++) {
-          embark(sourceUnit.getCargo().get(i));
-        }
-      }*/
-      
-     
       boolean found;
       //updates && adds any missing unit
       for (Unit u : sourceUnit.getCargo()) {
@@ -522,8 +518,24 @@ public class UnitCellController {
           embark(u);
       }
     }
+    
+    //hero crown
+    iHeroes.setVisible( unit.getHeroEL() > 0 );
   }
- 
+  
+  
+  /**
+   * Utility to create a small status icon
+   * @param mod bonus | malus
+   * @param icon icon name
+   * @return 
+   */
+  private Icon createStatus(String mod, String icon) {
+    Icon c = new Icon(String.format("xs, b-%s, %s", mod, icon));
+    c.getFront().getStyleClass().add("f-"+mod);
+    return c;
+  }
+  
   /**
   * Utility to create a status label
   * @param shape name of the icon

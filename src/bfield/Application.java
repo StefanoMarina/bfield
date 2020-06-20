@@ -19,7 +19,7 @@ package bfield;
 import bfield.data.*;
 
 import bfield.scene.MainWndController;
-import bfield.scene.UnitCellController;
+import bfield.scene.UnitController;
 import bfield.scene.dialogs.NewBattleDialogController;
 import bfield.scene.dialogs.UnitSelectorController;
 import bfield.scene.edit.EditUnitController;
@@ -30,14 +30,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Properties;
-import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
@@ -84,6 +80,9 @@ public class Application extends javafx.application.Application {
   }
 
   public void quit() {
+    if (!(rootController instanceof bfield.scene.MainWndController))
+      return;
+    
     rootController.closeAllTabs();
     try {
       getPreferences().storeToXML(new FileOutputStream(new File
@@ -169,20 +168,23 @@ public class Application extends javafx.application.Application {
    
     //Main scene
     FXMLLoader loader = new FXMLLoader(getClass().getResource("scene/MainWnd.fxml"));
-    //FXMLLoader loader = new FXMLLoader(getClass().getResource("scene/unitcell.fxml"));
+    //FXMLLoader loader = new FXMLLoader(getClass().getResource("scene/unit.fxml"));
     javafx.scene.Parent obj = loader.load();
     this.rootController = loader.<MainWndController>getController();
     javafx.scene.Scene scene = new javafx.scene.Scene(obj);
     
     //test start
-      /*UnitCellController ucc = loader.<UnitCellController>getController();
+/*
+      UnitController ucc = loader.<UnitController>getController();
       ucc.setArmyColor(javafx.scene.paint.Color.DARKRED);
       Unit u = rulesCache.get("D20 SRD").getUnitFactory().createUnit("Anuirean infantry");
       u.setIgnoreVisibility(true);
       u.setIgnoreTerrain(true);
       u.setIgnoreMountain(true);
-      ucc.setUnit(u);*/
-    //test end
+      ucc.setUnit(Battle.ID_HOME, u, new bfield.rules.srd.UnitSRD(
+      rulesCache.get("D20 SRD").newBattle()));
+    */
+//test end
     
     //Css & Launch
     scene.getStylesheets().add(getClass().getResource("scene/content.css").toExternalForm());
@@ -347,8 +349,6 @@ public class Application extends javafx.application.Application {
 
     final String RULESET = usdc.getRuleset(),
             SELECTION = usdc.getSelection();
-
-
 
     if (RULESET == null || SELECTION == null)
       return null;

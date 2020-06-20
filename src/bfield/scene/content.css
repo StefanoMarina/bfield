@@ -26,15 +26,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 .b-special { -fx-background-color: darkmagenta;}
 .b-disabled { -fx-background-color:darkgrey; }
 .b-cargo { -fx-background-color: rosybrown; }
+.b-morale { -fx-background-color: lightseagreen; }
+.b-movement { -fx-background-color: darkolivegreen; }
+.b-health { -fx-background-color: crimson; }
 
+.b-bonus { -fx-background-color: navy; }
+.b-malus { -fx-background-color: black; }
+
+/* colore per bonus e malus */
 .t-better {-fx-text-fill: yellow !important;}
-.t-worse {-fx-text-fill: tomato !important; }
+.t-bonus-dark, .t-better-dark {-fx-text-fill: darkorange !important;}
+.t-malus, .t-worse {-fx-text-fill: tomato !important; }
+
+
 
 .card {
   -fx-background-color: linear-gradient(from 50% 0% to 50% 100%, gainsboro 50%, slategray 100%);
   -fx-background-radius: 25px;
   -fx-padding: 0.5em;
-  /*-fx-border-color: black;*/
   -fx-border-radius: 20px;
   -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
 }
@@ -102,7 +111,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -fx-border-width: 1px;
   -fx-background-radius: 5px;
   -fx-border-radius: 5px;
-  -fx-border-color:   darkgray  dimgray  dimgray darkgray;
+  -fx-border-color: darkgray  dimgray  dimgray darkgray;
 }
 
 .btn {-fx-background-color: transparent}
@@ -126,21 +135,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -fx-border-color: black;
 }
 
-.tb:hover:selected .icon-crown {
+.tb:hover:selected .icon-front{
   -fx-background-color: goldenrod;
 }
 
-.tb:selected .icon-crown {
+.tb:selected .icon-front {
   -fx-background-color: gold;
-}
-
-
-.tb:hover:selected .icon-g {
-  -fx-background-color: firebrick;
-}
-
-.tb:selected .icon-g {
-  -fx-background-color: tomato;
 }
 
 #btnHeal  > Region{
