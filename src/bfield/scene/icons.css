@@ -18,9 +18,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     Created on : 29-ott-2019, 9.43.20
     Author     : root
 */
-@font-face {
-  src: url("/bfield/bfield.ttf");
-}
 
 .picture-xs-front, .picture-sm-front, .picture-md-front,
 .picture-lg-front, .picture-front, .icon-front, .icon-mini-front,
