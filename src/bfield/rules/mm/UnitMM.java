@@ -22,6 +22,9 @@ import bfield.data.Condition;
 import bfield.data.Unit;
 import bfield.rules.ArmyRules;
 import bfield.rules.UnitRules;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextInputDialog;
 
 /**
  *
@@ -59,4 +62,32 @@ public class UnitMM extends UnitRules {
             
   }
   
+  @Override
+  public boolean embedHero(Unit unitToEmbed) {
+    TextInputDialog dialog = new TextInputDialog("8");
+     dialog.setTitle("Attach hero unit");
+     dialog.setHeaderText("Add the encounter level (EL) of the heroes embedded\n"
+             + " on that unit. If the unit is destroyed, the heroes' fate will be\n"
+             + " decided by rules in chapter 6 of the BRCS.");
+     dialog.setContentText("Enter Hero EL:");
+
+     //dialog.getDialogPane().getStylesheets()
+     //  .add(getClass().getResource("dialog.css").toExternalForm());
+     //dialog.getDialogPane().getStyleClass().add("dlg");
+
+     Optional<String> result = dialog.showAndWait();
+     if (result.isPresent()) {
+       try {
+         unitToEmbed.attachHeroUnit(Integer.parseInt(result.get()));
+         return true;
+       } catch (NumberFormatException e) {
+         Alert alert = new Alert (Alert.AlertType.INFORMATION);
+         alert.setTitle("Could not parse number");
+         alert.setHeaderText(null);
+         alert.setContentText(result.get() + " is not a valid integer number.");
+         return false;
+       }
+     } else
+       return false;
+  }
 }

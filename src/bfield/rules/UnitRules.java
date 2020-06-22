@@ -42,4 +42,5 @@ public abstract class UnitRules {
   public Battle getContext() {
     return context;
   }
+  public abstract boolean embedHero(Unit unitToEmbed);
 }

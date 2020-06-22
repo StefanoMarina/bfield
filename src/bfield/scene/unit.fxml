@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -19,6 +17,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.control.ProgressBar?>
+
+<?import bfield.scene.Icon?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" 
       minWidth="-Infinity" prefHeight="150" prefWidth="480" 
@@ -46,13 +46,10 @@
     
       </HBox>
    
-      <GridPane hgap="3" vgap="6" prefHeight="30.0" prefWidth="350">
+      <GridPane hgap="3" vgap="6" prefHeight="30.0" prefWidth="350" >
         
-        <Group GridPane.columnIndex="0">
-          <Region styleClass="icon-back" style="-fx-background-color: midnightblue"/>
-          <Region styleClass="icon-front, icon-shield"/>
-        </Group>
-
+        <!--<Label styleClass="icon, b-def" GridPane.columnIndex="0" text="F"/>-->
+        <Icon formatClass="sm,b-def, icon-shield" GridPane.columnIndex="0"/>
         <Label styleClass="label-score" text="0" fx:id="lblDef" GridPane.columnIndex="1"
         GridPane.hgrow="ALWAYS" >
           <tooltip>
@@ -60,85 +57,86 @@
           </tooltip>
         </Label>
         
-        <Group GridPane.columnIndex="2">
-          <Region styleClass="icon-back" style="-fx-background-color: darkred"/>
-          <Region styleClass="icon-front, icon-hilt"/>
-        </Group>
+        
+        <Icon formatClass="sm, b-melee, icon-hilt" GridPane.columnIndex="2"/>
         <Label  GridPane.hgrow="ALWAYS" prefWidth="30" styleClass="label-score" text="0" fx:id="lblMelee" GridPane.columnIndex="3">
           <tooltip>
             <Tooltip text="Melee bonus"/>
           </tooltip>
         </Label>
         
-        <Group GridPane.rowIndex="0" GridPane.columnIndex="4">
-          <Region fx:id="gMissile" styleClass="icon-back"/>
-          <Region styleClass="icon-front, icon-missile"/>
-        </Group>
+        <!-- health -->
+        <Icon formatClass="sm, b-health, icon-heart" GridPane.columnIndex="4"/>
+        <Label GridPane.columnIndex="5" 
+               styleClass="label-score" fx:id="lblHealth" text="--" prefWidth="20">
+          <tooltip><Tooltip text="Remaining health"/></tooltip>
+        </Label>
         
+        <!-- morale -->
+        <Icon formatClass="sm, b-morale, icon-morale" GridPane.rowIndex="0" GridPane.columnIndex="6"/>
+        <Label GridPane.hgrow="ALWAYS" prefWidth="25" styleClass="label-score" 
+                text="0" fx:id="lblMorale"
+               GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.columnIndex="7">
+          <tooltip><Tooltip text="Morale"/></tooltip>
+        </Label>
+        
+      <!-- 2nd row -->
+        <!-- missile -->
+        <Icon fx:id="iMissile" formatClass="sm, b-missile, icon-missile"
+              GridPane.rowIndex="1" GridPane.columnIndex="0"/>  
         <Label  GridPane.hgrow="ALWAYS" prefWidth="25" styleClass="label-score" text="0" fx:id="lblMissile" 
-               GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.columnIndex="5">
+               GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="1">
           <tooltip>
             <Tooltip text="Missile bonus"/>
           </tooltip>
         </Label>
         
-        <Group GridPane.rowIndex="0" GridPane.columnIndex="6">
-          <Region  fx:id="gCharge" styleClass="icon-back, icon-black"/>
-          <Region styleClass="icon-front, icon-charge"/>
-        </Group>
+        <!-- charge / special -->
+        <Icon fx:id="iCharge" formatClass="sm, b-special, icon-charge"
+              GridPane.rowIndex="1" GridPane.columnIndex="2"/>  
         <Label  GridPane.hgrow="ALWAYS" prefWidth="25" styleClass="label-score" text="0" fx:id="lblCharge"
-               GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.columnIndex="7">
+               GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="3">
           <tooltip>
             <Tooltip text="Melee+Charge bonus"/>
           </tooltip>
         </Label>
-    <!-- 2nd row -->
-        <Group GridPane.rowIndex="1" GridPane.columnIndex="0">
-          <Region styleClass="icon-back" style="-fx-background-color: forestgreen"/>
-          <Region styleClass="icon-front, icon-morale"/>
-        </Group>
-        <Label GridPane.hgrow="ALWAYS" prefWidth="25" styleClass="label-score" 
-                text="0" fx:id="lblMorale"
-               GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="1">
-          <tooltip>
-            <Tooltip text="Morale"/>
-          </tooltip>
-        </Label>
-        <Group GridPane.rowIndex="1" GridPane.columnIndex="2">
-          <Region styleClass="icon-back" style="-fx-background-color: darkolivegreen"/>
-          <Region styleClass="icon-front, icon-boot"/>
-        </Group>
+        
+        <!-- movement -->
+        <Icon formatClass="sm, b-movement, icon-boot" GridPane.rowIndex="1" GridPane.columnIndex="4"/>
         <Label GridPane.hgrow="ALWAYS" prefWidth="25" styleClass="label-score" 
                 text="0" fx:id="lblMove"
-               GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="3">
+               GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="5">
           <tooltip>
             <Tooltip text="Movement"/>
           </tooltip>
         </Label>
-        <Group fx:id="grPaddles" GridPane.rowIndex="1" GridPane.columnIndex="4" >
-          <Region fx:id="rPaddles" styleClass="icon-back" style="-fx-background-color: midnightblue"/>
-          <Region styleClass="icon-front, icon-paddles"/>
-        </Group>
+        
+        <!-- rowing -->
+        <Icon fx:id="grPaddles" formatClass="sm, b-movement, icon-paddles" GridPane.rowIndex="1" GridPane.columnIndex="6"/>
         <Label GridPane.hgrow="ALWAYS" prefWidth="25" styleClass="label-score" 
                 text="0" fx:id="lblPaddles"
-               GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="5">
+               GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.columnIndex="7">
           <tooltip>
             <Tooltip text="Rowing"/>
           </tooltip>
         </Label>
+      </GridPane>
+      
+      <HBox spacing="5" alignment="BASELINE_CENTER"  prefWidth="350">
+        <padding><Insets left="50" top="5" bottom="5"/></padding>
         
     <!-- button row -->
         <ToggleButton styleClass="tb" fx:id="tgVis" text=""
                       GridPane.rowIndex="2" GridPane.columnIndex="0">
           <graphic>
-            <Region styleClass="icon-front, icon-g, icon-eye"/>
+            <Region styleClass="picture-sm-front, icon-eye"/>
           </graphic>
         </ToggleButton>
         
         <ToggleButton styleClass="tb" fx:id="tgWeather" text=""
                       GridPane.rowIndex="2" GridPane.columnIndex="1">
           <graphic>
-            <Region styleClass="icon-front, icon-g, icon-snow"/>
+            <Region styleClass="picture-sm-front, icon-snow"/>
           </graphic>
         </ToggleButton>
     
@@ -146,7 +144,7 @@
         <ToggleButton styleClass="tb" fx:id="tgMountain" text=""
                       GridPane.rowIndex="2" GridPane.columnIndex="2">
           <graphic>
-            <Region styleClass="icon-front, icon-g, icon-dwarf"/>
+            <Region styleClass="picture-sm-front, icon-dwarf"/>
           </graphic>
           
         </ToggleButton>
@@ -154,14 +152,14 @@
         <ToggleButton styleClass="tb" fx:id="tgFortification" text=""
                       GridPane.rowIndex="2" GridPane.columnIndex="3" >
           <graphic>
-            <Region styleClass="icon-front, icon-g, icon-tower"/>
+            <Region styleClass="picture-sm-front, icon-tower"/>
           </graphic>
         </ToggleButton>
         
         <ToggleButton styleClass="tb" fx:id="tgTerrain" text=""
                       GridPane.rowIndex="2" GridPane.columnIndex="4">
           <graphic>
-            <Region styleClass="icon-front, icon-g, icon-mountain"/>
+            <Region styleClass="picture-sm-front, icon-mountain"/>
           </graphic>
           
         </ToggleButton>
@@ -170,32 +168,25 @@
         <ToggleButton styleClass="tb" fx:id="tgHero" text=""
                       GridPane.rowIndex="2" GridPane.columnIndex="5">
           <graphic>
-            <Region styleClass="icon-front, icon-crown"/>
+            <Region styleClass="picture-sm-front, icon-crown"/>
           </graphic>
         </ToggleButton>
         
         <Label  GridPane.hgrow="ALWAYS" styleClass="label-score" fx:id="lblEL" text="-"
-               visible="false" GridPane.rowIndex="2" GridPane.columnIndex="6"/>        
-        
-        <Group  GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.columnIndex="6">
-          <Region styleClass="icon-back" style="-fx-background-color: darkred"/>
-          <Region styleClass="icon-front, icon-heart"/>
-        </Group>
-        
-        <Label GridPane.rowIndex="1" GridPane.columnIndex="7" 
-               styleClass="label-score" fx:id="lblHealth" text="--" prefWidth="20"/>
-      </GridPane>
+               visible="false" GridPane.rowIndex="2" GridPane.columnIndex="7"/>
+      </HBox>
     </VBox>
   </center>
   <right>
+    <!-- Vertical action bar -->
     <VBox spacing="5">
       <BorderPane.margin>
         <Insets top="5"/>
       </BorderPane.margin>
       <HBox spacing="2">
-      <Button  styleClass="btn" fx:id="btnHeal" text="" onAction="#onHealUnit">
+        <Button  styleClass="btn" fx:id="btnHeal" text="" onAction="#onHealUnit">
           <graphic>
-            <Region styleClass="icon-front, icon-heart-plus"/>
+            <Region styleClass="picture-sm-front, icon-heart-plus"/>
           </graphic>
           <tooltip>
             <Tooltip text="Click to restore 1 hit to unit"/>
@@ -203,29 +194,28 @@
         </Button>
         <Button styleClass="btn" fx:id="btnDamage" text="" onAction="#onDamageUnit">
           <graphic>
-            <Region styleClass="icon-front, icon-heart-minus" />
+            <Region styleClass="picture-sm-front, icon-heart-minus" />
           </graphic>
           <tooltip>
             <Tooltip text="Click to remove 1 hit to unit."/>
           </tooltip>
         </Button>
-        </HBox>
-        <ToggleButton styleClass="tb"  fx:id="tbCamp" alignment="BASELINE_RIGHT"><tooltip>
-            <Tooltip text="Send unit to camp."/>
-          </tooltip>
-          <graphic>
-            <Region styleClass="icon-front, icon-pavillon"/>
-          </graphic>
-        </ToggleButton>
-        <Button styleClass="btn" text=""  onAction="#onUnitRemove">
-          <graphic>
-            <Region styleClass="icon-front,icon-cancel" style="-fx-background-color:black" />
-          </graphic>
-          <tooltip>
-            <Tooltip text="Click to remove unit."/>
-          </tooltip>
-        </Button>
-    </VBox>
-    
+      </HBox>
+      <ToggleButton styleClass="tb"  fx:id="tbCamp" alignment="BASELINE_RIGHT"><tooltip>
+          <Tooltip text="Send unit to camp."/>
+        </tooltip>
+        <graphic>
+          <Region styleClass="picture-sm-front, icon-pavillon"/>
+        </graphic>
+      </ToggleButton>
+      <Button styleClass="btn" text=""  onAction="#onUnitRemove">
+        <graphic>
+          <Region styleClass="picture-sm-front, icon-cancel" style="-fx-background-color:black" />
+        </graphic>
+        <tooltip>
+          <Tooltip text="Click to remove unit."/>
+        </tooltip>
+      </Button>
+    </VBox>    
   </right>
 </BorderPane>

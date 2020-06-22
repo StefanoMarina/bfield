@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ * Copyright (C) 2020 ste
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ -->
 <units xmlns:ns2="http://battlefield.uri/adnd_2e">
     <unit name="Anuirean archers" def="12" charge="-999" hits="2" class="MdArch" melee="2" missile="4" move="2" mrl="4"/>
     <unit name="Anuirean med. cavalry" def="14" charge="2" hits="2" class="MdCav" melee="4" move="3" mrl="4"/>
@@ -64,13 +81,13 @@
     <unit name="Ship, Coaster" def="10" hits="1" class="LtShip" melee="0" missile="-2" move="1" mrl="2"/>
     <unit name="Ship, Dhow" def="10" hits="1" class="LtShip" melee="0" missile="-2" move="1" mrl="2"/>
     <unit name="Ship, Keelboat" def="8" hits="1" class="LtShip" melee="-2" move="1" mrl="0"/>
-    <unit name="Ship, Caravel" def="14" hits="2" class="MdShip" melee="4" missile="0" move="1" mrl="4"/>
-    <unit name="Ship, Cog" def="14" hits="2" class="MdShip" melee="4" missile="2" move="1" mrl="4"/>
-    <unit name="Ship, Dhoura" def="14" hits="2" class="MdShip" melee="4" missile="0" move="1" mrl="4"/>
-    <unit name="Ship, Longship" def="12" charge="2" hits="1" class="MdShip" melee="4" icon="trireme.svg" move="3" mrl="2"/>
-    <unit name="Ship, Drakkar" def="14" charge="2" hits="2" class="HvShip" melee="6" icon="trireme.svg" move="3" mrl="2"/>
-    <unit name="Ship, Galleon" def="16" charge="2" hits="4" class="HvShip" melee="8" missile="2" move="2" mrl="2"/>
-    <unit name="Ship, Knarr" def="14" charge="2" hits="2" class="HvShip" melee="4" missile="0" icon="trireme.svg" move="2" mrl="4"/>
-    <unit name="Ship, Roundship" def="16" hits="3" class="HvShip" melee="6" missile="6" move="0" mrl="6"/>
-    <unit name="Ship, Zebec" def="14" charge="2" hits="3" class="HvShip" melee="6" missile="4" move="2" mrl="4"/>
+    <unit name="Ship, Caravel" bunks="1" def="14" hits="2" class="MdShip" melee="4" missile="0" move="1" mrl="4"/>
+    <unit name="Ship, Cog" bunks="1" def="14" hits="2" class="MdShip" melee="4" missile="2" move="1" mrl="4"/>
+    <unit name="Ship, Dhoura"  bunks="1" def="14" hits="2" class="MdShip" melee="4" missile="0" move="1" mrl="4"/>
+    <unit name="Ship, Longship" bunks="1" def="12" charge="2" hits="1" class="MdShip" melee="4" icon="trireme.svg" move="3" mrl="2"/>
+    <unit name="Ship, Drakkar" bunks="1" def="14" charge="2" hits="2" class="HvShip" melee="6" icon="trireme.svg" move="3" mrl="2"/>
+    <unit name="Ship, Galleon" bunks="3" def="16" charge="2" hits="4" class="HvShip" melee="8" missile="2" move="2" mrl="2"/>
+    <unit name="Ship, Knarr" bunks="1" def="14" charge="2" hits="2" class="HvShip" melee="4" missile="0" icon="trireme.svg" move="2" mrl="4"/>
+    <unit name="Ship, Roundship" bunks="2" def="16" hits="3" class="HvShip" melee="6" missile="6" move="0" mrl="6"/>
+    <unit name="Ship, Zebec" bunks="2" def="14" charge="2" hits="3" class="HvShip" melee="6" missile="4" move="2" mrl="4"/>
 </units>

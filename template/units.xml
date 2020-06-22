@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ * Copyright (C) 2020 ste
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ -->
 <units xmlns:ns2="http://battlefield.uri/adnd_2e">
     <unit name="Archers" def="12" melee="0" missile="2" hits="2" move="1" mrl="2" class="Arch"/>
     <unit name="Artillerists" def="10" melee="-2" missile="4" hits="2" move="1" mrl="2" class="Art"/>

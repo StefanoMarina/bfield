@@ -1,0 +1,89 @@
+/*
+Copyright (C) 2020 ste
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : 22 mar 2020, 11:23:27
+    Author     : ste
+*/
+
+.card-cell {
+  -fx-padding: 0.5em;
+}
+
+.cell-selected {
+  -fx-background-color: linear-gradient(from 50% 0% to 50% 100%, skyblue 100%, steelblue 100%);
+  -fx-border-color: slateblue;
+}
+
+/*progress bar*/
+.ucHealthbar {
+  -fx-accent: lime;/*linear-gradient(from 100% 50% to 0% 50%, lime 50%, darkolivegreen 100%);*/ 
+}
+
+.ucHealthbar > .track {
+  -fx-control-inner-background: darkred;
+  /*-fx-background-radius: 4px;*/
+  -fx-border-radius: 4px;
+  -fx-border-style: solid;
+  -fx-border-width:1px;
+  -fx-text-box-border:black;
+}
+
+.ucHealthbar > .bar {
+  -fx-background-insets: 1 1 2 1;
+  -fx-padding: 0.20em;
+}
+
+.ucName {
+  -fx-font-size: 0.6em;
+  -fx-font-weight: bold;
+  -fx-text-alignment: center;
+  -fx-alignment: center;
+}
+
+.ucStat {
+  -fx-font-size: 0.8em;
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+  -fx-text-alignment: center;
+  -fx-alignment: center;
+  -fx-padding: 0.15em;
+  -fx-background-radius: 4px;
+}
+
+.status-label {
+  -fx-padding: 1px 3px 1px 3px;
+  -fx-background-radius: 4px;
+  /*-fx-indent: 4px;*/
+  -fx-opacity: 1;
+  -fx-font-size: 0.8em;
+  -fx-font-family: 'bfield';
+  /*-fx-border-width: 1px;
+  -fx-border-radius: 4px;-*/
+}
+
+/* bonus and malus front color used in small status icons*/
+.f-bonus {-fx-background-color: yellow !important;}
+.f-malus {-fx-background-color: tomato !important;}
+
+.smallcrown {
+  -fx-background-color: yellow;
+}
+
+#gStatuses {
+  -fx-background-color: transparent;
+  -fx-border-style: none;
+}

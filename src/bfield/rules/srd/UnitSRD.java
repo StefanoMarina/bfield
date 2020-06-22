@@ -21,6 +21,9 @@ import bfield.data.Battle;
 import bfield.data.Condition;
 import bfield.data.Rules;
 import bfield.data.Unit;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextInputDialog;
 
 /**
  *
@@ -208,5 +211,35 @@ public class UnitSRD extends bfield.rules.UnitRules {
     if (EL < 10) return 0;
     else if (EL >= 10 && EL < 16) return 1;
     else return 2;
+  }
+  
+  
+  @Override
+  public boolean embedHero(Unit unitToEmbed) {
+    TextInputDialog dialog = new TextInputDialog("8");
+     dialog.setTitle("Attach hero unit");
+     dialog.setHeaderText("Add the encounter level (EL) of the heroes embedded\n"
+             + " on that unit. If the unit is destroyed, the heroes' fate will be\n"
+             + " decided by rules in chapter 6 of the BRCS.");
+     dialog.setContentText("Enter Hero EL:");
+
+     //dialog.getDialogPane().getStylesheets()
+     //  .add(getClass().getResource("dialog.css").toExternalForm());
+     //dialog.getDialogPane().getStyleClass().add("dlg");
+
+     Optional<String> result = dialog.showAndWait();
+     if (result.isPresent()) {
+       try {
+         unitToEmbed.attachHeroUnit(Integer.parseInt(result.get()));
+         return true;
+       } catch (NumberFormatException e) {
+         Alert alert = new Alert (Alert.AlertType.INFORMATION);
+         alert.setTitle("Could not parse number");
+         alert.setHeaderText(null);
+         alert.setContentText(result.get() + " is not a valid integer number.");
+         return false;
+       }
+     } else
+       return false;
   }
 }

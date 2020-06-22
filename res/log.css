@@ -1,0 +1,28 @@
+/*
+ * Copyright (C) 2020 ste
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+h1,h2,h3 { text-align: center; margin-bottom: 5px}
+body { width: 780px} 
+td p {text-align:center;}
+table { border: none;border-collapse: collapse; border-spacing: 2em; width: 90%; margin-left: 5%; margin-right: 5%; }
+th h2 { font-weight: bold; font-size: 2em; text-align: center;}
+
+#table td {width: 50%; word-wrap: break-word;}
+
+td { font-weight: normal; padding: none;}
+.army { padding: 0.2em 0.5em 0.2em 0.5em; border-radius: 10px; }
+.armyline { border-bottom:1px solid; }

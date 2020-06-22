@@ -43,8 +43,12 @@ public abstract class BattleSRD implements BattleRules {
    */
   @Override
   public Map<String,String> doBattle(Rules rules, Battle battle) {
-    Army home = battle.getArmies().get(Battle.ID_HOME),
+    final Army home = battle.getArmies().get(Battle.ID_HOME),
          away = battle.getArmies().get(Battle.ID_AWAY);
+    java.util.Map<String,String> res = new java.util.HashMap();
+    StringBuilder homeStr = new StringBuilder(), 
+                  awayStr = new StringBuilder(),
+                  mainStr = new StringBuilder();
     
     final int VALUE = getFixedNumber(rules),
               MIN = rules.getMinimalDamage();
@@ -57,30 +61,53 @@ public abstract class BattleSRD implements BattleRules {
     double multiplier = VALUE + getAttackValue(home, battle) - rAway.getDefense();
            multiplier *= MOD * home.getActiveUnitsSize();
            
-    int resultHome = (int)Math.max(Math.floor(multiplier), MIN);
+    final int resultHome = (int)Math.max(Math.floor(multiplier), MIN);
     
     
     //away attack
     multiplier = VALUE + getAttackValue(away, battle) - rHome.getDefense();
     multiplier *= MOD * home.getActiveUnitsSize();
-    int resultAway = (int)Math.max(Math.floor(multiplier), MIN);
+    final int resultAway = (int)Math.max(Math.floor(multiplier), MIN);
     
-    java.util.Map<String,String> res = new java.util.HashMap();
     
     if (battle.getTerrain().getHighGroundRule().contains("hill") &&
             battle.getRound() == 1) {
       if (home.hasHighGround()) {
-        res.put(home.getID(), home.getName() + " lost the high ground.");
+        mainStr.append("<p>").append(home.getName()).append(" charged downhill, losing the high ground.");
         home.setHighGround(false);
       } else if (away.hasHighGround()) {
-        res.put(away.getID(), away.getName() + " lost the high ground.");
+        mainStr.append("<p>").append(home.getName()).append(" charged downhill, losing the high ground.");
         away.setHighGround(false);
       }
     }
     
-    res.put(home.getID(), home.getName() + " scored " + String.valueOf(resultHome) + " hits.");
-    res.put(away.getID(), away.getName() + " scored " + String.valueOf(resultAway) + " hits.");
+    if (resultHome == resultAway && (homeStr.length()+awayStr.length()==0)) {
+      mainStr.append("<p>The armies held their ground.<strong>Both</strong> receive ")
+              .append(resultHome).append(" point(s) of damage.</p>");
+    } else {
+      res.put(home.getID(), elaborateResult(homeStr, home, resultHome, resultAway).toString());
+      res.put(away.getID(), elaborateResult(awayStr, away, resultAway, resultHome).toString());
+    }
     
+    res.put("main", mainStr.toString());
     return res;
+  }
+  
+  /**
+   * Utility to write more nice results. all results are under <p>.
+   * @param builder a valid stringbuilder
+   * @param a valid army
+   * @param result army's damage dealt
+   * @param damage army's damage suffered
+   * @return builder
+   */
+  private StringBuilder elaborateResult(StringBuilder builder, Army a, int result, int damage) {
+    builder.append("<p>");
+    if (result == 0)
+      builder.append(a.getName()).append(" was overwhelmed and scored no damage point.");
+    else
+      builder.append(a.getName()).append(" scored ").append(result).append(" damage point(s).");
+    builder.append("</p>");
+    return builder;
   }
 }

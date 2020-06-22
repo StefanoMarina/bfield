@@ -10,26 +10,27 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.Region?>
+<?import bfield.scene.Icon?>
 
-<BorderPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1"   fx:controller="bfield.scene.ArmyController">
+<BorderPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1"   fx:controller="bfield.scene.ArmyController" style="background-color:blue">
     <top>
         <VBox>
             <Button maxWidth="Infinity" styleClass="armyName" alignment="CENTER" fx:id="lblName" onAction="#setName"/>
             <ToolBar>
                 <ComboBox fx:id="cbUnits"/>
                 <Button fx:id="btnAdd" text="Add unit" onAction="#onAddNewUnit"/>
+                <Button fx:id="btnEmbark" text="Embark" onAction="#onEmbarkUnit"/>
                 <ColorPicker fx:id="btnColorChange" styleClass="btnColor"/>
             </ToolBar>
             <HBox spacing="5" fillHeight="true" alignment="CENTER">
               <padding>
                 <Insets top="2.5" bottom="2.5" left="2.5" right="2.5"/>
               </padding>
-              <Group GridPane.columnIndex="0">
-                  <Region styleClass="icon-back" style="-fx-background-color: midnightblue"/>
-                  <Region styleClass="icon-front, icon-shield"/>
-                </Group>
-                 <Label styleClass="label-score, army-tool-label" text="0" fx:id="lblDef" GridPane.columnIndex="1">
+              <Icon GridPane.columnIndex="0" formatClass="sm, b-def, icon-shield"/>
+              <Label styleClass="label-score, army-tool-label" text="0" fx:id="lblDef" GridPane.columnIndex="1">
               <tooltip>
                 <Tooltip text="Defense score"/>
               </tooltip>
@@ -40,19 +41,13 @@
                </tooltip>
            </Spinner>
              
-            <Group>
-              <Region styleClass="icon-back" style="-fx-background-color: darkred"/>
-              <Region styleClass="icon-front, icon-hilt"/>
-            </Group>
+            <Icon formatClass="sm, b-melee, icon-hilt"/>
             <Label styleClass="label-score, army-tool-label" text="0" fx:id="lblMelee" GridPane.columnIndex="4">
               <tooltip>
                 <Tooltip text="Attack score"/>
               </tooltip>
             </Label>
-            <Group GridPane.rowIndex="0" GridPane.columnIndex="5">
-              <Region styleClass="icon-back" style="-fx-background-color:darkred"/>
-              <Region styleClass="icon-front, icon-special"/>
-            </Group>
+            <Icon GridPane.columnIndex="0" formatClass="sm, b-special, icon-charge"/>
             <Label styleClass="label-score, army-tool-label" text="0" fx:id="lblCharge"
                    GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.columnIndex="6">
               <tooltip>
@@ -64,25 +59,26 @@
                     <Tooltip text="Modifier to both standard and special attack"/>
                 </tooltip>
             </Spinner>
-             <ToggleButton fx:id="tbFortified" text="" onAction="#onFortified">
+            
+             <ToggleButton styleClass="tb" fx:id="tbFortified" text="" onAction="#onFortified">
                     <graphic>
-                        <Region styleClass="icon-front, icon-g, icon-tower" style="-fx-background-color: black"/>
+                        <Region styleClass="picture-sm-front, icon-tower"/>
                     </graphic>
                     <tooltip>
                       <Tooltip text="Enable fortification (enemies suffer -1 to attacks)"/>
                     </tooltip>
                 </ToggleButton>
-                <Button fx:id="btnWeather" text="" onAction="#onHostileWeather">
+                <Button styleClass="tb" fx:id="btnWeather" text="" onAction="#onHostileWeather">
                     <graphic>
-                        <Region styleClass="icon-front, icon-g, icon-snow" style="-fx-background-color: blue"/>
+                        <Region styleClass="picture-sm-front, icon-snow" style="-fx-background-color: blue"/>
                     </graphic>
                     <tooltip>
                       <Tooltip text="Make whole army suffer from abnormal weather (-2)"/>
                     </tooltip>
                 </Button>
-                <ToggleButton fx:id="tbHighGround" text="" onAction="#onHighGround">
+                <ToggleButton styleClass="tb" fx:id="tbHighGround" text="" onAction="#onHighGround">
                     <graphic>
-                        <Region styleClass="icon-front, icon-g, icon-conquest" style="-fx-background-color: black"/>
+                        <Region styleClass="picture-sm-front, icon-conquest"/>
                     </graphic>
                     <tooltip>
                       <Tooltip text="Army (hill) or 1st unit (mountain) has high ground"/>
@@ -92,19 +88,19 @@
         </VBox>
     </top>
     <center>
-        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+      <StackPane fx:id="stack">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" fitToHeight="true" >
             <content>
-                <VBox fx:id="boxList" spacing="20">
+                <FlowPane fx:id="boxList" hgap="10" vgap="10">
                     <padding>
                     <Insets top="20.0" bottom="20.0" left="20.0" right="20.0"/>
                     </padding>
-                </VBox>
+                </FlowPane>
             </content>
         </ScrollPane>
+      </StackPane>
     </center>
     <bottom>
-        <GridPane hgap="10" prefWidth="140">
-            
-        </GridPane>
+        
     </bottom>
 </BorderPane>

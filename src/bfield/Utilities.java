@@ -27,7 +27,7 @@ import org.w3c.dom.Document;
  *
  * @author Stefano
  */
-public class Utilities {
+public interface Utilities {
   public static String loadSVGFile(String filename) throws Exception {
     File f = new File("svg"+File.separator+filename);
     
@@ -84,5 +84,21 @@ public class Utilities {
       case "Ship": return "Ship";
       default: return "Special";
     }
+  }
+  
+  static public StringBuilder tag(StringBuilder builder, String tag, String classes, String style) { 
+    builder.append("<").append(tag);
+    if (classes != null)
+      builder.append(" class=\"").append(classes).append("\"");
+    if (style != null)
+      builder.append(" style=\"").append(style).append("\"");
+    
+    return builder.append(">");
+  }
+  
+  static public String getResourceFile(String file) {
+    return new StringBuilder().append(System.getProperty("user.dir"))
+            .append(File.separator).append("res").append(File.separator)
+            .append(file).toString();
   }
 }

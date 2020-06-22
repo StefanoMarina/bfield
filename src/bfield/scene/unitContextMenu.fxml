@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ContextMenu xmlns:fx="http://javafx.com/fxml/1" fx:id="root" 
+             fx:controller="bfield.scene.UnitContextMenuController">
+    <items>
+      <MenuItem fx:id="miHit" text="Hit!" onAction="#onHit" />
+      <MenuItem fx:id="miHeal" text="Heal" onAction="#onHeal"/>
+      <CheckMenuItem fx:id="miRetire" text="Retire" onAction="#onRetire" />
+      <SeparatorMenuItem/>
+      <CheckMenuItem fx:id="miEmbed" text="Add/Remove hero unit..." onAction="#onEmbedHero"/>
+      <Menu fx:id="mnuBunks" text="Embarked units" />
+      <SeparatorMenuItem/>
+      <Menu text="status">
+        <items>
+          <CheckMenuItem fx:id="cmiVisibility" text="Ignore visibility" onAction="#onStatusChange"/>
+          <CheckMenuItem fx:id="cmiTerrain"  text="Ignore terrain" onAction="#onStatusChange"/>
+          <CheckMenuItem fx:id="cmisWeather" text="Ignore weather"
+                         onAction="#onStatusChange"/>
+          <CheckMenuItem fx:id="cmiFortification" text="Ignore fortification"
+                         onAction="#onStatusChange"/>
+          <CheckMenuItem fx:id="cmisMountain" text="Ignore mountain high ground"
+                         onAction="#onStatusChange"/>
+        </items>
+      </Menu>
+      <SeparatorMenuItem/>
+      <MenuItem fx:id="miDelete" text="Remove unit"/>
+    </items>
+</ContextMenu>

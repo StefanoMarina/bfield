@@ -279,6 +279,16 @@ public class Condition {
     this.defenseMod = defenseMod;
   }
   
-  
+  /**
+   * Attemps to assert if a condition is a malus only condition
+   * to be a malus only condition the condition must have more maluses
+   * than bonuses.
+   * @return 
+   */
+  public boolean isBad() {
+    int stat = getAttackMod()+getDefenseMod()+getMissileMod()
+            +getMountedUnitsMod();
+    return (stat < 0);
+  }
 }
 

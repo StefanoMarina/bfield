@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
+<?import bfield.scene.Icon?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" styleClass="card-cell" 
+          gridLinesVisible="false"  hgap="0" vgap="3"
+          prefHeight="50.0" prefWidth="100"
+          fx:controller="bfield.scene.UnitCellController">
+  <columnConstraints>
+    <ColumnConstraints halignment="LEFT"  fillWidth="true" percentWidth="75"/>
+    <ColumnConstraints halignment="CENTER" fillWidth="true" percentWidth="25" />  
+  </columnConstraints>
+  
+  <ProgressBar fx:id="pBar"  styleClass="ucHealthbar" 
+               GridPane.rowIndex="0" GridPane.columnIndex="0"
+          minHeight="5" GridPane.columnSpan="2"  /> 
+  
+  <HBox GridPane.rowIndex="1" GridPane.columnIndex="0"
+          GridPane.columnSpan="2">
+    <Label fx:id="lblName" styleClass="ucName" />
+    <Icon fx:id="iHeroes" visible="false" sizeClass="xs" iconClass="icon-smallcrown, smallcrown"/>
+  </HBox>
+  
+  <Label fx:id="lblRetired"  styleClass="ucName" 
+               GridPane.rowIndex="1" GridPane.columnIndex="0"
+          GridPane.columnSpan="2" visible="false" text="Retired"/>
+  
+<StackPane GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.rowSpan="4">
+    <Group fx:id="gPicture" >
+      <Region styleClass="picture-lg-back" fx:id="rPictureBackground"/>
+      <Region styleClass="picture-lg-front" fx:id="rPictureIcon"/>
+    </Group>
+    <GridPane fx:id="gpStatuses" vgap="1" hgap="1">
+      <padding>
+        <javafx.geometry.Insets bottom="1" left="1" right="1" top="1"/>
+      </padding>
+    </GridPane>
+  </StackPane>
+  
+  <Label fx:id="lBunks" GridPane.rowIndex="1" GridPane.columnIndex="1" 
+      prefWidth="25" styleClass="ucStat, b-cargo" visible="false"/>
+  <Label fx:id="lDef" GridPane.rowIndex="2" GridPane.columnIndex="1" 
+      prefWidth="25" styleClass="ucStat, b-def"/>
+  <Label fx:id="lMel" GridPane.rowIndex="3" GridPane.columnIndex="1" 
+      prefWidth="25" styleClass="ucStat, b-melee"/>
+  <Label fx:id="lMis" GridPane.rowIndex="4" GridPane.columnIndex="1" 
+      prefWidth="25" styleClass="ucStat, b-missile"/>
+  <Label fx:id="lSpc" GridPane.rowIndex="5" GridPane.columnIndex="1" 
+      prefWidth="25" styleClass="ucStat, b-special"/>
+</GridPane>

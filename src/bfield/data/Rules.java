@@ -46,6 +46,11 @@ import java.lang.reflect.Constructor;
 public class Rules {
   
   /**
+   * When a getXXX() returns this value, it means that the rule is not available on this ruleset.
+   */
+  public static final int RULE_DISABLED = -999;
+  
+  /**
    * BRCS formula's first step is <i>baseAttackBonus</i>+army attack - enemy defense.
    * I think it represents average dice roll (11 on BRCS).
    * @see #getBaseAttackMod() 

@@ -23,6 +23,7 @@ import bfield.data.BField;
 import bfield.data.Battle;
 import bfield.data.Condition;
 import bfield.data.ConditionFactory;
+import bfield.data.Rules;
 import bfield.data.Unit;
 import bfield.event.ArmyEvent;
 import bfield.event.BattleEvent;
@@ -44,6 +45,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import bfield.rules.BattleRules;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 
 /**
  * FXML Controller class
@@ -70,6 +74,10 @@ public class BattleController  {
   private GridPane pnlContent;
   @FXML
   private ComboBox<BattleRules> cbFormula;
+  @FXML
+  private StackPane stack;
+  @FXML
+  private Button btnWeather;
   
   
   public BField getBattlefield() {return battle;}
@@ -87,7 +95,9 @@ public class BattleController  {
       pnlAway = loader.load();
       acAway = loader.<ArmyController>getController();
       
-     
+      GridPane.setVgrow(pnlHome, Priority.ALWAYS);
+      GridPane.setVgrow(pnlAway, Priority.ALWAYS);
+      
       pnlContent.add(pnlHome, 0, 0);
       pnlContent.add(pnlAway, 1, 0);
       
@@ -129,30 +139,49 @@ public class BattleController  {
       refreshArmies();
     };
     
+    final EventHandler<ArmyEvent> armyDisembarkUnit = (event) -> {
+      Unit unit = event.getTargetUnit();
+      ArmyController acRequest = (event.getArmy().getID()
+          .equals(Battle.ID_HOME)) ? acHome : acAway;
+      event.getArmy().addUnit(event.getTargetUnit());
+      acRequest.addUnit(event.getTargetUnit());
+      refreshArmies();
+    };
+            
     final EventHandler<ArmyEvent> armyAddNewUnit = (event) -> {
       String newUnitName = event.getData();
       ArmyController ucRequest = (event.getArmy().getID()
               .equals(Battle.ID_HOME)) ? acHome : acAway;
       
       Unit newUnit;
-      /**
-       * NOTE:
-       * Ordinals should be added regardless of usage, it's less confusing.
-       */
+
       newUnit = battle.getFactory().getUnitFactory().createUnit(newUnitName,
                 event.getArmy().nextOrdinal(newUnitName));
       
-      event.getArmy().addUnit(newUnit);
-      ucRequest.addUnit(newUnit);
+      
+      if (event.getEventType() == ArmyEvent.ARMY_EMBARK_UNIT) {
+        if (newUnit.getClassName().contains("Ship")) {
+          Application.showMessage("Cannot add ship", "Unit is a ship", 
+                  "you cannot embark a ship inside another ship.", null);
+          event.consume();
+          return;
+        }
+        event.getTargetUnit().getCargo().add(newUnit);
+      } else {
+        event.getArmy().addUnit(newUnit);
+        ucRequest.addUnit(newUnit);
+      }
+      
       refreshArmies();
     };
-    
-    pnlHome.addEventHandler(ArmyEvent.ARMY_HIGHGROUND_CHANGED, armyHGChanged);
-    pnlAway.addEventHandler(ArmyEvent.ARMY_HIGHGROUND_CHANGED, armyHGChanged);
-    pnlHome.addEventHandler(ArmyEvent.ARMY_CHANGED, armyRefreshRequest);
-    pnlAway.addEventHandler(ArmyEvent.ARMY_CHANGED, armyRefreshRequest);
-    pnlHome.addEventHandler(ArmyEvent.ARMY_ADD_UNIT, armyAddNewUnit);
-    pnlAway.addEventHandler(ArmyEvent.ARMY_ADD_UNIT, armyAddNewUnit);
+    final Pane[] loop = new Pane[] {pnlHome, pnlAway};
+    for (Pane p : loop ){
+      p.addEventHandler(ArmyEvent.ARMY_HIGHGROUND_CHANGED, armyHGChanged);
+      p.addEventHandler(ArmyEvent.ARMY_CHANGED, armyRefreshRequest);
+      p.addEventHandler(ArmyEvent.ARMY_ADD_UNIT, armyAddNewUnit);
+      p.addEventHandler(ArmyEvent.ARMY_EMBARK_UNIT, armyAddNewUnit);
+      p.addEventHandler(ArmyEvent.ARMY_DISEMBARK_UNIT, armyDisembarkUnit);
+    }
   }
 
   @FXML
@@ -180,11 +209,30 @@ public class BattleController  {
     ConditionFactory cf = b.getFactory().getConditionFactory();
     
     cbTerrain.setItems(FXCollections.observableArrayList(cf.getTerrain()));
+    cbTerrain.setDisable(cf.getTerrain().size() <= 1);
     cbWeather.setItems(FXCollections.observableArrayList(cf.getWeather()));
+    cbWeather.setDisable(cf.getWeather().size() <= 1);
+    btnWeather.setVisible(cf.getWeather().size() > 1);
+    
     cbVisibility.setItems(FXCollections.observableArrayList(cf.getVisibility()));
+    cbVisibility.setDisable(cf.getVisibility().size() <= 1);
    // cbFormula.setItems(FXCollections.observableArrayList(Rules.AttackMethod.values()));
     cbFormula.setItems(FXCollections.observableArrayList(
               battle.getFactory().getRules().getBattleMechanics()));
+    
+    
+    //set visibile stuff
+    bfield.data.Rules r = battle.getBattle().getRules();
+    if(r.getEffectiveness() == Rules.RULE_DISABLED)
+      tbEffect.setVisible(false);
+    
+    
+    List<ArmyController> la = Arrays.<ArmyController>asList(acHome, acAway);
+    la.forEach( (ac) -> {
+      ac.setFortificationVisible(r.getFortificationMod() != Rules.RULE_DISABLED);
+      ac.setHighGroundVisible(Math.round(r.getHighGroundMod()) != Rules.RULE_DISABLED);
+      ac.setStormModifierVisible(r.getStormMalus() != Rules.RULE_DISABLED);
+    });
     
     refreshBattle();
     refreshArmies();
@@ -195,23 +243,13 @@ public class BattleController  {
     List<ArmyController> la = Arrays.<ArmyController>asList(acHome, acAway);
     
     la.forEach( (ac) -> {
-      ac.refreshArmy();
-      ac.setGroundDisabled(!cbTerrain.getValue().isHighGroundAllowed());
-      ac.setWeatherDisabled("Normal".equals(cbWeather.getValue().getName()));
-      ac.setVisibilityDisabled("Full".equals(cbVisibility.getValue().getName()));
+      ac.setGroundDisabled(!cbTerrain.getValue().isHighGroundAllowed(), false);
+      ac.setWeatherDisabled("Normal".equals(cbWeather.getValue().getName()), false);
+      ac.setVisibilityDisabled("Full".equals(cbVisibility.getValue().getName()),false);
+      ac.refreshArmyAndUnits();
     });
     
     root.fireEvent(new BattleEvent(BattleEvent.BATTLE_GENERAL_CHANGE));
-  }
-  
-  public void setOrdinal(boolean bOrdinal) {
-    boolean bCurrentStatus = battle.isUseOrdinals();
-    if (bCurrentStatus == bOrdinal)
-      return;
-    
-    battle.setUseOrdinals(bOrdinal);
-    acHome.updateOrdinals(bOrdinal);
-    acAway.updateOrdinals(bOrdinal);
   }
   
   public void refreshBattleAndArmies() {
@@ -265,44 +303,29 @@ public class BattleController  {
  @FXML
  private void onAttack() {
    
-   for (Army a : battle.getBattle().getArmies().values()) {
-      if (a.getActiveUnitsSize() <= 0) {
-        Application.showMessage("Cannot attack", "Units are missing.", "You cannot "
-                + " attack with an empty army.", null);
-        return;
-      }
-   }
+  for (Army a : battle.getBattle().getArmies().values()) {
+     if (a.getActiveUnitsSize() <= 0) {
+       Application.showMessage("Cannot attack", "Units are missing.", "You cannot "
+               + " attack with an empty army.", null);
+       return;
+     }
+  }
    
-   Map<String,String> result;
-   result = battle.getSelectedBattleMechanic().doBattle(battle.getFactory().getRules(),
-           battle.getBattle());
+  Map<String,String> result;
+  result = battle.getSelectedBattleMechanic().doBattle(battle.getFactory().getRules(),
+          battle.getBattle());
    
-   if (result == null) {
-     //attack aborted.
-     return;
-   }
-   
-   int round = battle.getBattle().nextRound();
-   
-    StringBuilder sb = new StringBuilder();
-    sb.append("Attack").append(" performed.\n");
-    
-    for(String s : result.values()) {
-      sb.append(s).append(".\n");
-    //  sb.append(army.getName()).append(" inflicted ").append(result.get(s))
-    //          .append(" points of damage to ").append(army.getEnemy().getName());
-      //sb.append(".\n");
-      
-      //REMOVE!!!
-      
-      refreshArmies();
-    }
-    
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle("Attack result");
-    alert.setHeaderText("Round " + round);
-    alert.setContentText(sb.toString());
-    
-    alert.showAndWait();
+  if (result == null) {
+    //attack aborted.
+    return;
+  }
+  
+  bfield.scene.BattleResultFormatter formatter = new
+            BattleResultFormatter();
+  String html = formatter.toHTML(getBattlefield().getBattle(), result);
+  
+  Application.getApp().actionshowHTMLContent("Attack results", html, true);
+  battle.getBattle().nextRound();
+  refreshBattleAndArmies();
  }
 }

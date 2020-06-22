@@ -17,6 +17,7 @@
 package bfield.scene;
 
 import bfield.Application;
+import bfield.Utilities;
 import bfield.data.BField;
 import bfield.data.Unit;
 import bfield.data.UnitBuilder;
@@ -58,8 +59,6 @@ public class MainWndController  {
   private final java.util.Map<Tab, BattleController> battles;
 
   private final EventHandler<BattleEvent> ehBattleChange;
-  @FXML
-  private CheckMenuItem micOrdinals;
   @FXML
   private Menu mBattle;
   
@@ -294,7 +293,6 @@ public class MainWndController  {
     //check if it is a battle tab
     if (battles.containsKey(newTab)) {
       mBattle.setDisable(false);
-      micOrdinals.setSelected(battles.get(newTab).getBattlefield().isUseOrdinals());
     } else {
       mBattle.setDisable(true);
     }
@@ -370,14 +368,6 @@ public class MainWndController  {
   }
 
   @FXML
-  private void onOrdinalsCheck(ActionEvent event) {
-    battles.get(tabMain.getSelectionModel().getSelectedItem())
-            .setOrdinal(micOrdinals.isSelected());
-    
-    getSelectedBattle().setUseOrdinals(micOrdinals.isSelected());
-  }
-
-  @FXML
   private void onImportArmy(ActionEvent event) {
     FileChooser fc = createFileChooser("Import army", "xarmy");          
     File result = fc.showOpenDialog(Application.getApp().getStage());
@@ -425,8 +415,7 @@ public class MainWndController  {
   private void onMenuAcknowledgemens(ActionEvent event) {
     try {
       String data = new String(Files.readAllBytes(
-              new File(System.getProperty("user.dir")+File.separator+"text"
-                      +File.separator+"acknowledgements.html").toPath()
+              new File(Utilities.getResourceFile("acknowledgements.html")).toPath()
       ));
       
       Application.getApp().actionshowHTMLContent("Acknowledgements",data, true);
@@ -461,10 +450,11 @@ public class MainWndController  {
       return;
     }
       
-    File tutorialFile = new File(String.format("%s%stext%s%s",
+    File tutorialFile = new File(String.format("%s%sres%s%s",
             System.getProperty("user.dir"), File.separator,
             File.separator, FNAME
     ));
+    
     try {
       String data = new String(Files.readAllBytes(tutorialFile.toPath()));
       if (data == null || data.isEmpty())

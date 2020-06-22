@@ -17,6 +17,10 @@
 package bfield.rules.srd;
 
 import bfield.data.*;
+import bfield.event.UnitChangeEvent;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextInputDialog;
 /**
  *
  * @author ste
@@ -132,5 +136,4 @@ public class ArmySRD extends bfield.rules.ArmyRules {
     return value  + army.getAttackMod();
   }
 
-  
 }

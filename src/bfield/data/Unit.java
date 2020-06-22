@@ -16,7 +16,7 @@
  */
 package bfield.data;
 
-import bfield.RulesUtilities;
+import java.util.Optional;
 import javax.xml.bind.annotation.*;
 
 
@@ -78,27 +78,42 @@ public class Unit implements Cloneable {
   
   public static final int NA = -999;
   
+  @XmlAttribute(name="bunks", required=false)
+  protected Integer bunks;
+  
+  @XmlElementWrapper(name="cargo")
+  @XmlElements(value={
+    @XmlElement(name="unit", type=Unit.class),
+    @XmlElement(namespace=URI.ADND_URI, name="unit", type=Unit2nd.class)
+  })
+  protected java.util.List<Unit> cargo;
+  
+  public java.util.List<Unit> getCargo() {
+    if (cargo == null) {
+      cargo = new java.util.ArrayList();
+    }
+    return cargo;
+  }
+  
   public String getName() {
     return name;
   }
   
   public int getDef() {
-    if (def == null)
-      return Unit.NA;
-    
-    return def;
+    return Optional.ofNullable(def).orElse(NA);
   }
 
   public int getChargeBonus() {
-    if (charge == null)
+    if (charge == null || NA == charge)
       return NA;
     else
       return charge;
   }
   
   public int getCharge() {
-    return (charge != null) ? 
-            getMelee() + charge: NA;
+    return (charge != null && NA != charge) 
+            ?  getMelee() + charge
+            : NA;
   }
   
   public int getHits() {
@@ -116,12 +131,15 @@ public class Unit implements Cloneable {
   }
   
   public int getMelee() {
-  
     return melee;
   }
 
+  public int getBunks() {
+    return Optional.ofNullable(bunks).orElse(NA);
+  }
+  
   public int getMissile() {
-    return (missile != null) ? missile : NA;
+    return Optional.ofNullable(missile).orElse(NA);
   }
   
   public int getCurrentHits() {
@@ -136,7 +154,7 @@ public class Unit implements Cloneable {
   }
   
   public int getMorale() {
-    return (morale == null) ? Unit.NA : morale;
+    return Optional.ofNullable(morale).orElse(NA);
   }
 
   public void setMorale(int morale) {
@@ -156,7 +174,7 @@ public class Unit implements Cloneable {
   }
   
   public int getHeroEL() {
-   return (heroEL != null) ? heroEL : Unit.NA;
+   return Optional.ofNullable(heroEL).orElse(NA);
   }
   
   public void attachHeroUnit(int el) {
@@ -171,7 +189,6 @@ public class Unit implements Cloneable {
    */
   public boolean hit() {
     health = Math.max(0, getCurrentHits()-1);
-    
     return (health <= 0);
   }
 
@@ -277,4 +294,21 @@ public class Unit implements Cloneable {
   
   public boolean isDamaged() {return getCurrentHits() < getHits();}
   public boolean isDead() {return getCurrentHits() <= 0 || isRetired();}
+
+  @Override
+  public String toString() {
+    if (getOrdinal() != null)
+      return getName() + "["+getOrdinal()+"]";
+    else
+      return getName();
+  }
+  
+  /**
+   * Returns ordinal number and name, I.E I Infantry
+   * @return 
+   */
+  public String getOrderAndName() {
+    return new StringBuilder().append(bfield.tools.RomanNumerals.toRoman(getOrdinal()))
+               .append(" ").append(getName()).toString();
+  }
 }

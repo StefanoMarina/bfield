@@ -19,6 +19,7 @@ package bfield;
 import bfield.data.*;
 
 import bfield.scene.MainWndController;
+import bfield.scene.UnitController;
 import bfield.scene.dialogs.NewBattleDialogController;
 import bfield.scene.dialogs.UnitSelectorController;
 import bfield.scene.edit.EditUnitController;
@@ -29,18 +30,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Properties;
-import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -63,6 +61,8 @@ public class Application extends javafx.application.Application {
   private Stage stage;
   private static Application app;
   
+  private Font FONT_STATUS;
+  
   private Properties preferences;
   
   public static Application getApp() {
@@ -70,6 +70,9 @@ public class Application extends javafx.application.Application {
   }
 
   public void quit() {
+    if (!(rootController instanceof bfield.scene.MainWndController))
+      return;
+    
     rootController.closeAllTabs();
     try {
       getPreferences().storeToXML(new FileOutputStream(new File
@@ -155,14 +158,28 @@ public class Application extends javafx.application.Application {
    
     //Main scene
     FXMLLoader loader = new FXMLLoader(getClass().getResource("scene/MainWnd.fxml"));
-    //FXMLLoader loader = new FXMLLoader(getClass().getResource("scene/dialogs/NewRulesetDialog.fxml"));
+    //FXMLLoader loader = new FXMLLoader(getClass().getResource("scene/unit.fxml"));
     javafx.scene.Parent obj = loader.load();
     this.rootController = loader.<MainWndController>getController();
     javafx.scene.Scene scene = new javafx.scene.Scene(obj);
     
+    //test start
+/*
+      UnitController ucc = loader.<UnitController>getController();
+      ucc.setArmyColor(javafx.scene.paint.Color.DARKRED);
+      Unit u = rulesCache.get("D20 SRD").getUnitFactory().createUnit("Anuirean infantry");
+      u.setIgnoreVisibility(true);
+      u.setIgnoreTerrain(true);
+      u.setIgnoreMountain(true);
+      ucc.setUnit(Battle.ID_HOME, u, new bfield.rules.srd.UnitSRD(
+      rulesCache.get("D20 SRD").newBattle()));
+    */
+//test end
+    
     //Css & Launch
     scene.getStylesheets().add(getClass().getResource("scene/content.css").toExternalForm());
     scene.getStylesheets().add(getClass().getResource("scene/icons.css").toExternalForm());
+    scene.getStylesheets().add(getClass().getResource("scene/smallcell.css").toExternalForm());
     primaryStage.setScene(scene);
     primaryStage.setTitle("Battlefield!");
     primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
@@ -323,8 +340,6 @@ public class Application extends javafx.application.Application {
     final String RULESET = usdc.getRuleset(),
             SELECTION = usdc.getSelection();
 
-
-
     if (RULESET == null || SELECTION == null)
       return null;
     
@@ -480,8 +495,7 @@ public class Application extends javafx.application.Application {
    * @param htmlData valid html source from wich read HTML text.
    * @param isModal
    */
-  public void actionshowHTMLContent(String title, String htmlData, boolean 
-          isModal) {
+  public void actionshowHTMLContent(String title, String htmlData, boolean  isModal) {
     WebView browser = new WebView();
     browser.getEngine().loadContent(htmlData, "text/html");
    

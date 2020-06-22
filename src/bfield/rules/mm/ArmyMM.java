@@ -20,6 +20,9 @@ import bfield.data.Army;
 import bfield.data.Battle;
 import bfield.data.Unit;
 import bfield.rules.ArmyRules;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextInputDialog;
 
 /**
  *

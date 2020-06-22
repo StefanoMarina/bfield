@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="128"
+   height="128"
+   viewBox="0 0 33.866666 33.866668"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (unknown)"
+   sodipodi:docname="_weather.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="80.855774"
+     inkscape:cy="56.229993"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:pagecheckerboard="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1366"
+     inkscape:window-height="711"
+     inkscape:window-x="1366"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Livello 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-263.13332)">
+    <path
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.77952766;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98884762;paint-order:fill markers stroke"
+       d="M 67.427734 7.2851562 C 60.852146 7.2851562 55.558594 9.8205169 55.558594 12.96875 L 55.558594 86.535156 C 47.450132 89.854888 42.438557 96.0411 42.425781 102.74609 C 42.426029 113.06704 54.071846 121.43371 68.4375 121.43359 C 82.803154 121.43371 94.448971 113.06704 94.449219 102.74609 C 94.437029 95.453216 88.520895 88.83169 79.296875 85.787109 L 79.296875 67.449219 L 74.650391 67.449219 L 74.650391 63.15625 L 79.296875 63.15625 L 79.296875 58.449219 L 72.650391 58.449219 L 72.650391 54.15625 L 79.296875 54.15625 L 79.296875 49.449219 L 70.650391 49.449219 L 70.650391 45.15625 L 79.296875 45.15625 L 79.296875 40.449219 L 70.650391 40.449219 L 70.650391 36.15625 L 79.296875 36.15625 L 79.296875 31.449219 L 68.650391 31.449219 L 68.650391 27.15625 L 79.296875 27.15625 L 79.296875 21.449219 L 68.650391 21.449219 L 68.650391 17.15625 L 79.296875 17.15625 L 79.296875 12.96875 C 79.296875 9.8205169 74.003322 7.2851562 67.427734 7.2851562 z M 59.599609 13.599609 L 63.892578 13.599609 L 63.892578 97.695312 L 59.599609 97.695312 L 59.599609 13.599609 z "
+       transform="matrix(0.26458333,0,0,0.26458333,0,263.13332)"
+       id="rect822" />
+  </g>
+</svg>

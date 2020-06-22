@@ -19,7 +19,6 @@ package bfield.scene;
 import bfield.Application;
 import bfield.RulesUtilities;
 import bfield.Utilities;
-import bfield.data.Battle;
 import bfield.event.UnitChangeEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -27,7 +26,6 @@ import javafx.scene.control.Label;
 import bfield.data.Unit;
 import bfield.data.Unit2nd;
 import bfield.rules.UnitRules;
-import java.lang.ref.WeakReference;
 import java.util.Optional;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Tooltip;
@@ -68,9 +66,6 @@ public class UnitController {
   private Region rPictureBackground;
   @FXML
   private Region rPictureIcon;
-  @FXML
-  private Region gMissile;
-  @FXML
   private Region gCharge;
   @FXML
   private ToggleButton tgVis;
@@ -117,11 +112,14 @@ public class UnitController {
   private Label lblPaddles;
   
   @FXML
-  private Region rPaddles;
-  @FXML
   private Group grPaddles;
   
   private boolean showOrdinal;
+  
+  @FXML
+  private Icon iMissile;
+  @FXML
+  private Icon iCharge;
   /**
    * TODO:
    * Army request is used for color change only at this time.
@@ -164,6 +162,8 @@ public class UnitController {
   public void setArmyID(String name) {
     armyID = name;
   }
+  
+  public Unit getUnit() {return unit;}
   
   public void initialize() {
     
@@ -252,7 +252,13 @@ public void setModEnvironment(UnitRules um) {
 }
 
 public void setUnit(String team, Unit u, UnitRules um) {
-   unit = u;
+   this.unit = u;
+   
+   if (unit == null) {
+      modEnvironment = null;
+      return;
+   }
+   
    this.armyID = team;
    modEnvironment = um;
    
@@ -260,6 +266,7 @@ public void setUnit(String team, Unit u, UnitRules um) {
    setShowOrdinal(showOrdinal);
    
   
+  //load and set unit symbol
   String svgFile = (u.getIcon() != null ? u.getIcon()
       : Application.getApp().getAppropriateIcon(u.getClassName()));
   try {
@@ -270,37 +277,37 @@ public void setUnit(String team, Unit u, UnitRules um) {
   }
   
   rPictureIcon.getStyleClass().clear();
-  rPictureIcon.getStyleClass().add("picture-front");
-  //rPictureIcon.getStyleClass().add("pic-"+unitName);
-   
+  rPictureIcon.getStyleClass().add("picture-front");   
   rPictureBackground.setStyle("-fx-background-color: red");
-   
+  
+  /**
+   * 2nd edition units have the "rowing" capability
+   * TODO: add show_rowing to rules instead of ugly class ref check
+   */ 
     if (unit instanceof Unit2nd) {
       lblPaddles.setVisible(true);
       grPaddles.setVisible(true);
       Unit2nd u2 = (Unit2nd) unit;
-      if (u2.getRowing() == Unit.NA) {
-        lblPaddles.setText("--");
-        rPaddles.setStyle("-fx-background-color: darkgray");
-      } else
-        lblPaddles.setText(String.valueOf(u2.getRowing()));
+      styleData(u2.getRowing(), u2.getRowing(), lblPaddles);
    } else {
       lblPaddles.setVisible(false);
       grPaddles.setVisible(false);
    }
    
+    //movement can be number or string (movement class for ships in 2e)
     if (unit.getMovement() != null)
       lblMove.setText(unit.getMovement().toString());
     else
       lblMove.setText("--");
-   
-   refreshUnit();
+    
+    refreshUnit();
  }
  
  public void refreshUnit() {
-   Unit mod = modEnvironment.mod(unit, armyID);
    if (unit == null)
      return;
+   
+   Unit mod = modEnvironment.mod(unit, armyID);
    
    bSilent = true;
   
@@ -308,33 +315,13 @@ public void setUnit(String team, Unit u, UnitRules um) {
    
    lblDef.setText(String.valueOf(mod.getDef()));
    lblMelee.setText(String.format("%d", mod.getMelee()));
- 
+   lblMorale.setText(String.valueOf(mod.getMorale()));
    
-   lblMissile.setStyle("");
-   if (mod.getMissile() != Unit.NA){
-    lblMissile.setText(String.format("%d", mod.getMissile()));
-    gMissile.setStyle("-fx-background-color:darkolivegreen");
-   } else if (mod.getMissile() == Unit.NA && unit.getMissile() != Unit.NA) {
-     gMissile.setStyle("-fx-background-color:darkolivegreen");
-     lblMissile.setText("X");
-     lblMissile.setStyle("-fx-text-fill: red");
-   } else {
-     lblMissile.setText("--");
-     gMissile.setStyle("-fx-background-color:darkgray");
-   }
-   
-   lblCharge.setStyle("");
-   if (mod.getChargeBonus() != Unit.NA) {
-    lblCharge.setText(String.format("%d", mod.getCharge()));
-    gCharge.setStyle("-fx-background-color:darkred");
-   }else if (mod.getChargeBonus() == Unit.NA && unit.getChargeBonus() != Unit.NA) {
-     gCharge.setStyle("-fx-background-color:darkred");
-     lblCharge.setText("X");
-     lblCharge.setStyle("-fx-text-fill: red");
-   } else { 
-     lblCharge.setText("--");
-     gCharge.setStyle("-fx-background-color:darkgray");
-   }
+   iMissile.setGray(unit.getMissile() == Unit.NA);
+   styleData(unit.getMissile(), mod.getMissile(), lblMissile);
+           
+   iCharge.setGray(unit.getChargeBonus() == Unit.NA);
+   styleData(unit.getCharge(), mod.getCharge(), lblCharge);
   
    if (tgFortification.getTooltip() == null) {
      tgFortification.setTooltip(new Tooltip());
@@ -402,21 +389,36 @@ public void setUnit(String team, Unit u, UnitRules um) {
    bSilent = false;
  }
  
- private void styleData(int value, int modvalue, Label l) {
+ /**
+  * Utility that will restyle score labels adjacent to icons.
+  * Gray parameter will be applied if original value is Unit.NA,
+  * otherwise a red X will be printed out.
+  * l will be using .t-better-dark css class to show improvements
+  * from value, .t-worse if worse, or plain black.
+  * If text is 3 digits or more (i.e. -10), font will be reduced.
+  * @param value the original value
+  * @param modvalue the final value that will be shown
+  * @param l label to be changed
+  */
+ public static void styleData(int value, int modvalue, Label l) {
    
-  final String better = "-fx-text-fill: blue", worse ="-fx-text-fill: red";
-   
-  if (value < modvalue)
-     l.setStyle(better);
-  else if (value > modvalue)
-     l.setStyle(worse);
-  else if (value == Unit.NA)
-    l.setStyle("--");
+  final String better = "t-better-dark", worse ="t-worse";
+  l.getStyleClass().remove(better);
+  l.getStyleClass().remove(worse);
+  if (value == Unit.NA)
+     l.setText("--");
+  else if (modvalue == Unit.NA)
+    l.setText("X");
   else
-    l.setStyle("");
+    l.setText(String.valueOf(modvalue));
   
   if (l.getText().length() > 2)
     l.setStyle(l.getStyle()+";-fx-font-size:1.1em");
+  else
+    l.setStyle(l.getStyle().replaceAll(";\\-fx\\-font\\-size\\:1\\.1em",""));
+  
+  if (value != modvalue)
+    l.getStyleClass().add((value < modvalue) ? better : worse);
  }
      
   @FXML
@@ -454,4 +456,7 @@ public void setUnit(String team, Unit u, UnitRules um) {
   public void onUnitRemove() {
     root.fireEvent(new UnitChangeEvent(unit, root, UnitChangeEvent.UNIT_REMOVE));
   }
+
+
+ 
 }
