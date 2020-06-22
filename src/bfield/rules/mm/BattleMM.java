@@ -50,15 +50,20 @@ public class BattleMM implements BattleRules {
     
     double hBCR = arHome.getDefense(), aBCR = arAway.getDefense();
     if (hBCR >= 10 && ((hBCR / 2.0) >= aBCR) ) {
-      result.put(home.getID(), home.getName() + " crushed " + away.getName());
+      result.put("main","<p>"+ home.getName() + " crushed " + away.getName() + "!</p>"
+                        + "<p><small>BCR ("+hBCR+") &gt; 10 and more than half of " + arAway.getArmy().getName() + "'s BCR ("+aBCR+")</small></p>"
+      );
       return result;
     } else if (aBCR >= 10 && ((aBCR / 2.0) >= hBCR) ) {
-      result.put(away.getID(), away.getName() + " crushed " + home.getName());
+      result.put("main", "<p>"+away.getName() + " crushed " + home.getName()+"!</p>"
+                                + "<p><small>BCR ("+aBCR+") &gt; 10 and more than half of " + arHome.getArmy().getName() + "'s BCR ("+hBCR+")</small></p>"
+      );
       return result;
     }
     
     //Now that BCR is resolved, let's fight
     Random die = new Random();
+    final StringBuilder strHome = new StringBuilder(), strAway = new StringBuilder();
     
     Arrays.asList( new ArmyRules[]{arHome, arAway} ).forEach( (ArmyRules armyRule)
             -> {
@@ -68,6 +73,7 @@ public class BattleMM implements BattleRules {
       final Army army = armyRule.getArmy();
       
       army.getActiveUnitsStream().forEach( (Unit u) ->{
+        StringBuilder builder = (army == arHome.getArmy()) ? strHome : strAway;
         int mod = 0;
         int dieRoll = 0;
         mod = (int)baseMod+ur.mod(u, army.getID()).getMelee();
@@ -78,28 +84,34 @@ public class BattleMM implements BattleRules {
         
         switch (dieRoll) {
           case 1: case 2: case 3: case 4: {
-            if (u.hit())
+            if (u.hit()) {
               results.destroyed += 1;
-            else
+              builder.append("<p>").append(u.getOrderAndName()).append(" was destroyed.</p>");
+            } else {
               results.hitten += 1;
+              builder.append("<p>").append(u.getOrderAndName()).append(" was hit.</p>");
+            }
           } break;
           case 5: case 6: break;
           default: {
             if (dieRoll < 1) {
-              if (u.die())
+              if (u.die()) {
                 results.destroyed+=1;
+                builder.append("<p>").append(u.getOrderAndName()).append(" was destroyed.</p>");
+              }
             } else if (dieRoll >= 7 && !"LtIrr-".equals(u.getClassName())
                     && !u.getClassName().contains("+")) {
               //promote unit
               u.setDef(u.getDef()+1);
               UnitBuilder.setUnitExperience(u, "+");
               results.promoted +=1;
+              builder.append("<p>").append(u.getOrderAndName()).append(" was promoted to veteran!</p>");
             }
               
           }break;
         }
       });
-      
+      /*
       if (results.defeated == 0)
         result.put(army.getID(), army.getName() + " never suffered 1 or less");
       else
@@ -117,8 +129,11 @@ public class BattleMM implements BattleRules {
       if (results.promoted > 0) {
         result.put(army.getID(), army.getName() + " saw " + results.promoted
                 + " units rise to veteran status!");
-      }
+      }*/
     });
+    
+    result.put(arHome.getArmy().getID(), strHome.toString());
+    result.put(arAway.getArmy().getID(), strAway.toString());
     
     return result;
   }

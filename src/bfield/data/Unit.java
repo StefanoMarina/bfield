@@ -302,4 +302,13 @@ public class Unit implements Cloneable {
     else
       return getName();
   }
+  
+  /**
+   * Returns ordinal number and name, I.E I Infantry
+   * @return 
+   */
+  public String getOrderAndName() {
+    return new StringBuilder().append(bfield.tools.RomanNumerals.toRoman(getOrdinal()))
+               .append(" ").append(getName()).toString();
+  }
 }

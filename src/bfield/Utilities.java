@@ -85,4 +85,14 @@ public interface Utilities {
       default: return "Special";
     }
   }
+  
+  static public StringBuilder tag(StringBuilder builder, String tag, String classes, String style) { 
+    builder.append("<").append(tag);
+    if (classes != null)
+      builder.append(" class=\"").append(classes).append("\"");
+    if (style != null)
+      builder.append(" style=\"").append(style).append("\"");
+    
+    return builder.append(">");
+  }
 }

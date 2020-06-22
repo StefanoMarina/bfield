@@ -29,9 +29,14 @@ public interface BattleRules {
  
   /**
    * Perform the actual encounter between all armies.
-   * @param rules
-   * @param battle
-   * @return a Properties file with the result of the battle.
+   * The resulting Map<String,String> should be mapped like this: Keys should be
+   * the army ID, while properties should be an HTML-formatted string. The BattleResultFormatter
+   * will automatically add a column for each key, adding a <p> tag if only one key is found.
+   * @param rules valid Rules object
+   * @param battle valid Battle object
+   * @return a Map with the result of the battle. the rules for filling this map are
+   * explained in bfield.scene.BattleResultFormatter.
+   * @see bfield.scene.BattleResultFormatter
    */
   public Map<String,String> doBattle(bfield.data.Rules rules, bfield.data.Battle battle);
   

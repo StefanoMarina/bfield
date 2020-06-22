@@ -156,6 +156,12 @@ public class BattleController  {
       
       
       if (event.getEventType() == ArmyEvent.ARMY_EMBARK_UNIT) {
+        if (newUnit.getClassName().contains("Ship")) {
+          Application.showMessage("Cannot add ship", "Unit is a ship", 
+                  "you cannot embark a ship inside another ship.", null);
+          event.consume();
+          return;
+        }
         event.getTargetUnit().getCargo().add(newUnit);
       } else {
         event.getArmy().addUnit(newUnit);
@@ -274,44 +280,29 @@ public class BattleController  {
  @FXML
  private void onAttack() {
    
-   for (Army a : battle.getBattle().getArmies().values()) {
-      if (a.getActiveUnitsSize() <= 0) {
-        Application.showMessage("Cannot attack", "Units are missing.", "You cannot "
-                + " attack with an empty army.", null);
-        return;
-      }
-   }
+  for (Army a : battle.getBattle().getArmies().values()) {
+     if (a.getActiveUnitsSize() <= 0) {
+       Application.showMessage("Cannot attack", "Units are missing.", "You cannot "
+               + " attack with an empty army.", null);
+       return;
+     }
+  }
    
-   Map<String,String> result;
-   result = battle.getSelectedBattleMechanic().doBattle(battle.getFactory().getRules(),
-           battle.getBattle());
+  Map<String,String> result;
+  result = battle.getSelectedBattleMechanic().doBattle(battle.getFactory().getRules(),
+          battle.getBattle());
    
-   if (result == null) {
-     //attack aborted.
-     return;
-   }
-   
-   int round = battle.getBattle().nextRound();
-   
-    StringBuilder sb = new StringBuilder();
-    sb.append("Attack").append(" performed.\n");
-    
-    for(String s : result.values()) {
-      sb.append(s).append(".\n");
-    //  sb.append(army.getName()).append(" inflicted ").append(result.get(s))
-    //          .append(" points of damage to ").append(army.getEnemy().getName());
-      //sb.append(".\n");
-      
-      //REMOVE!!!
-      
-      refreshArmies();
-    }
-    
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle("Attack result");
-    alert.setHeaderText("Round " + round);
-    alert.setContentText(sb.toString());
-    
-    alert.showAndWait();
+  if (result == null) {
+    //attack aborted.
+    return;
+  }
+  
+  bfield.scene.BattleResultFormatter formatter = new
+            BattleResultFormatter();
+  String html = formatter.toHTML(getBattlefield().getBattle(), result);
+  System.out.println(html);
+  Application.getApp().actionshowHTMLContent("Attack results", html, true);
+  battle.getBattle().nextRound();
+  refreshBattleAndArmies();
  }
 }

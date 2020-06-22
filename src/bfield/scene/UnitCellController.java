@@ -441,7 +441,7 @@ public class UnitCellController {
               armyColor.toString().replaceAll("0x","#"));
     }
  
-    lblName.setFont(Application.getApp().getStatusFont());
+    //lblName.setFont(Application.getApp().getStatusFont());
     
     if (unit.getOrdinal() != null) {
     lblName.setText(

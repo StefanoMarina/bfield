@@ -64,16 +64,6 @@ public class Application extends javafx.application.Application {
   private Font FONT_STATUS;
   
   private Properties preferences;
-
-  public Font getStatusFont() {
-    
-    if (FONT_STATUS == null) {
-      FONT_STATUS = 
-            Font.loadFont(Application.class.getResource("bfield.ttf")
-                    .toExternalForm(),10.0);
-    }
-    return FONT_STATUS;
-  }
   
   public static Application getApp() {
     return app;
@@ -505,8 +495,7 @@ public class Application extends javafx.application.Application {
    * @param htmlData valid html source from wich read HTML text.
    * @param isModal
    */
-  public void actionshowHTMLContent(String title, String htmlData, boolean 
-          isModal) {
+  public void actionshowHTMLContent(String title, String htmlData, boolean  isModal) {
     WebView browser = new WebView();
     browser.getEngine().loadContent(htmlData, "text/html");
    
