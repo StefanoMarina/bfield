@@ -519,4 +519,16 @@ public class ArmyController  {
     root.fireEvent(new ArmyEvent(army, ArmyEvent.ARMY_EMBARK_UNIT, newUnitName,
             ship));
   }
+  
+  public void setFortificationVisible(boolean visible) {
+    tbFortified.setVisible(visible);
+  }
+  
+  public void setHighGroundVisible(boolean visible) {
+    tbHighGround.setVisible(visible);
+  }
+  
+  public void setStormModifierVisible(boolean visible) {
+    btnWeather.setVisible(visible);
+  }
 }

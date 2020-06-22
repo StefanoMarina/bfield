@@ -24,7 +24,7 @@
         <ComboBox fx:id="cbTerrain" />
         <Label text="Weather:"/>
         <ComboBox fx:id="cbWeather" />
-        <Button onAction="#onWeatherRoll">
+        <Button fx:id="btnWeather" onAction="#onWeatherRoll">
           <graphic>
             <Region styleClass="picture-sm-front, icon-dice" style="-fx-background-color: black"/>
           </graphic>

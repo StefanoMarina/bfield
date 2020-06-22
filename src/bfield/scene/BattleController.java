@@ -23,6 +23,7 @@ import bfield.data.BField;
 import bfield.data.Battle;
 import bfield.data.Condition;
 import bfield.data.ConditionFactory;
+import bfield.data.Rules;
 import bfield.data.Unit;
 import bfield.event.ArmyEvent;
 import bfield.event.BattleEvent;
@@ -44,6 +45,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import bfield.rules.BattleRules;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 
@@ -74,6 +76,8 @@ public class BattleController  {
   private ComboBox<BattleRules> cbFormula;
   @FXML
   private StackPane stack;
+  @FXML
+  private Button btnWeather;
   
   
   public BField getBattlefield() {return battle;}
@@ -205,11 +209,30 @@ public class BattleController  {
     ConditionFactory cf = b.getFactory().getConditionFactory();
     
     cbTerrain.setItems(FXCollections.observableArrayList(cf.getTerrain()));
+    cbTerrain.setDisable(cf.getTerrain().size() <= 1);
     cbWeather.setItems(FXCollections.observableArrayList(cf.getWeather()));
+    cbWeather.setDisable(cf.getWeather().size() <= 1);
+    btnWeather.setVisible(cf.getWeather().size() > 1);
+    
     cbVisibility.setItems(FXCollections.observableArrayList(cf.getVisibility()));
+    cbVisibility.setDisable(cf.getVisibility().size() <= 1);
    // cbFormula.setItems(FXCollections.observableArrayList(Rules.AttackMethod.values()));
     cbFormula.setItems(FXCollections.observableArrayList(
               battle.getFactory().getRules().getBattleMechanics()));
+    
+    
+    //set visibile stuff
+    bfield.data.Rules r = battle.getBattle().getRules();
+    if(r.getEffectiveness() == Rules.RULE_DISABLED)
+      tbEffect.setVisible(false);
+    
+    
+    List<ArmyController> la = Arrays.<ArmyController>asList(acHome, acAway);
+    la.forEach( (ac) -> {
+      ac.setFortificationVisible(r.getFortificationMod() != Rules.RULE_DISABLED);
+      ac.setHighGroundVisible(Math.round(r.getHighGroundMod()) != Rules.RULE_DISABLED);
+      ac.setStormModifierVisible(r.getStormMalus() != Rules.RULE_DISABLED);
+    });
     
     refreshBattle();
     refreshArmies();
