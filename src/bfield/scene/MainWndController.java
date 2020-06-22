@@ -17,6 +17,7 @@
 package bfield.scene;
 
 import bfield.Application;
+import bfield.Utilities;
 import bfield.data.BField;
 import bfield.data.Unit;
 import bfield.data.UnitBuilder;
@@ -414,8 +415,7 @@ public class MainWndController  {
   private void onMenuAcknowledgemens(ActionEvent event) {
     try {
       String data = new String(Files.readAllBytes(
-              new File(System.getProperty("user.dir")+File.separator+"text"
-                      +File.separator+"acknowledgements.html").toPath()
+              new File(Utilities.getResourceFile("acknowledgements.html")).toPath()
       ));
       
       Application.getApp().actionshowHTMLContent("Acknowledgements",data, true);
@@ -450,10 +450,11 @@ public class MainWndController  {
       return;
     }
       
-    File tutorialFile = new File(String.format("%s%stext%s%s",
+    File tutorialFile = new File(String.format("%s%sres%s%s",
             System.getProperty("user.dir"), File.separator,
             File.separator, FNAME
     ));
+    
     try {
       String data = new String(Files.readAllBytes(tutorialFile.toPath()));
       if (data == null || data.isEmpty())

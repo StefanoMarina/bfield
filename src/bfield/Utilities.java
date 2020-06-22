@@ -95,4 +95,10 @@ public interface Utilities {
     
     return builder.append(">");
   }
+  
+  static public String getResourceFile(String file) {
+    return new StringBuilder().append(System.getProperty("user.dir"))
+            .append(File.separator).append("res").append(File.separator)
+            .append(file).toString();
+  }
 }
