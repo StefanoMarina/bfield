@@ -300,7 +300,7 @@ public class BattleController  {
   bfield.scene.BattleResultFormatter formatter = new
             BattleResultFormatter();
   String html = formatter.toHTML(getBattlefield().getBattle(), result);
-  System.out.println(html);
+  
   Application.getApp().actionshowHTMLContent("Attack results", html, true);
   battle.getBattle().nextRound();
   refreshBattleAndArmies();
